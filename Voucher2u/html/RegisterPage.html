@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create an Account</title>
-    <link href="/Voucher2u/css/RegisterPage.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/RegisterPage.css">
 </head>
 <body>
 
@@ -15,15 +15,14 @@
         <div class="register-form">
             <h2>Create an Account</h2>
             <p>Set up your account</p>
-            <form action="#">
+            <form action="#" id="registrationForm">
                 <div class="form-group">
-                    <input type="text" placeholder="First Name" required>
-                    <input type="text" placeholder="Last Name" required>
+                    <input type="text" placeholder="Name" name="name" required>
                 </div>
-                <input type="email" placeholder="Email Address" required>
+                <input type="email" placeholder="Email Address" name="email" required>
                 <div class="form-group">
-                    <input type="text" placeholder="Credit/Debit Card Number" required>
-                    <input type="text" placeholder="Account Number" required>
+                    <input type="text" placeholder="Credit/Debit Card Number" name="cardNumber">
+                    <input type="text" placeholder="Bank Account Number" name="bankAccNum">
                 </div>
                 <div class="radio-buttons">
                     <input type="radio" id="credit" name="account-type" checked>
@@ -32,17 +31,19 @@
                     <label for="bank">Bank Account Number</label>
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" required>
-                    <input type="password" placeholder="Confirm Password" required>
+                    <input type="password" placeholder="Password" name="password" required>
+                    <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
                 </div>
                 <div class="buttons">
                     <button type="submit">Continue</button>
                     <button type="button" class="cancel">Cancel</button>
                 </div>
             </form>
+            <p class="login-link">Already have an account? <a href="LoginPage.html">Login here</a></p>
+            <div id="message"></div>
         </div>
     </div>
 </div>
-
+    <script src="../js/userRegister.js"></script>
 </body>
 </html>

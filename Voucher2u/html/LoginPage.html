@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="/Voucher2u/css/LoginPage.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/LoginPage.css">
 </head>
 <body>
 
@@ -15,17 +15,18 @@
         <div class="login-form">
             <h2>Login</h2>
             <p>Please enter your login details.</p>
-            <form action="#">
-                <input type="email" placeholder="Enter your email" required>
-                <input type="password" placeholder="Password" required>
+            <form action="#" id="loginForm">
+                <input type="email" placeholder="Enter your email" name="email" required>
+                <input type="password" placeholder="Password" name="password" required>
                 <label>
                     <input type="checkbox"> Remember me
                 </label>
                 <button type="submit">Continue</button>
             </form>
+            <div id="message"></div>
             <div class="links">
                 <a href="#">Forgot password?</a>
-                <a href="#">Click here to Register</a>
+                <a href="RegisterPage.html">Click here to Register</a>
             </div>
             <div class="divider">
                 <span>OR</span>
@@ -34,6 +35,6 @@
         </div>
     </div>
 </div>
-
+    <script src="../js/user_auth.js"></script>
 </body>
 </html>
