@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account</title>
+    <link href="/Voucher2u/css/RegisterPage.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="register-container">
+    <div class="register-box">
+        <div class="image-container">
+        </div> <!-- The image is now a CSS background -->
+        <div class="register-form">
+            <h2>Create an Account</h2>
+            <p>Set up your account</p>
+            <form action="#">
+                <div class="form-group">
+                    <input type="text" placeholder="First Name" required>
+                    <input type="text" placeholder="Last Name" required>
+                </div>
+                <input type="email" placeholder="Email Address" required>
+                <div class="form-group">
+                    <input type="text" placeholder="Credit/Debit Card Number" required>
+                    <input type="text" placeholder="Account Number" required>
+                </div>
+                <div class="radio-buttons">
+                    <input type="radio" id="credit" name="account-type" checked>
+                    <label for="credit">Credit/Debit Card Number</label>
+                    <input type="radio" id="bank" name="account-type">
+                    <label for="bank">Bank Account Number</label>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" required>
+                    <input type="password" placeholder="Confirm Password" required>
+                </div>
+                <div class="buttons">
+                    <button type="submit">Continue</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
