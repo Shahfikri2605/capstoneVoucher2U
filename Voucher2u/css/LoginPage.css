@@ -1,0 +1,207 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Changed font to Roboto */
+    background-color: #e0e7eb; /* Light blue-gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Use min-height to allow content to expand */
+    padding: 20px; /* Add some padding for smaller screens */
+}
+
+/* Login container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ensure container takes full width */
+    max-width: 1000px; /* Limit overall width */
+}
+
+/* Login Box */
+.login-box {
+    display: flex;
+    background-color: white;
+    border-radius: 12px; /* Slightly more rounded corners */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    overflow: hidden;
+    width: 100%; /* Take full width of its container */
+    max-width: 900px; /* Max width for the box */
+}
+
+/* Image container */
+.image-container {
+    flex: 1; /* Allow image to take available space */
+    background: url('../assets/login.jpg') no-repeat center center/cover; /* Placeholder background image */
+    min-height: 400px; /* Minimum height for the image container */
+    position: relative;
+    border-top-left-radius: 12px; /* Match login-box border-radius */
+    border-bottom-left-radius: 12px; /* Match login-box border-radius */
+}
+
+/* Form container */
+.login-form {
+    flex: 1; /* Allow form to take available space */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Form styles */
+.login-form h2 {
+    font-size: 32px; /* Slightly larger heading */
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.login-form p {
+    font-size: 15px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 14px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd; /* Lighter border */
+    border-radius: 8px; /* More rounded corners */
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input:focus {
+    border-color: #007bff; /* Highlight on focus */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+.login-form label {
+    display: flex; /* Align checkbox and text */
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: #555;
+}
+.login-form input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto; /* Reset width for checkbox */
+    margin-bottom: 0;
+}
+
+.login-form button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #007bff; /* Primary blue */
+    color: white;
+    border: none;
+    border-radius: 8px; /* More rounded corners */
+    font-size: 18px; /* Larger font for button */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* Links section */
+.links {
+    display: flex;
+    justify-content: space-between; /* Space out the links */
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.links a {
+    font-size: 14px;
+    color: #007bff; /* Use primary blue for links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.links a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Divider */
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.divider span {
+    background-color: #f8f8f8; /* Match body background */
+    padding: 0 10px;
+    font-size: 14px;
+    color: #888;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e0e7eb; /* Match body background */
+}
+
+/* Divider horizontal line */
+.divider::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+/* Google button */
+.google-btn {
+    width: 100%;
+    padding: 14px; /* Larger padding */
+    background-color: #4285F4; /* Google brand blue */
+    color: white;
+    border: none;
+    border-radius: 8px; /* More rounded corners */
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.google-btn:hover {
+    background-color: #3367d6; /* Darker Google blue on hover */
+    box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .login-box {
+        flex-direction: column; /* Stack image and form vertically */
+        max-width: 400px; /* Limit width for single column layout */
+    }
+
+    .image-container {
+        min-height: 200px; /* Adjust image height for smaller screens */
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 12px;
+    }
+
+    .login-form {
+        padding: 30px; /* Adjust padding */
+        width: 100%;
+    }
+}

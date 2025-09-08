@@ -96,22 +96,37 @@ header .user-profile i {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f2f2f2;
-    padding: 80px 20px;
-    border-bottom: 1px solid #eee;
+    background-image: url('../assets/background.jpg'); /* Placeholder background image */
+    background-size: cover;
+    background-position: center;
+    color: white; /* Ensure text is visible on background */
+    padding: 100px 20px; /* Adjust padding for better visual */
+    position: relative; /* Needed for overlay */
+    z-index: 1;
+}
+.hero::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+z-index: -1;
 }
 .hero .hero-content {
     text-align: left;
     margin-right: 50px;
+    z-index: 2;
 }
 .hero h1 {
     font-size: 48px;
-    color: #333;
+    color: white;
     margin-bottom: 10px;
 }
 .hero p {
     font-size: 18px;
-    color: #666;
+    color: #e0e0e0;
     margin-bottom: 30px;
 }
 .hero .btn {
@@ -124,6 +139,9 @@ header .user-profile i {
 }
 .hero .btn:hover {
     background-color: #0056b3;
+}
+.hero .hero-image {
+    z-index: 2;
 }
 .hero .hero-image img {
     width: 400px; /* Adjust as needed */
