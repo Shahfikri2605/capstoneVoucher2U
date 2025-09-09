@@ -44,8 +44,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("INSERT INTO User (Email, Name, Password, CardNumber, BankAccNum) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$email, $name, $password, $cardNumber, $bankAccNum]);
 
+        // Get the last inserted UserID
+        $last_id = $pdo->lastInsertId();
+
+        // Start session and set session variables
+        session_start();
+        $_SESSION['userID'] = $last_id;
+        $_SESSION['userName'] = $name;
+        $_SESSION['userEmail'] = $email;
+
         $response['success'] = true;
         $response['message'] = 'Registration successful.';
+        $response['redirect'] = '../html/HomePage.html';
 
     } catch (PDOException $e) {
         $response['message'] = 'Database error: ' . $e->getMessage();
