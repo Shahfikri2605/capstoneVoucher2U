@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 $response = ['loggedIn' => false, 'userName' => ''];
 
-if (isset($_SESSION['userID']) && isset($_SESSION['userName'])) {
+if (isset($_SESSION['Id']) && isset($_SESSION['userName'])) {
     $response['loggedIn'] = true;
     $response['userName'] = $_SESSION['userName'];
 }

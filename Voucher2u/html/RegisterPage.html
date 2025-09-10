@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create an Account</title>
     <link rel="stylesheet" href="../css/RegisterPage.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -15,23 +16,20 @@
         <div class="register-form">
             <h2>Create an Account</h2>
             <p>Set up your account</p>
-            <form action="#" id="registrationForm">
+            <form action="#" id="registrationForm" enctype="multipart/form-data">
                 <div class="form-group">
-                    <input type="text" placeholder="Name" name="name" required>
+                    <input type="text" placeholder="Username" name="Username" required>
                 </div>
-                <input type="email" placeholder="Email Address" name="email" required>
+                <input type="email" placeholder="Email Address" name="Email" required>
                 <div class="form-group">
-                    <input type="text" placeholder="Credit/Debit Card Number" name="cardNumber">
-                    <input type="text" placeholder="Bank Account Number" name="bankAccNum">
-                </div>
-                <div class="radio-buttons">
-                    <input type="radio" id="credit" name="account-type" checked>
-                    <label for="credit">Credit/Debit Card Number</label>
-                    <input type="radio" id="bank" name="account-type">
-                    <label for="bank">Bank Account Number</label>
+                    <input type="text" placeholder="Phone Number" name="Phone_number">
                 </div>
                 <div class="form-group">
-                    <input type="password" placeholder="Password" name="password" required>
+                    <input type="text" placeholder="Address" name="Address">
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" placeholder="Password" name="Password" required>
                     <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
                 </div>
                 <div class="buttons">
@@ -39,6 +37,22 @@
                     <button type="button" class="cancel">Cancel</button>
                 </div>
             </form>
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            <div id="g_id_onload"
+                 data-client_id="326812386407-0cm9mlg0ap6dd4i3h8u12advl52ioj06.apps.googleusercontent.com"
+                 data-callback="handleGoogleRegister"
+                 data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-size="large"
+                 data-theme="outline"
+                 data-text="sign_in_with"
+                 data-shape="rectangular"
+                 data-logo_alignment="left">
+            </div>
             <p class="login-link">Already have an account? <a href="LoginPage.html">Login here</a></p>
             <div id="message"></div>
         </div>

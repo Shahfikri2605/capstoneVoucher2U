@@ -18,15 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Fetch user from database
-        $stmt = $pdo->prepare("SELECT UserID, Name, Password FROM User WHERE Email = ?");
+        $stmt = $pdo->prepare("SELECT Id, Username, Password FROM User WHERE Email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 
         if ($user && $password === $user['Password']) {
             // Password is correct, start a new session
             session_start();
-            $_SESSION['userID'] = $user['UserID'];
-            $_SESSION['userName'] = $user['Name'];
+            $_SESSION['Id'] = $user['Id'];
+            $_SESSION['userName'] = $user['Username'];
             $_SESSION['userEmail'] = $email;
 
             $response['success'] = true;

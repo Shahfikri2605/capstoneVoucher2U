@@ -9,15 +9,40 @@ header('Content-Type: application/json');
 $response = ['success' => false, 'message' => 'An unexpected error occurred.'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? '';
-    $name = $_POST['name'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $cardNumber = $_POST['cardNumber'] ?? null;
-    $bankAccNum = $_POST['bankAccNum'] ?? null;
+    $email = $_POST['Email'] ?? '';
+    $username = $_POST['Username'] ?? '';
+    $password = $_POST['Password'] ?? '';
+    $phoneNumber = $_POST['Phone_number'] ?? null;
+    $address = $_POST['Address'] ?? null;
+    $profileImage = null;
+
+    // Handle profile image upload
+    if (isset($_FILES['Profile_image']) && $_FILES['Profile_image']['error'] === UPLOAD_ERR_OK) {
+        $target_dir = "../../uploads/profile_images/"; // Ensure this directory exists and is writable
+        $target_file = $target_dir . basename($_FILES['Profile_image']['name']);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+        // Allow certain file formats
+        $extensions_arr = array("jpg", "jpeg", "png", "gif");
+
+        if (in_array($imageFileType, $extensions_arr)) {
+            if (move_uploaded_file($_FILES['Profile_image']['tmp_name'], $target_file)) {
+                $profileImage = $target_file;
+            } else {
+                $response['message'] = 'Failed to upload profile image.';
+                echo json_encode($response);
+                exit;
+            }
+        } else {
+            $response['message'] = 'Invalid image file type. Only JPG, JPEG, PNG, GIF are allowed.';
+            echo json_encode($response);
+            exit;
+        }
+    }
 
     // Input validation
-    if (empty($email) || empty($name) || empty($password)) {
-        $response['message'] = 'Please fill in all required fields: email, name, and password.';
+    if (empty($email) || empty($username) || empty($password)) {
+        $response['message'] = 'Please fill in all required fields: email, username, and password.';
         echo json_encode($response);
         exit;
     }
@@ -32,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Check if email already exists
-        $stmt = $pdo->prepare("SELECT UserID FROM User WHERE Email = ?");
+        $stmt = $pdo->prepare("SELECT Id FROM User WHERE Email = ?");
         $stmt->execute([$email]);
         if ($stmt->fetch()) {
             $response['message'] = 'An account with this email already exists.';
@@ -40,17 +65,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        // Insert new user into the database
-        $stmt = $pdo->prepare("INSERT INTO User (Email, Name, Password, CardNumber, BankAccNum) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$email, $name, $password, $cardNumber, $bankAccNum]);
+        // Generate random points between 3000 and 5000
+        $points = rand(3000, 5000);
 
-        // Get the last inserted UserID
+        // Insert new user into the database
+        $stmt = $pdo->prepare("INSERT INTO User (Email, Username, Phone_number, Password, Profile_image, Address, Points) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$email, $username, $phoneNumber, $password, $profileImage, $address, $points]);
+
+        // Get the last inserted userID
         $last_id = $pdo->lastInsertId();
 
         // Start session and set session variables
         session_start();
-        $_SESSION['userID'] = $last_id;
-        $_SESSION['userName'] = $name;
+        $_SESSION['Id'] = $last_id;
+        $_SESSION['userName'] = $username;
         $_SESSION['userEmail'] = $email;
 
         $response['success'] = true;

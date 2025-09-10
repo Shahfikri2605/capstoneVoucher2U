@@ -8,7 +8,7 @@
 /* Body styles */
 body {
     font-family: 'Roboto', sans-serif; /* Changed font to Roboto */
-    background-color: #e0e7eb; /* Light blue-gray background */
+    background-color: #eef2f5; /* Lighter background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,10 +30,11 @@ body {
     display: flex;
     background-color: white;
     border-radius: 12px; /* Slightly more rounded corners */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
     overflow: hidden;
     width: 100%; /* Take full width of its container */
     max-width: 900px; /* Max width for the box */
+    margin: 20px; /* Add some margin around the box */
 }
 
 /* Image container */
@@ -57,44 +58,96 @@ body {
 
 /* Form styles */
 .register-form h2 {
-    font-size: 32px; /* Slightly larger heading */
-    margin-bottom: 15px;
+    font-size: 32px;
+    margin-bottom: 10px; /* Reduced margin */
     color: #333;
 }
 
 .register-form p {
     font-size: 15px;
     color: #777;
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* Reduced margin */
 }
 
 .register-form input[type="text"],
 .register-form input[type="email"],
-.register-form input[type="password"] {
+.register-form input[type="password"],
+.register-form .file-input-group input[type="file"] {
     width: 100%;
-    padding: 14px 15px;
+    padding: 12px 15px; /* Slightly smaller padding */
     margin-bottom: 15px;
-    border: 1px solid #ddd; /* Lighter border */
-    border-radius: 8px; /* More rounded corners */
+    border: 1px solid #e0e0e0; /* Lighter border */
+    border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .register-form input:focus {
-    border-color: #007bff; /* Highlight on focus */
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    border-color: #5a8dee; /* Google-like blue on focus */
+    box-shadow: 0 0 0 3px rgba(90, 141, 238, 0.25);
     outline: none;
 }
 
 .register-form .form-group {
     display: flex;
     justify-content: space-between;
-    gap: 15px; /* Increased gap */
-    margin-bottom: 15px; /* Added margin-bottom */
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 .register-form .form-group input {
     flex: 1; /* Make inputs take equal space within group */
+}
+
+.register-form .file-input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.register-form .file-input-group label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.register-form .file-input-group input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
+/* Divider style */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0;
+    color: #aaa;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #eee;
+}
+
+.divider:not(:empty)::before {
+    margin-right: .25em;
+}
+
+.divider:not(:empty)::after {
+    margin-left: .25em;
+}
+
+/* Google Sign-In button adjustments */
+.g_id_signin {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 /* Radio buttons */

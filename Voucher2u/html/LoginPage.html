@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../css/LoginPage.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -31,7 +32,19 @@
             <div class="divider">
                 <span>OR</span>
             </div>
-            <button class="google-btn">G Continue with Google</button>
+            <div id="g_id_onload"
+                 data-client_id="326812386407-0cm9mlg0ap6dd4i3h8u12advl52ioj06.apps.googleusercontent.com"
+                 data-callback="handleGoogleLogin"
+                 data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin"
+                 data-type="standard"
+                 data-size="large"
+                 data-theme="outline"
+                 data-text="sign_in_with"
+                 data-shape="rectangular"
+                 data-logo_alignment="left">
+            </div>
         </div>
     </div>
 </div>
