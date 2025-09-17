@@ -8,7 +8,7 @@
 /* Body styles */
 body {
     font-family: 'Roboto', sans-serif; /* Changed font to Roboto */
-    background-color: #eef2f5; /* Lighter background */
+    background: url('../assets/register.png') no-repeat center center/cover; /* Background image */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,14 +22,15 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%; /* Ensure container takes full width */
-    max-width: 1000px; /* Limit overall width */
+    max-width: 10000px; /* Larger width */
 }
+
 
 /* Register Box */
 .register-box {
     display: flex;
     background-color: white;
-    border-radius: 12px; /* Slightly more rounded corners */
+    border-radius: 20px; /* More rounded corners for a modern look */
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
     overflow: hidden;
     width: 100%; /* Take full width of its container */
@@ -40,11 +41,11 @@ body {
 /* Image container */
 .image-container {
     flex: 1; /* Allow image to take available space */
-    background: url('../assets/register.jpg') no-repeat center center/cover; /* Placeholder background image */
+    background: url('../assets/registerForm.png') no-repeat center center/cover; /* Background image */
     min-height: 400px; /* Minimum height for the image container */
     position: relative;
-    border-top-left-radius: 12px; /* Match register-box border-radius */
-    border-bottom-left-radius: 12px; /* Match register-box border-radius */
+    border-top-left-radius: 20px; /* Match register-box border-radius */
+    border-bottom-left-radius: 20px; /* Match register-box border-radius */
 }
 
 /* Form container */
@@ -58,7 +59,7 @@ body {
 
 /* Form styles */
 .register-form h2 {
-    font-size: 32px;
+    font-size: 30px;
     margin-bottom: 10px; /* Reduced margin */
     color: #333;
 }
@@ -71,8 +72,7 @@ body {
 
 .register-form input[type="text"],
 .register-form input[type="email"],
-.register-form input[type="password"],
-.register-form .file-input-group input[type="file"] {
+.register-form input[type="password"] {
     width: 100%;
     padding: 12px 15px; /* Slightly smaller padding */
     margin-bottom: 15px;
@@ -83,40 +83,44 @@ body {
 }
 
 .register-form input:focus {
-    border-color: #5a8dee; /* Google-like blue on focus */
-    box-shadow: 0 0 0 3px rgba(90, 141, 238, 0.25);
+    border-color: #FF5F6D; /* Focus color similar to your theme */
+    box-shadow: 0 0 0 3px rgba(255, 95, 109, 0.25);
     outline: none;
 }
 
-.register-form .form-group {
+/* Buttons */
+.register-form .buttons {
     display: flex;
     justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 15px;
+    margin-top: 25px; /* Increased top margin for buttons */
 }
 
-.register-form .form-group input {
-    flex: 1; /* Make inputs take equal space within group */
+.register-form button {
+    flex: 1; /* Make buttons take equal space */
+    padding: 14px; /* Larger padding */
+    background-color: #FF5F6D; /* Primary button color */
+    color: white;
+    border: none;
+    border-radius: 8px; /* More rounded corners */
+    font-size: 18px; /* Larger font for button */
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.register-form .file-input-group {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
+.register-form button:hover {
+    background-color: #E84B5D; /* Darker shade for hover */
+    box-shadow: 0 4px 10px rgba(255, 95, 109, 0.3);
 }
 
-.register-form .file-input-group label {
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: #555;
+.register-form .cancel {
+    background-color: #6c757d; /* Muted gray for cancel */
+    margin-left: 15px; /* Space between buttons */
 }
 
-.register-form .file-input-group input[type="file"] {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    background-color: #f9f9f9;
+.register-form .cancel:hover {
+    background-color: #5a6268; /* Darker gray on hover */
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
 }
 
 /* Divider style */
@@ -145,62 +149,6 @@ body {
 /* Google Sign-In button adjustments */
 .g_id_signin {
     margin: 20px auto;
-    /* margin-bottom: 20px; */
-    /* display: flex; */
-    /* justify-content: center; */
-}
-
-/* Radio buttons */
-.radio-buttons {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-}
-
-.radio-buttons input[type="radio"] {
-    margin-right: 8px; /* Smaller margin */
-    width: auto; /* Reset width for radio button */
-    margin-bottom: 0;
-}
-
-.register-form label {
-    font-size: 14px;
-    color: #555;
-    margin-right: 20px; /* Space between radio groups */
-}
-
-.register-form .buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 25px; /* Increased top margin for buttons */
-}
-
-.register-form button {
-    flex: 1; /* Make buttons take equal space */
-    padding: 14px; /* Larger padding */
-    background-color: #007bff; /* Primary blue */
-    color: white;
-    border: none;
-    border-radius: 8px; /* More rounded corners */
-    font-size: 18px; /* Larger font for button */
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.register-form button:hover {
-    background-color: #0056b3;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
-}
-
-.register-form .cancel {
-    background-color: #6c757d; /* Muted gray for cancel */
-    margin-left: 15px; /* Space between buttons */
-}
-
-.register-form .cancel:hover {
-    background-color: #5a6268; /* Darker gray on hover */
-    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
 }
 
 /* Add responsiveness */
@@ -214,7 +162,7 @@ body {
         min-height: 200px; /* Adjust image height for smaller screens */
         width: 100%;
         border-bottom-left-radius: 0;
-        border-top-right-radius: 12px;
+        border-top-right-radius: 20px;
     }
 
     .register-form {
@@ -230,16 +178,6 @@ body {
     .register-form .form-group input {
         width: 100%; /* Full width for inputs in stacked groups */
         margin-bottom: 15px; /* Add margin between stacked inputs */
-    }
-
-    .radio-buttons {
-        flex-direction: column; /* Stack radio buttons vertically */
-        align-items: flex-start;
-    }
-
-    .radio-buttons label {
-        margin-bottom: 10px;
-        margin-right: 0;
     }
 
     .register-form .buttons {

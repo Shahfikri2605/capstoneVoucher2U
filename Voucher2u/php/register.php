@@ -17,28 +17,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $profileImage = null;
 
     // Handle profile image upload
-    if (isset($_FILES['Profile_image']) && $_FILES['Profile_image']['error'] === UPLOAD_ERR_OK) {
-        $target_dir = "../../uploads/profile_images/"; // Ensure this directory exists and is writable
-        $target_file = $target_dir . basename($_FILES['Profile_image']['name']);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        // Allow certain file formats
-        $extensions_arr = array("jpg", "jpeg", "png", "gif");
-
-        if (in_array($imageFileType, $extensions_arr)) {
-            if (move_uploaded_file($_FILES['Profile_image']['tmp_name'], $target_file)) {
-                $profileImage = $target_file;
-            } else {
-                $response['message'] = 'Failed to upload profile image.';
-                echo json_encode($response);
-                exit;
-            }
-        } else {
-            $response['message'] = 'Invalid image file type. Only JPG, JPEG, PNG, GIF are allowed.';
-            echo json_encode($response);
-            exit;
-        }
-    }
+    // if (isset($_FILES['Profile_image']) && $_FILES['Profile_image']['error'] === UPLOAD_ERR_OK) {
+    //     $target_dir = "../../uploads/profile_images/"; // Ensure this directory exists and is writable
+    //     $target_file = $target_dir . basename($_FILES['Profile_image']['name']);
+    //     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    //     // Allow certain file formats
+    //     $extensions_arr = array("jpg", "jpeg", "png", "gif");
+    //     if (in_array($imageFileType, $extensions_arr)) {
+    //         if (move_uploaded_file($_FILES['Profile_image']['tmp_name'], $target_file)) {
+    //             $profileImage = $target_file;
+    //         } else {
+    //             $response['message'] = 'Failed to upload profile image.';
+    //             echo json_encode($response);
+    //             exit;
+    //         }
+    //     } else {
+    //         $response['message'] = 'Invalid image file type. Only JPG, JPEG, PNG, GIF are allowed.';
+    //         echo json_encode($response);
+    //         exit;
+    //     }
+    // }
 
     // Input validation
     if (empty($email) || empty($username) || empty($password)) {
