@@ -67,9 +67,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         offerItem.dataset.voucherId = voucher.id; // Store ID for navigation
                         offerItem.innerHTML = `
                             <img src="${voucher.image}" alt="${voucher.title}">
-                            <div class="points">${voucher.points} Points</div>
                             <h3>${voucher.title}</h3>
                             <p>${voucher.description}</p>
+                            <div class="points">${voucher.points} Points</div>
                         `;
                         offerItem.addEventListener('click', () => {
                             window.location.href = `productDetails.html?id=${voucher.id}`;

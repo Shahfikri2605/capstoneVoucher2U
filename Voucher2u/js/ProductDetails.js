@@ -65,7 +65,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                 productImage.alt = currentProduct.title;
                 productTitle.textContent = currentProduct.title;
                 productDescription.textContent = currentProduct.description;
-                userPoints.textContent = `${currentProduct.points} Points`; // Update points display
+                // Restore product-specific points display (do NOT overwrite header user points)
+                const productPointsEl = document.getElementById('product-points');
+                if (productPointsEl) {
+                    productPointsEl.textContent = `${currentProduct.points} Points`;
+                }
 
                 // Populate terms & conditions
                 if (termsConditionsList) {

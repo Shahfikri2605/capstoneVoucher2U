@@ -36,6 +36,7 @@
         </div>
         <div class="user-session-info">
             <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+            <span class="points-display" id="user-points">12500 Points</span>
            
         </div>
     </div>
@@ -45,25 +46,46 @@
     <div class="hero-content">
         <h1>Optima Bank</h1>
         <p>Welcome to Optima's Loyalty Program</p>
-        <a href="#" class="btn">Redeem Now</a>
     </div>
-   
 </section>
+
+<section class="carousel">
+  <div class="carousel-container">
+    <div class="carousel-slide">
+      <img src="../assets/travel_ad.png" alt="Slide 1">
+    </div>
+    <div class="carousel-slide">
+      <img src="../assets/food_ad.png" alt="Slide 2">
+    </div>
+    <div class="carousel-slide">
+      <img src="../assets/fashion_ad.png" alt="Slide 3">
+    </div>
+  </div>
+
+  <!-- Navigation buttons -->
+  <button class="carousel-btn prev">&#10094;</button>
+  <button class="carousel-btn next">&#10095;</button>
+</section>
+
 
 <h2 class="section-title">Voucher Categories</h2>
 <section class="categories">
     <!-- Travel -->
     <div class="category-item">
     <a href="category.html?name=travel">
-        <img src="../assets/travel_icon.png" alt="Travel Icon">
+        <div class="icon-wrapper">
+            <img src="../assets/travel_icon.png" alt="Travel Icon">
+        </div>
         <h3>Travel</h3>
         <p>Exclusive deals on flights, hotels, and vacation packages.</p>
     </a>
     </div>
     <!-- Food -->
     <div class="category-item">
-    <a href="category.html?name=food">
-        <img src="../assets/food_icon.png" alt="Food Icon">
+        <a href="category.html?name=food">
+        <div class="icon-wrapper">
+            <img src="../assets/food_icon.png" alt="Food Icon">
+        </div>
         <h3>Food & Dining</h3>
         <p>Discounts at restaurants, cafes, and delivery services.</p>
     </a>
@@ -71,7 +93,9 @@
     <!-- Shopping -->
     <div class="category-item">
     <a href="category.html?name=shopping">
-        <img src="../assets/shopping_icon.png" alt="Shopping Icon">
+        <div class="icon-wrapper">
+            <img src="../assets/shopping_icon.png" alt="Shopping Icon">
+        </div>
         <h3>Shopping & Retail</h3>
         <p>Savings on fashion, electronics, home goods, and more.</p>
     </a>
@@ -181,6 +205,26 @@
     </div>
 </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const slides = document.querySelectorAll(".carousel-slide");
+        const prevBtn = document.querySelector(".carousel-btn.prev");
+        const nextBtn = document.querySelector(".carousel-btn.next");
+        const container = document.querySelector(".carousel-container");
+        let index = 0;
+
+        function showSlide(i) {
+            index = (i + slides.length) % slides.length;
+            container.style.transform = `translateX(${-index * 100}%)`;
+        }
+
+        prevBtn.addEventListener("click", () => showSlide(index - 1));
+        nextBtn.addEventListener("click", () => showSlide(index + 1));
+
+        // Auto slide every 5 seconds
+        setInterval(() => showSlide(index + 1), 5000);
+        });
+    </script>
     <script src="../js/userSession.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
