@@ -168,22 +168,8 @@ body {
 }
 
 /* Google button */
-.google-btn {
-    width: 100%;
-    padding: 14px; /* Larger padding */
-    background-color: #4285F4; /* Google brand blue */
-    color: white;
-    border: none;
-    border-radius: 8px; /* More rounded corners */
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.google-btn:hover {
-    background-color: #3367d6; /* Darker Google blue on hover */
-    box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+.g_id_signin {
+    margin: 20px auto;
 }
 
 /* Responsive adjustments */
@@ -203,5 +189,30 @@ body {
     .login-form {
         padding: 30px; /* Adjust padding */
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form {
+        padding: 20px; /* Further adjust padding for very small screens */
+    }
+
+    .login-form h2 {
+        font-size: 28px; /* Adjust heading size */
+    }
+
+    .login-form p {
+        font-size: 14px; /* Adjust paragraph size */
+    }
+
+    .login-form input[type="email"],
+    .login-form input[type="password"],
+    .login-form button[type="submit"] {
+        padding: 12px 15px;
+        font-size: 15px;
+    }
+
+    .links a {
+        font-size: 13px;
     }
 }

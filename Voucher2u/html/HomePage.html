@@ -20,6 +20,9 @@
         <li><a href="#">Settings</a></li>
         <li><a href="#">Help</a></li>
     </ul>
+    <div class="burger-menu">
+        <i class="fas fa-bars"></i>
+    </div>
     <div class="header-right">
         <div class="search-bar">
             <input type="text" placeholder="Search product...">
@@ -182,5 +185,15 @@
 </footer>
 
     <script src="../js/userSession.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const burgerMenu = document.querySelector('.burger-menu');
+            const navLinks = document.querySelector('.nav-links');
+
+            burgerMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>

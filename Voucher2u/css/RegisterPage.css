@@ -144,10 +144,10 @@ body {
 
 /* Google Sign-In button adjustments */
 .g_id_signin {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
+    margin: 20px auto;
+    /* margin-bottom: 20px; */
+    /* display: flex; */
+    /* justify-content: center; */
 }
 
 /* Radio buttons */
@@ -250,5 +250,31 @@ body {
     .register-form button {
         width: 100%; /* Full width for stacked buttons */
         margin-left: 0; /* Remove margin for stacked buttons */
+    }
+}
+
+@media (max-width: 480px) {
+    .register-form {
+        padding: 20px; /* Further adjust padding for very small screens */
+    }
+
+    .register-form h2 {
+        font-size: 28px; /* Adjust heading size */
+    }
+
+    .register-form p {
+        font-size: 14px; /* Adjust paragraph size */
+    }
+
+    .register-form input[type="text"],
+    .register-form input[type="email"],
+    .register-form input[type="password"],
+    .register-form button {
+        padding: 12px 15px;
+        font-size: 15px;
+    }
+
+    .login-link a {
+        font-size: 13px;
     }
 }
