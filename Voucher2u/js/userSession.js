@@ -7,9 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.loggedIn) {
                 authLink.innerHTML = `<i class="fas fa-user-circle"></i> ${data.userName}`;
                 authLink.href = "#"; // Or a profile page link
+                localStorage.setItem('userId', data.userId); // Store userId in localStorage
             } else {
                 authLink.innerHTML = `<i class="fas fa-user"></i> Login`;
                 authLink.href = "LoginPage.html";
+                localStorage.removeItem('userId'); // Remove userId if not logged in
             }
         })
         .catch(error => {

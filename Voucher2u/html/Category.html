@@ -33,11 +33,10 @@
   </ul>
   <div class="header-right">
       <div class="cart">
-          <i class="fas fa-shopping-cart"></i> Cart (0)
+          <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
       </div>
       <div class="user-session-info">
           <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
-          <a href="#" id="profile-link" class="profile-icon"><i class="fas fa-user-circle"></i></a>
       </div>
   </div>
 </header>
@@ -101,73 +100,7 @@
 </footer>
 
 <script src="../js/userSession.js"></script>
-<script>
-  // Grab category from URL (e.g. ?name=travel)
-  const params = new URLSearchParams(window.location.search);
-  const category = params.get("name") || "general";
-
-  const categoryData = {
-    travel: {
-      title: "Travel Vouchers",
-      description: "Exclusive deals on flights, hotels, and holiday packages.",
-      banner: "../assets/travel_banner.png",
-      vouchers: [
-        { img: "../assets/luxury_resort.jpg", points: "1500 Points", title: "Luxury Resort Stay", desc: "3-night stay at a 5-star resort with breakfast & spa." },
-        { img: "../assets/europe_flight.png", points: "1200 Points", title: "Europe Flight Discount", desc: "Save big on flights to Europe." }
-      ]
-    },
-    food: {
-      title: "Food & Drinks",
-      description: "Delicious discounts at restaurants, cafes, and delivery.",
-      banner: "../assets/food_banner.png",
-      vouchers: [
-        { img: "../assets/gourmet_dining.png", points: "800 Points", title: "Gourmet Dining", desc: "3-course meal for two at a top restaurant." },
-        { img: "../assets/coffee_shop.png", points: "400 Points", title: "Coffee Shop Voucher", desc: "50% off your next 10 coffee orders." }
-      ]
-    },
-    shopping: {
-      title: "Shopping Vouchers",
-      description: "Save on fashion, electronics, and home goods.",
-      banner: "../assets/shopping_banner.png",
-      vouchers: [
-        { img: "../assets/fashion_retail.png", points: "900 Points", title: "Fashion Retail Credit", desc: "£50 store credit at boutiques." },
-        { img: "../assets/electronics_discount.png", points: "1000 Points", title: "Electronics Discount", desc: "20% off electronics over £200." }
-      ]
-    }
-  };
-
-  const data = categoryData[category] || { 
-    title: "Category", 
-    description: "Browse available vouchers.", 
-    banner: "../assets/default_banner.png", 
-    vouchers: [] 
-  };
-
-  // Update hero
-  document.getElementById("category-title").textContent = data.title;
-  document.getElementById("category-description").textContent = data.description;
-  document.querySelector(".category-hero").style.backgroundImage = `url('${data.banner}')`;
-
-  // Populate vouchers
-  const voucherList = document.getElementById("voucher-list");
-  data.vouchers.forEach(v => {
-    const item = document.createElement("div");
-    item.classList.add("offer-item");
-    item.innerHTML = `
-      <img src="${v.img}" alt="${v.title}">
-      <h3>${v.title}</h3>
-      <p>${v.desc}</p>
-      <div class="points">${v.points}</div>
-    `;
-    voucherList.appendChild(item);
-  });
-
-  // Burger menu script
-  document.querySelector('.burger-menu').addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.toggle('active');
-  });
-</script>
-
-
+<script src="../js/Category.js"></script> <!-- New JS for dynamic category content -->
+<script src="../js/cartDisplay.js"></script> <!-- New script for global cart count -->
 </body>
 </html>

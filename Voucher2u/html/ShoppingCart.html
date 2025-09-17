@@ -25,7 +25,7 @@
     </ul>
     <div class="header-right">
         <div class="cart">
-            <i class="fas fa-shopping-cart"></i> Cart (0)
+            <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
         </div>
         <div class="user-session-info">
             <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
@@ -51,7 +51,7 @@
                 <tr class="cart-item">
                     <td class="item-details">
                         <div class="item-image-wrapper">
-                            <img src="../assets/health_wellness.png" alt="Health & Wellness">
+                            <img src="../assets/luxury_resort.jpg" alt="Health & Wellness">
                             <button class="remove-item"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="item-info">
@@ -174,5 +174,6 @@
     });
 </script>
 <script src="../js/ShoppingCart.js"></script> <!-- New JS for cart functionality -->
+<script src="../js/cartDisplay.js"></script> <!-- New script for global cart count -->
 </body>
 </html>
