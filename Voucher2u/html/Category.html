@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voucher2U - Category</title>
+  <link rel="stylesheet" href="../css/HomePage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+
+<!-- Header (same as homepage) -->
+<header>
+  <div class="logo">
+      <img src="../assets/logo.png" alt="Voucher2U Logo">
+      OptimaBank
+  </div>
+  <div class="burger-menu">
+      <i class="fas fa-bars"></i>
+  </div>
+  <ul class="nav-links">
+      <li><a href="HomePage.html">Home</a></li>
+      <li><a href="category.html">Category</a></li>
+      <li><a href="#">Support</a></li>
+  </ul>
+  <div class="header-right">
+      <div class="cart">
+          <i class="fas fa-shopping-cart"></i> Cart (0)
+      </div>
+      <div class="user-session-info">
+          <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+          <a href="#" id="profile-link" class="profile-icon"><i class="fas fa-user-circle"></i></a>
+      </div>
+  </div>
+</header>
+
+<!-- Category Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 id="category-title">Category</h1>
+    <p id="category-description">Browse the best vouchers available in this category.</p>
+  </div>
+</section>
+
+<!-- Vouchers Section -->
+<h2 class="section-title">Available Vouchers</h2>
+<section class="featured-offers" id="voucher-list">
+  <!-- Voucher items will be injected here -->
+</section>
+
+<!-- Footer-->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section about">
+        <h4>About</h4>
+        <ul>
+            <li><a href="HomePage.html">Home</a></li>
+            <li><a href="#">Vouchers</a></li>
+            <li><a href="#">Our story</a></li>
+        </ul>
+    </div>
+    <div class="footer-section help">
+        <h4>Help</h4>
+        <ul>
+            <li><a href="#">Redeem</a></li>
+            <li><a href="#">Issues</a></li>
+            <li><a href="#">FAQs</a></li>
+        </ul>
+    </div>
+    <div class="footer-section contact">
+        <h4>Contact</h4>
+        <p>Phone: (+1) 123 456 7893</p>
+        <p>Email: name@email.com</p>
+    </div>
+    <div class="footer-section promotions">
+        <h4>Receive new promotions</h4>
+        <div class="subscribe">
+            <input type="email" placeholder="Input your email">
+            <button>Subscribe</button>
+        </div>
+        <div class="social-links">
+            <a href="#"><img src="../assets/facebook_icon.png" alt="Facebook"></a>
+            <a href="#"><img src="../assets/twitter_icon.png" alt="Twitter"></a>
+            <a href="#"><img src="../assets/linkedin_icon.png" alt="LinkedIn"></a>
+            <a href="#"><img src="../assets/youtube_icon.png" alt="YouTube"></a>
+        </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2022 Brand, Inc. | Privacy | Terms | Sitemap</p>
+    <p>Made with V</p>
+  </div>
+</footer>
+
+<!-- Script -->
+<script>
+  // Grab category from URL (e.g. ?name=travel)
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("name") || "general";
+
+  const categoryData = {
+    travel: {
+      title: "Travel Vouchers",
+      description: "Exclusive deals on flights, hotels, and holiday packages.",
+      vouchers: [
+        { img: "../assets/luxury_resort.png", points: "1500 Points", title: "Luxury Resort Stay", desc: "3-night stay at a 5-star resort with breakfast & spa." },
+        { img: "../assets/europe_flight.png", points: "1200 Points", title: "Europe Flight Discount", desc: "Save big on flights to Europe." }
+      ]
+    },
+    food: {
+      title: "Food & Drinks",
+      description: "Delicious discounts at restaurants, cafes, and delivery.",
+      vouchers: [
+        { img: "../assets/gourmet_dining.png", points: "800 Points", title: "Gourmet Dining", desc: "3-course meal for two at a top restaurant." },
+        { img: "../assets/coffee_shop.png", points: "400 Points", title: "Coffee Shop Voucher", desc: "50% off your next 10 coffee orders." }
+      ]
+    },
+    shopping: {
+      title: "Shopping Vouchers",
+      description: "Save on fashion, electronics, and home goods.",
+      vouchers: [
+        { img: "../assets/fashion_retail.png", points: "900 Points", title: "Fashion Retail Credit", desc: "£50 store credit at boutiques." },
+        { img: "../assets/electronics_discount.png", points: "1000 Points", title: "Electronics Discount", desc: "20% off electronics over £200." }
+      ]
+    }
+  };
+
+  const data = categoryData[category] || { title: "Category", description: "", vouchers: [] };
+
+  // Update hero
+  document.getElementById("category-title").textContent = data.title;
+  document.getElementById("category-description").textContent = data.description;
+
+  // Populate vouchers
+  const voucherList = document.getElementById("voucher-list");
+  data.vouchers.forEach(v => {
+    const item = document.createElement("div");
+    item.classList.add("offer-item");
+    item.innerHTML = `
+      <img src="${v.img}" alt="${v.title}">
+      <div class="points">${v.points}</div>
+      <h3>${v.title}</h3>
+      <p>${v.desc}</p>
+      <a href="#" class="btn">Redeem Now</a>
+    `;
+    voucherList.appendChild(item);
+  });
+
+  // Burger menu script
+  document.querySelector('.burger-menu').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>
