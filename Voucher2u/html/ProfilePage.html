@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Optima Bank</title>
+    <link rel="stylesheet" href="../css/HomePage.css">
     <link rel="stylesheet" href="../css/ProfilePage.css">
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6TaY+VT5apfpmYV7/CPA3ywp+kSBYpmn+HbASGLfAcs+gNA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"  />
 </head>
 <body>
 
@@ -19,7 +20,7 @@
         <i class="fas fa-bars"></i>
     </div>
     <ul class="nav-links">
-        <li><a href="#">Home</a></li>
+        <li><a href="HomePage.html">Home</a></li>
         <li class="dropdown">
             <a href="#">Category <i class="fas fa-caret-down"></i></a>
             <ul class="dropdown-menu">
@@ -35,7 +36,13 @@
             <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
         </div>
         <div class="user-session-info">
-            <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+            <div class="profile-dropdown-container">
+                <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+                <div class="dropdown-menu-profile">
+                    <a href="ProfilePage.html">My Account</a>
+                    <a href="#" id="logout-link">Logout</a>
+                </div>
+            </div>
             <span class="points-display" id="user-points">12500 Points</span>
            
         </div>
@@ -156,10 +163,6 @@
             <button class="btn-edit" id="editToggleBtn">
                 <i class="fas fa-edit">...</i>
             </button>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Create Date</span>
-                <span class="info-value" id="createDate">May 27, 2022</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Phone</span>

@@ -30,14 +30,24 @@
         </li>
         <li><a href="#">Support</a></li>
     </ul>
+    <div class="search-bar">
+        <input type="text" placeholder="Search vouchers..." id="search-input">
+        <i class="fas fa-search"></i>
+    </div>
     <div class="header-right">
         <div class="cart">
             <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
         </div>
         <div class="user-session-info">
-            <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
-            <span class="points-display" id="user-points">12500 Points</span>
-           
+              <div class="profile-dropdown-container">
+                <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+                <div class="dropdown-menu-profile">
+                  <a href="ProfilePage.html">My Account</a>
+                  <a href="#" id="logout-link">Logout</a>
+                </div>
+              </div>
+            <span class="points-display" id="user-points"></span>
+
         </div>
     </div>
 </header>
@@ -103,63 +113,8 @@
 </section>
 
 <h2 class="section-title">Featured Offers</h2>
-<section class="featured-offers">
-    <div class="offer-item">
-        <img src="../assets/luxury_resort.png" alt="Luxury Resort Stay"> <!-- Placeholder for image -->
-        <div class="points">1500 Points</div>
-        <h3>Luxury Resort Stay in Bali</h3>
-        <p>Enjoy a 3-night stay at a 5-star resort with complimentary breakfast and spa access.</p>
-        <a href="#" class="btn">Redeem Now</a>
-    </div>
-    <div class="offer-item">
-        <img src="../assets/europe_flight.png" alt="Europe Flight Discount"> <!-- Placeholder for image -->
-        <div class="points">1200 Points</div>
-        <h3>Europe Flight Discount</h3>
-        <p>Save big on your next flight to popular European destinations. Limited seats available.</p>
-        <a href="#" class="btn">Redeem Now</a>
-    </div>
-    <div class="offer-item">
-        <img src="../assets/gourmet_dining.png" alt="Gourmet Dining Experience"> <!-- Placeholder for image -->
-        <div class="points">800 Points</div>
-        <h3>Gourmet Dining Experience</h3>
-        <p>A special 3-course meal for two at a top-rated restaurant. Reservations required.</p>
-        <a href="#" class="btn">Redeem Now</a>
-    </div>
-    <div class="offer-item">
-        <img src="../assets/coffee_shop.png" alt="Coffee Shop Voucher"> <!-- Placeholder for image -->
-        <div class="points">400 Points</div>
-        <h3>Coffee Shop Voucher</h3>
-        <p>Get 50% off your next 10 coffee orders at selected local cafes.</p>
-        <a href="#" class="btn">Redeem Now</a>
-    </div>
-    <div class="offer-item">
-        <img src="../assets/fashion_retail.png" alt="Fashion Retail Store Credit"> <!-- Placeholder for image -->
-        <div class="points">900 Points</div>
-        <h3>Fashion Retail Store Credit</h3>
-        <p>£50 store credit for any purchase at leading fashion boutiques. Excludes sale items.</p>
-        <a href="#" class="btn">Redeem Now</a>
-    </div>
-    <div class="offer-item">
-        <img src="../assets/electronics_discount.png" alt="Electronics Online Discount"> <!-- Placeholder for image -->
-        <div class="points">1000 Points</div>
-        <h3>Electronics Online Discount</h3>
-        <p>20% off all electronics purchases over £200. Limited time offer.</p>
-        <a href="#" class="btn">Redeem Now</a>
-    </div>
-    <div class="offer-item">
-        <img src="../assets/movie_ticket.png" alt="Movie Ticket Bundle"> <!-- Placeholder for image -->
-        <div class="points">600 Points</div>
-        <h3>Movie Ticket Bundle</h3>
-        <p>Buy one, get one free on movie tickets at any major cinema chain. Valid for 2D/3D films.</p>
-        <a href="#" class="btn">Redeem Now</a>
-    </div>
-    <div class="offer-item">
-        <img src="../assets/concert_event.png" alt="Concert Event Pass"> <!-- Placeholder for image -->
-        <div class="points">1100 Points</div>
-        <h3>Concert Event Pass</h3>
-        <p>Exclusive access to pre-sale tickets and a 10% discount on select concert events.</p>
-        <a href="#" class="btn">Redeem Now</a>
-    </div>
+<section class="featured-offers" id="featured-vouchers-container">
+    <!-- Featured voucher items will be injected here dynamically -->
 </section>
 
 <footer class="footer">
@@ -237,5 +192,7 @@
         });
     </script>
     <script src="../js/cartDisplay.js"></script> <!-- New script for global cart count -->
+    <script src="../js/featuredVouchers.js"></script> <!-- New script for dynamic featured vouchers -->
+    <script src="../js/search.js"></script> <!-- New script for search functionality -->
 </body>
 </html>

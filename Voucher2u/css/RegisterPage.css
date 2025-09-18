@@ -22,7 +22,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%; /* Ensure container takes full width */
-    max-width: 10000px; /* Larger width */
+    max-width: 5000px; /* Larger width */
 }
 
 
@@ -32,17 +32,17 @@ body {
     background-color: white;
     border-radius: 20px; /* More rounded corners for a modern look */
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
-    overflow: hidden;
     width: 100%; /* Take full width of its container */
-    max-width: 900px; /* Max width for the box */
+    max-width: 1100px; /* Max width for the box */
     margin: 20px; /* Add some margin around the box */
 }
 
 /* Image container */
 .image-container {
-    flex: 1; /* Allow image to take available space */
+    flex: 1.4; /* Allow image to take available space */
     background: url('../assets/registerForm.png') no-repeat center center/cover; /* Background image */
     min-height: 400px; /* Minimum height for the image container */
+    min-width: 320px;
     position: relative;
     border-top-left-radius: 20px; /* Match register-box border-radius */
     border-bottom-left-radius: 20px; /* Match register-box border-radius */
@@ -50,8 +50,8 @@ body {
 
 /* Form container */
 .register-form {
-    flex: 1; /* Allow form to take available space */
-    padding: 40px;
+    flex: 1.2; /* Allow form to take available space */
+    padding: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -83,8 +83,8 @@ body {
 }
 
 .register-form input:focus {
-    border-color: #FF5F6D; /* Focus color similar to your theme */
-    box-shadow: 0 0 0 3px rgba(255, 95, 109, 0.25);
+    border-color: #63373a; /* Focus color similar to your theme */
+    box-shadow: 0 0 0 2px rgba(85, 65, 67, 0.25);
     outline: none;
 }
 
@@ -92,12 +92,12 @@ body {
 .register-form .buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 25px; /* Increased top margin for buttons */
+    margin-top: 10px; /* Increased top margin for buttons */
 }
 
 .register-form button {
     flex: 1; /* Make buttons take equal space */
-    padding: 14px; /* Larger padding */
+    padding: 10px; /* Larger padding */
     background-color: #FF5F6D; /* Primary button color */
     color: white;
     border: none;
@@ -151,8 +151,40 @@ body {
     margin: 20px auto;
 }
 
+/* Form labels */
+.register-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+/* Password wrapper (input + eye icon) */
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* space for eye icon */
+}
+
+.password-wrapper .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  font-size: 18px;
+}
+.password-wrapper .toggle-password:hover {
+  color: #000;
+}
+
 /* Add responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .register-box {
         flex-direction: column; /* Stack image and form vertically */
         max-width: 400px; /* Limit width for single column layout */
@@ -166,7 +198,7 @@ body {
     }
 
     .register-form {
-        padding: 30px; /* Adjust padding */
+        padding: 15px; /* Adjust padding */
         width: 100%;
     }
 
@@ -182,7 +214,7 @@ body {
 
     .register-form .buttons {
         flex-direction: column; /* Stack buttons vertically */
-        gap: 15px; /* Add gap between stacked buttons */
+        gap: 10px; /* Add gap between stacked buttons */
     }
 
     .register-form button {
@@ -193,26 +225,28 @@ body {
 
 @media (max-width: 480px) {
     .register-form {
-        padding: 20px; /* Further adjust padding for very small screens */
+        padding: 10px; /* Further adjust padding for very small screens */
     }
 
     .register-form h2 {
-        font-size: 28px; /* Adjust heading size */
+        font-size: 14px; /* Adjust heading size */
     }
 
     .register-form p {
-        font-size: 14px; /* Adjust paragraph size */
+        font-size: 7px; /* Adjust paragraph size */
     }
 
     .register-form input[type="text"],
     .register-form input[type="email"],
     .register-form input[type="password"],
     .register-form button {
-        padding: 12px 15px;
+        padding: 20px 15px;
         font-size: 15px;
     }
 
     .login-link a {
         font-size: 13px;
     }
-}
+
+
+}  

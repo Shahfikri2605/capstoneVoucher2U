@@ -28,8 +28,14 @@
             <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
         </div>
         <div class="user-session-info">
-            <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
-            <span class="points-display" id="user-points">12500 Points</span>
+            <div class="profile-dropdown-container">
+              <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+              <div class="dropdown-menu-profile">
+                <a href="ProfilePage.html">My Account</a>
+                <a href="#" id="logout-link">Logout</a>
+              </div>
+            </div>
+            <span class="points-display" id="user-points"></span>
         </div>
     </div>
 </header>

@@ -60,6 +60,44 @@
     display: flex;
     gap: 15px;
     margin-bottom: 40px;
+    align-items: center; /* Align items vertically */
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.quantity-btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px 12px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.quantity-btn:hover {
+    background-color: #e0e0e0;
+}
+
+#quantity-input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 8px 0;
+    -moz-appearance: textfield; /* Hide arrows in Firefox */
+}
+
+#quantity-input::-webkit-outer-spin-button,
+#quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Hide arrows in Chrome, Safari, Edge */
+    margin: 0;
 }
 
 .btn {
