@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Optima Bank</title>
+    <link rel="stylesheet" href="../css/ProfilePage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6TaY+VT5apfpmYV7/CPA3ywp+kSBYpmn+HbASGLfAcs+gNA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="../assets/logo.png" alt="Optima Bank Logo">
+        OptimaBank
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search product...">
+        <i class="fas fa-search"></i>
+    </div>
+    <div class="burger-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+        <li><a href="HomePage.html">Home</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Help</a></li>
+    </ul>
+    <div class="header-right">
+        <div class="cart">
+            <i class="fas fa-shopping-cart"></i>
+            Cart (0)
+        </div>
+        <div class="user-session-info">
+            <a href="#" id="auth-link"><i class="fas fa-user-circle"></i>User</a>
+            <a href="#" id="profile-link" class="profile-icon"><i class="fas fa-user-circle"></i></a>
+        </div>
+    </div>
+</header>
+
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-avatar">
+            DS
+        </div>
+        <div class="profile-info">
+            <h1 id="userName">User</h1>
+            <p id="userEmail">user@email.com</p>
+        </div>
+    </div>
+
+    <!-- Simple Edit Form - Hidden by default -->
+    <div class="edit-form-container" id="editFormContainer" style="display: none;">
+        <div class="edit-form-card">
+            <h3><i class="fas fa-edit"></i> Edit Profile Information</h3>
+            <form id="editProfileForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editUsername">Name</label>
+                        <input type="text" id="editUsername" name="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editEmail">Email</label>
+                        <input type="email" id="editEmail" name="Email" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editPhone">Phone Number</label>
+                        <input type="text" id="editPhone" name="Phone_number" placeholder="Optional">
+                    </div>
+                    <div class="form-group">
+                        <label for="editAddress">Address</label>
+                        <input type="text" id="editAddress" name="Address" placeholder="Optional">
+                    </div>
+                </div>
+                
+                <div id="editMessage" class="message"></div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-save">Save Changes</button>
+                    <button type="button" class="btn-cancel" id="cancelEditBtn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Information Grid -->
+    <div class="profile-grid">
+        <!-- General Information -->
+        <div class="profile-card">
+            <div class="card-header">
+            <h3><i class="fas fa-user"></i> General Information</h3>
+            <button class="btn-edit" id="editToggleBtn">
+                <i class="fas fa-edit"></i> Edit
+            </button>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Create Date</span>
+                <span class="info-value" id="createDate">null</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Status</span>
+                <span class="info-value" id="userStatus">Active</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Phone</span>
+                <span class="info-value" id="userPhone">null</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Address</span>
+                <span class="info-value" id="userAddress">null</span>
+            </div>
+        </div>
+
+        <!-- Member Ship Status -->
+        <div class="profile-card">
+            <h3><i class="fas fa-crown"></i> Member Ship Status</h3>
+            <div class="info-row">
+                <span class="info-label">Current Tier</span>
+                <span class="info-value" id="memberTier">null</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Benefits</span>
+                <span class="info-value" id="memberBenefit">null</span>
+            </div>
+        </div>
+
+        <!-- Loyalty Points Balance -->
+        <div class="profile-card points-balance">
+            <h3><i class="fas fa-coins"></i> Loyalty Points Balance</h3>
+            <div class="points-number" id="pointsBalance">null</div>
+        </div>
+
+
+        <!-- Reward History -->
+        <div class="profile-card payment-history">
+            <h3><i class="fas fa-credit-card"></i> Transaction History</h3>
+            
+            <div class="transaction-tabs">
+                <button class="tab-button active" data-tab="all">All</button>
+                <button class="tab-button" data-tab="completed">Completed</button>
+                <button class="tab-button" data-tab="refund">Return/Refund</button>
+                <button class="tab-button" data-tab="pending">Pending</button>
+                <button class="tab-button" data-tab="failed">Failed</button>
+            </div>
+
+            <div class="tab-content active" id="all-tab">
+                <div id="transactionList">
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon completed">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Purchase</h4>
+                                <p>12:29 AM • May 15, 2023</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount completed">80p</div>
+                        <div class="transaction-status completed">Completed</div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon refund">
+                                <i class="fas fa-undo"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Refund</h4>
+                                <p>02:45 AM • Feb 16, 2023</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount refund">-80p</div>
+                        <div class="transaction-status refund">Refunded</div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon pending">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Purchase</h4>
+                                <p>10:15 AM • Jan 20, 2023</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount pending">120p</div>
+                        <div class="transaction-status pending">Pending</div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon failed">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Purchase</h4>
+                                <p>08:30 PM • Jan 18, 2023</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount failed">200p</div>
+                        <div class="transaction-status failed">Failed</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="completed-tab">
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon completed">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Purchase</h4>
+                            <p>12:29 AM • May 15, 2023</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount completed">80p</div>
+                    <div class="transaction-status completed">Completed</div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="refund-tab">
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon refund">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Refund</h4>
+                            <p>02:45 AM • Feb 16, 2023</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount refund">-80p</div>
+                    <div class="transaction-status refund">Refunded</div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="pending-tab">
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Purchase</h4>
+                            <p>10:15 AM • Jan 20, 2023</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount pending">120p</div>
+                    <div class="transaction-status pending">Pending</div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="failed-tab">
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon failed">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Purchase</h4>
+                            <p>08:30 PM • Jan 18, 2023</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount failed">200p</div>
+                    <div class="transaction-status failed">Failed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loyalty Program Progress -->
+        <div class="profile-card loyalty-progress">
+            <h3><i class="fas fa-trophy"></i> Loyalty Program Progress</h3>
+                <div class="progress-container">
+                    <div class="tier-progress">
+                        <h4>Your Tier Progress</h4>
+                        <div class="current-tier">
+                            <span>Current Tier:</span>
+                            <span class="tier-badge" id="currentTierBadge">Silver</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 65%"></div>
+                            </div>
+                            <div class="progress-percentage" id="progressPercentage">65%</div>
+                        </div>
+                        <p class="progress-text" id="progressText">You need 3500 more points to reach Gold Tier.</p>
+                    </div>
+
+                    <div class="points-history">
+                        <h4>Points Earned History</h4>
+                        <div class="points-chart">
+                            <canvas id="pointsChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <!-- Activities -->
+        <div class="profile-card activities-card">
+            <h3><i class="fas fa-history"></i> Activities</h3>
+            <div id="activitiesList">
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="activity-text">
+                        Redeems 70% of total voucher successfully
+                    </div>
+                    <div class="activity-time">
+                        22/12/22 • Dec 22, 2022
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="activity-text">
+                        A new voucher added to cart
+                    </div>
+                    <div class="activity-time">
+                        22/12/22 • Nov 22, 2022
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Vouchers</a></li>
+                <li><a href="#">Our story</a></li>
+            </ul>
+        </div>
+        <div class="footer-section help">
+            <h4>Help</h4>
+            <ul>
+                <li><a href="#">Redeem</a></li>
+                <li><a href="#">Issues</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h4>Contact</h4>
+            <p>Phone: (+1) 123 456 7893</p>
+            <p>Email: name@email.com</p>
+        </div>
+        <div class="footer-section promotions">
+            <h4>Receive new promotions</h4>
+            <div class="subscribe">
+                <input type="email" placeholder="Input your email">
+                <button>Subscribe</button>
+            </div>
+            <div class="social-links">
+                <a href="#"><img src="../assets/facebook_icon.png" alt="Facebook"></a>
+                <a href="#"><img src="../assets/twitter_icon.png" alt="Twitter"></a>
+                <a href="#"><img src="../assets/linkedin_icon.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../assets/youtube_icon.png" alt="YouTube"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2022 Brand, Inc. | Privacy | Terms | Sitemap</p>
+        <p>Made with V</p>
+    </div>
+</footer>
+
+<script src="../js/userSession.js"></script>
+<script src="../js/profilePage.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerMenu = document.querySelector('.burger-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        burgerMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    });
+</script>
+</body>
+</html>

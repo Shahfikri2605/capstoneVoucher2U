@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             if (data.loggedIn) {
                 authLink.innerHTML = `<i class="fas fa-user-circle"></i> ${data.userName}`;
-                authLink.href = "#"; // Or a profile page link
+                authLink.href = "ProfilePage.html"; // Or a profile page link
             } else {
                 authLink.innerHTML = `<i class="fas fa-user"></i> Login`;
                 authLink.href = "LoginPage.html";
