@@ -5,39 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - Optima Bank</title>
     <link rel="stylesheet" href="../css/ProfilePage.css">
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6TaY+VT5apfpmYV7/CPA3ywp+kSBYpmn+HbASGLfAcs+gNA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
 <header>
     <div class="logo">
-        <img src="../assets/logo.png" alt="Optima Bank Logo">
+        <img src="../assets/logo.png" alt="Voucher2U Logo"> <!-- Placeholder for logo -->
         OptimaBank
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Search product...">
-        <i class="fas fa-search"></i>
     </div>
     <div class="burger-menu">
         <i class="fas fa-bars"></i>
     </div>
     <ul class="nav-links">
-        <li><a href="HomePage.html">Home</a></li>
-        <li><a href="#">Cart</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="#">Help</a></li>
+        <li><a href="#">Home</a></li>
+        <li class="dropdown">
+            <a href="#">Category <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+            <li><a href="category.html?name=travel">Travel</a></li>
+            <li><a href="category.html?name=food">Food & Dining</a></li>
+            <li><a href="category.html?name=shopping">Shopping & Retail</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Support</a></li>
     </ul>
     <div class="header-right">
         <div class="cart">
-            <i class="fas fa-shopping-cart"></i>
-            Cart (0)
+            <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
         </div>
         <div class="user-session-info">
-            <a href="#" id="auth-link"><i class="fas fa-user-circle"></i>User</a>
-            <a href="#" id="profile-link" class="profile-icon"><i class="fas fa-user-circle"></i></a>
+            <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+            <span class="points-display" id="user-points">12500 Points</span>
+           
         </div>
     </div>
 </header>
+
+<!-- Modal Overlay for Edit Form -->
+<div class="modal-overlay" id="editModalOverlay">
+    <div class="edit-form-container" id="editFormContainer">
+        <div class="edit-form-card">
+            <h3>
+                <div class="title-section">
+                    <i class="fas fa-edit"></i>
+                    Edit Profile Information
+                </div>
+                <button type="button" class="modal-close" id="modalCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </h3>
+            
+            <form id="editProfileForm">
+                <div class="form-sections">
+                    <!-- Personal Information Section -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-user"></i> Personal Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="editUsername">Full Name *</label>
+                                <input type="text" id="editUsername" name="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmail">Email Address *</label>
+                                <input type="email" id="editEmail" name="Email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="editPhone">Phone Number</label>
+                                <input type="text" id="editPhone" name="Phone_number" placeholder="Optional">
+                            </div>
+                            <div class="form-group">
+                                <label for="editAddress">Address</label>
+                                <input type="text" id="editAddress" name="Address" placeholder="Optional">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-shield-alt"></i> Security Settings</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" name="current_password" placeholder="Enter current password to change">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" name="new_password" placeholder="Leave blank to keep current">
+                                <div class="password-strength" id="passwordStrength"></div>
+                                <div class="password-requirements" id="passwordRequirements">
+                                    <ul>
+                                        <li id="lengthReq">At least 8 characters</li>
+                                        <li id="upperReq">One uppercase letter</li>
+                                        <li id="lowerReq">One lowercase letter</li>
+                                        <li id="numberReq">One number</li>
+                                        <li id="specialReq">One special character</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm new password">
+                            </div>
+                            <div class="form-group">
+                                <!-- Empty space for alignment -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="editMessage" class="message"></div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="cancelEditBtn">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn-save">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="profile-container">
     <!-- Profile Header -->
@@ -46,45 +142,8 @@
             DS
         </div>
         <div class="profile-info">
-            <h1 id="userName">User</h1>
-            <p id="userEmail">user@email.com</p>
-        </div>
-    </div>
-
-    <!-- Simple Edit Form - Hidden by default -->
-    <div class="edit-form-container" id="editFormContainer" style="display: none;">
-        <div class="edit-form-card">
-            <h3><i class="fas fa-edit"></i> Edit Profile Information</h3>
-            <form id="editProfileForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="editUsername">Name</label>
-                        <input type="text" id="editUsername" name="Username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editEmail">Email</label>
-                        <input type="email" id="editEmail" name="Email" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="editPhone">Phone Number</label>
-                        <input type="text" id="editPhone" name="Phone_number" placeholder="Optional">
-                    </div>
-                    <div class="form-group">
-                        <label for="editAddress">Address</label>
-                        <input type="text" id="editAddress" name="Address" placeholder="Optional">
-                    </div>
-                </div>
-                
-                <div id="editMessage" class="message"></div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="btn-save">Save Changes</button>
-                    <button type="button" class="btn-cancel" id="cancelEditBtn">Cancel</button>
-                </div>
-            </form>
+            <h1 id="userName">null</h1>
+            <p id="userEmail">null@email.com</p>
         </div>
     </div>
 
@@ -95,24 +154,20 @@
             <div class="card-header">
             <h3><i class="fas fa-user"></i> General Information</h3>
             <button class="btn-edit" id="editToggleBtn">
-                <i class="fas fa-edit"></i> Edit
+                <i class="fas fa-edit">...</i>
             </button>
             </div>
             <div class="info-row">
                 <span class="info-label">Create Date</span>
-                <span class="info-value" id="createDate">null</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Status</span>
-                <span class="info-value" id="userStatus">Active</span>
+                <span class="info-value" id="createDate">May 27, 2022</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Phone</span>
-                <span class="info-value" id="userPhone">null</span>
+                <span class="info-value" id="userPhone">+1 (555) 123-4567</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Address</span>
-                <span class="info-value" id="userAddress">null</span>
+                <span class="info-value" id="userAddress">123 Main St, Anytown, USA</span>
             </div>
         </div>
 
@@ -121,22 +176,21 @@
             <h3><i class="fas fa-crown"></i> Member Ship Status</h3>
             <div class="info-row">
                 <span class="info-label">Current Tier</span>
-                <span class="info-value" id="memberTier">null</span>
+                <span class="info-value" id="memberTier">Gold</span>
             </div>
             <div class="info-row">
                 <span class="info-label">Benefits</span>
-                <span class="info-value" id="memberBenefit">null</span>
+                <span class="info-value" id="memberBenefit">Gold Rewards</span>
             </div>
         </div>
 
         <!-- Loyalty Points Balance -->
         <div class="profile-card points-balance">
             <h3><i class="fas fa-coins"></i> Loyalty Points Balance</h3>
-            <div class="points-number" id="pointsBalance">null</div>
+            <div class="points-number" id="pointsBalance">12,500</div>
         </div>
 
-
-        <!-- Reward History -->
+        <!-- Payment History -->
         <div class="profile-card payment-history">
             <h3><i class="fas fa-credit-card"></i> Transaction History</h3>
             
@@ -207,70 +261,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="tab-content" id="completed-tab">
-                <div class="transaction-item">
-                    <div class="transaction-info">
-                        <div class="transaction-icon completed">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div class="transaction-details">
-                            <h4>Purchase</h4>
-                            <p>12:29 AM • May 15, 2023</p>
-                        </div>
-                    </div>
-                    <div class="transaction-amount completed">80p</div>
-                    <div class="transaction-status completed">Completed</div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="refund-tab">
-                <div class="transaction-item">
-                    <div class="transaction-info">
-                        <div class="transaction-icon refund">
-                            <i class="fas fa-undo"></i>
-                        </div>
-                        <div class="transaction-details">
-                            <h4>Refund</h4>
-                            <p>02:45 AM • Feb 16, 2023</p>
-                        </div>
-                    </div>
-                    <div class="transaction-amount refund">-80p</div>
-                    <div class="transaction-status refund">Refunded</div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="pending-tab">
-                <div class="transaction-item">
-                    <div class="transaction-info">
-                        <div class="transaction-icon pending">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="transaction-details">
-                            <h4>Purchase</h4>
-                            <p>10:15 AM • Jan 20, 2023</p>
-                        </div>
-                    </div>
-                    <div class="transaction-amount pending">120p</div>
-                    <div class="transaction-status pending">Pending</div>
-                </div>
-            </div>
-
-            <div class="tab-content" id="failed-tab">
-                <div class="transaction-item">
-                    <div class="transaction-info">
-                        <div class="transaction-icon failed">
-                            <i class="fas fa-times"></i>
-                        </div>
-                        <div class="transaction-details">
-                            <h4>Purchase</h4>
-                            <p>08:30 PM • Jan 18, 2023</p>
-                        </div>
-                    </div>
-                    <div class="transaction-amount failed">200p</div>
-                    <div class="transaction-status failed">Failed</div>
-                </div>
-            </div>
         </div>
 
         <!-- Loyalty Program Progress -->
@@ -281,15 +271,15 @@
                         <h4>Your Tier Progress</h4>
                         <div class="current-tier">
                             <span>Current Tier:</span>
-                            <span class="tier-badge" id="currentTierBadge">Silver</span>
+                            <span class="tier-badge" id="currentTierBadge">null</span>
                         </div>
                         <div class="progress-bar-container">
                             <div class="progress-bar">
                                 <div class="progress-fill" id="progressFill" style="width: 65%"></div>
                             </div>
-                            <div class="progress-percentage" id="progressPercentage">65%</div>
+                            <div class="progress-percentage" id="progressPercentage">0%</div>
                         </div>
-                        <p class="progress-text" id="progressText">You need 3500 more points to reach Gold Tier.</p>
+                        <p class="progress-text" id="progressText">You need null more points to reach Gold Tier.</p>
                     </div>
 
                     <div class="points-history">

@@ -96,6 +96,9 @@ function updateProfileDisplay(userData) {
     if (memberBenefit)  {
         memberBenefit.textContent = getMembershipBenefits(points);
     }
+    
+    // Update loyalty progress
+    updateLoyaltyProgress(points);
 }
 
 function useDefaultProfileData() {
@@ -140,16 +143,24 @@ function getMembershipBenefits(points){
 function initializeEventListeners() {
     console.log('Initializing event listeners...'); // Debug log
     
-    // Edit button functionality
+    // Modal Edit Form functionality
     const editBtn = document.getElementById('editToggleBtn');
+    const editModalOverlay = document.getElementById('editModalOverlay');
     const editContainer = document.getElementById('editFormContainer');
     const cancelBtn = document.getElementById('cancelEditBtn');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
     const editForm = document.getElementById('editProfileForm');
     
-    console.log('Elements found:', {
+    // Password fields
+    const newPasswordInput = document.getElementById('newPassword');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    
+    console.log('Modal elements found:', {
         editBtn: !!editBtn,
+        editModalOverlay: !!editModalOverlay,
         editContainer: !!editContainer,
         cancelBtn: !!cancelBtn,
+        modalCloseBtn: !!modalCloseBtn,
         editForm: !!editForm
     }); // Debug log
     
@@ -157,7 +168,7 @@ function initializeEventListeners() {
         editBtn.addEventListener('click', function(e) {
             e.preventDefault();
             console.log('Edit button clicked!'); // Debug log
-            showEditForm();
+            showEditModal();
         });
     } else {
         console.error('Edit button not found!');
@@ -165,13 +176,51 @@ function initializeEventListeners() {
     
     if (cancelBtn) {
         cancelBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             console.log('Cancel button clicked');
-            hideEditForm();
+            hideEditModal();
         });
     }
     
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Modal close button clicked');
+            hideEditModal();
+        });
+    }
+    
+    // Close modal when clicking outside of it
+    if (editModalOverlay) {
+        editModalOverlay.addEventListener('click', function(e) {
+            if (e.target === editModalOverlay) {
+                console.log('Clicked outside modal');
+                hideEditModal();
+            }
+        });
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && editModalOverlay && editModalOverlay.classList.contains('active')) {
+            console.log('Escape key pressed');
+            hideEditModal();
+        }
+    });
+    
     if (editForm) {
         editForm.addEventListener('submit', handleProfileUpdate);
+    }
+    
+    // Simple password validation for matching passwords
+    if (newPasswordInput && confirmPasswordInput) {
+        newPasswordInput.addEventListener('input', function() {
+            validatePasswordMatch();
+        });
+        
+        confirmPasswordInput.addEventListener('input', function() {
+            validatePasswordMatch();
+        });
     }
 
     // Initialize transaction tabs
@@ -183,6 +232,230 @@ function initializeEventListeners() {
     // Load transactions and activities
     loadTransactionHistory();
     loadActivities();
+}
+
+function showEditModal() {
+    console.log('Showing edit modal...'); // Debug log
+    const editModalOverlay = document.getElementById('editModalOverlay');
+    
+    if (editModalOverlay) {
+        // Fill form with current data
+        populateEditForm();
+        
+        // Show the modal
+        editModalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent body scroll
+        
+        // Focus first input after animation
+        setTimeout(() => {
+            const firstInput = document.getElementById('editUsername');
+            if (firstInput) {
+                firstInput.focus();
+            }
+        }, 300);
+        
+        console.log('Edit modal should now be visible'); // Debug log
+    } else {
+        console.error('Edit modal overlay not found!');
+    }
+}
+
+function hideEditModal() {
+    console.log('Hiding edit modal...'); // Debug log
+    const editModalOverlay = document.getElementById('editModalOverlay');
+    
+    if (editModalOverlay) {
+        editModalOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Restore body scroll
+        clearEditForm();
+    }
+}
+
+function populateEditForm() {
+    // Get current profile data from the page
+    const userName = document.getElementById('userName')?.textContent || '';
+    const userEmail = document.getElementById('userEmail')?.textContent || '';
+    const userPhone = document.getElementById('userPhone')?.textContent || '';
+    const userAddress = document.getElementById('userAddress')?.textContent || '';
+    
+    // Fill the form fields
+    const editUsername = document.getElementById('editUsername');
+    const editEmail = document.getElementById('editEmail');
+    const editPhone = document.getElementById('editPhone');
+    const editAddress = document.getElementById('editAddress');
+    
+    if (editUsername) editUsername.value = userName;
+    if (editEmail) editEmail.value = userEmail;
+    if (editPhone) editPhone.value = userPhone !== 'Not provided' ? userPhone : '';
+    if (editAddress) editAddress.value = userAddress !== 'Not provided' ? userAddress : '';
+    
+    console.log('Form filled with current data:', {
+        username: userName,
+        email: userEmail,
+        phone: userPhone,
+        address: userAddress
+    });
+}
+
+function clearEditForm() {
+    const editForm = document.getElementById('editProfileForm');
+    if (editForm) {
+        editForm.reset();
+    }
+    
+    const messageDiv = document.getElementById('editMessage');
+    if (messageDiv) {
+        messageDiv.style.display = 'none';
+        messageDiv.className = 'message';
+    }
+    
+    console.log('Edit form cleared');
+}
+
+function validatePasswordMatch() {
+    const newPasswordInput = document.getElementById('newPassword');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    
+    if (!newPasswordInput || !confirmPasswordInput) return;
+    
+    const newPassword = newPasswordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    // Only validate if both fields have content
+    if (newPassword && confirmPassword) {
+        if (newPassword !== confirmPassword) {
+            confirmPasswordInput.setCustomValidity('Passwords do not match');
+            console.log('Password validation: passwords do not match');
+        } else {
+            confirmPasswordInput.setCustomValidity('');
+            console.log('Password validation: passwords match');
+        }
+    } else {
+        confirmPasswordInput.setCustomValidity('');
+    }
+}
+
+function handleProfileUpdate(e) {
+    e.preventDefault();
+    
+    console.log('Profile update form submitted'); // Debug log
+    
+    const formData = new FormData(e.target);
+    const messageDiv = document.getElementById('editMessage');
+    const submitBtn = e.target.querySelector('.btn-save') || e.target.querySelector('button[type="submit"]');
+    
+    // Get form values for validation
+    const username = formData.get('Username');
+    const email = formData.get('Email');
+    const newPassword = formData.get('new_password');
+    const currentPassword = formData.get('current_password');
+    const confirmPassword = formData.get('confirm_password');
+    
+    console.log('Form data being processed:', {
+        username: username,
+        email: email,
+        phone: formData.get('Phone_number'),
+        address: formData.get('Address'),
+        hasCurrentPassword: !!currentPassword,
+        hasNewPassword: !!newPassword,
+        hasConfirmPassword: !!confirmPassword
+    });
+    
+    // Basic validation
+    if (!username || !email) {
+        showMessage(messageDiv, 'Username and email are required.', 'error');
+        return;
+    }
+    
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showMessage(messageDiv, 'Please enter a valid email address.', 'error');
+        return;
+    }
+    
+    // Password validation if password change is requested
+    if (newPassword) {
+        if (!currentPassword) {
+            showMessage(messageDiv, 'Current password is required to set a new password.', 'error');
+            return;
+        }
+        
+        if (newPassword !== confirmPassword) {
+            showMessage(messageDiv, 'New passwords do not match.', 'error');
+            return;
+        }
+        
+        if (newPassword.length < 8) {
+            showMessage(messageDiv, 'New password must be at least 8 characters long.', 'error');
+            return;
+        }
+    }
+    
+    // Show loading state
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    }
+    
+    console.log('Sending update request to server...');
+    
+    // Send update request
+    fetch('../php/update_profile.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response data:', data);
+        if (data.success) {
+            showMessage(messageDiv, data.message || 'Profile updated successfully!', 'success');
+            // Update the profile display with new data
+            if (data.user) {
+                updateProfileDisplay(data.user);
+            }
+            // Hide form after short delay
+            setTimeout(() => {
+                hideEditModal();
+            }, 2000);
+        } else {
+            showMessage(messageDiv, data.message || 'Update failed. Please try again.', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Update error:', error);
+        showMessage(messageDiv, 'Update failed. Please check your connection and try again.', 'error');
+    })
+    .finally(() => {
+        // Reset button state
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-save"></i> Save Changes';
+        }
+    });
+}
+
+function showMessage(messageDiv, message, type) {
+    if (messageDiv) {
+        messageDiv.textContent = message;
+        messageDiv.className = `message ${type}`;
+        messageDiv.style.display = 'block';
+        
+        console.log(`Message displayed: ${type} - ${message}`);
+        
+        // Auto-hide success messages after 5 seconds
+        if (type === 'success') {
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+    }
 }
 
 function initializeTransactionTabs() {
@@ -247,28 +520,28 @@ function updateLoyaltyProgress(points) {
 }
 
 function getTierInfo(points) {
-    if (points >= 5000) {
+    if (points >= 15000) {
         return {
             percentage: 100,
             text: 'You have reached the highest tier - Platinum!'
         };
-    } else if (points >= 4000) {
-        const remaining = 5000 - points;
-        const percentage = ((points - 4000) / 1000) * 100;
+    } else if (points >= 10000) {
+        const remaining = 15000 - points;
+        const percentage = ((points - 10000) / 5000) * 100;
         return {
             percentage: Math.round(percentage),
             text: `You need ${remaining} more points to reach Platinum Tier.`
         };
-    } else if (points >= 3000) {
-        const remaining = 4000 - points;
-        const percentage = ((points - 3000) / 1000) * 100;
+    } else if (points >= 5000) {
+        const remaining = 10000 - points;
+        const percentage = ((points - 5000) / 5000) * 100;
         return {
             percentage: Math.round(percentage),
             text: `You need ${remaining} more points to reach Gold Tier.`
         };
     } else {
-        const remaining = 3000 - points;
-        const percentage = (points / 3000) * 100;
+        const remaining = 5000 - points;
+        const percentage = (points / 5000) * 100;
         return {
             percentage: Math.round(percentage),
             text: `You need ${remaining} more points to reach Silver Tier.`
@@ -379,132 +652,6 @@ function initializePointsChart() {
     });
 }
 
-function showEditForm() {
-    console.log('Showing edit form...'); // Debug log
-    const editContainer = document.getElementById('editFormContainer');
-    
-    if (editContainer) {
-        // Fill form with current data
-        populateEditForm();
-        
-        // Show the form
-        editContainer.style.display = 'block';
-        
-        // Scroll to form
-        editContainer.scrollIntoView({ behavior: 'smooth' });
-        
-        console.log('Edit form should now be visible'); // Debug log
-    } else {
-        console.error('Edit form container not found!');
-    }
-}
-
-function hideEditForm() {
-    console.log('Hiding edit form...'); // Debug log
-    const editContainer = document.getElementById('editFormContainer');
-    
-    if (editContainer) {
-        editContainer.style.display = 'none';
-        clearEditForm();
-    }
-}
-
-function populateEditForm() {
-    // Get current profile data from the page
-    const userName = document.getElementById('userName')?.textContent || '';
-    const userEmail = document.getElementById('userEmail')?.textContent || '';
-    const userPhone = document.getElementById('userPhone')?.textContent || '';
-    const userAddress = document.getElementById('userAddress')?.textContent || '';
-    
-    // Fill the form fields
-    const editUsername = document.getElementById('editUsername');
-    const editEmail = document.getElementById('editEmail');
-    const editPhone = document.getElementById('editPhone');
-    const editAddress = document.getElementById('editAddress');
-    
-    if (editUsername) editUsername.value = userName;
-    if (editEmail) editEmail.value = userEmail;
-    if (editPhone) editPhone.value = userPhone !== 'Not provided' ? userPhone : '';
-    if (editAddress) editAddress.value = userAddress !== 'Not provided' ? userAddress : '';
-    
-    console.log('Form filled with current data');
-}
-
-function clearEditForm() {
-    const editForm = document.getElementById('editProfileForm');
-    if (editForm) {
-        editForm.reset();
-    }
-    
-    const messageDiv = document.getElementById('editMessage');
-    if (messageDiv) {
-        messageDiv.style.display = 'none';
-        messageDiv.className = 'message';
-    }
-}
-
-function handleProfileUpdate(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const messageDiv = document.getElementById('editMessage');
-    const submitBtn = e.target.querySelector('.btn-save');
-    
-    // Simple validation - just check required fields
-    const username = formData.get('Username');
-    const email = formData.get('Email');
-    
-    if (!username || !email) {
-        showMessage(messageDiv, 'Name and email are required.', 'error');
-        return;
-    }
-    
-    // Show loading state
-    if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Saving...';
-    }
-    
-    // Send update request
-    fetch('../php/update_profile.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            showMessage(messageDiv, 'Profile updated successfully!', 'success');
-            // Update the profile display
-            updateProfileDisplay(data.user);
-            // Hide form after short delay
-            setTimeout(() => {
-                hideEditForm();
-            }, 2000);
-        } else {
-            showMessage(messageDiv, data.message, 'error');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        showMessage(messageDiv, 'Update failed. Please try again.', 'error');
-    })
-    .finally(() => {
-        // Reset button
-        if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Save Changes';
-        }
-    });
-}
-
-function showMessage(messageDiv, message, type) {
-    if (messageDiv) {
-        messageDiv.textContent = message;
-        messageDiv.className = `message ${type}`;
-        messageDiv.style.display = 'block';
-    }
-}
-
 function loadTransactionHistory() {
     // Fetch transaction history from server
     fetch('../php/get_transactions.php')
@@ -552,7 +699,7 @@ function createTransactionElement(transaction) {
                 <p>${formatTransactionDate(transaction.date)}</p>
             </div>
         </div>
-        <div class="transaction-amount ${amountClass}">${amountPrefix}$${Math.abs(transaction.amount)}</div>
+        <div class="transaction-amount ${amountClass}">${amountPrefix}${Math.abs(transaction.amount)}</div>
     `;
     
     return item;
@@ -625,6 +772,8 @@ function getActivityIcon(activityType) {
         'redemption': 'fas fa-gift',
         'login': 'fas fa-sign-in-alt',
         'registration': 'fas fa-user-plus',
+        'profile_update': 'fas fa-user-edit',
+        'password_change': 'fas fa-key',
         'default': 'fas fa-circle'
     };
     
