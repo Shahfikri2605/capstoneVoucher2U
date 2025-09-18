@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 redeemNowBtn.style.backgroundColor = ''; // Reset to default
             } else {
                 redeemNowBtn.disabled = true;
-                redeemNowBtn.textContent = `Insufficient Points (${voucherPointsNeeded} needed`;
-                redeemNowBtn.style.backgroundColor = 'e25822'; // Indicate disabled state
+                redeemNowBtn.textContent = "Insufficient Points";
+                redeemNowBtn.title = `You need ${voucherPointsNeeded} points`;
             }
         }
 
@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 addToCartBtn.style.backgroundColor = ''; // Reset to default
             } else {
                 addToCartBtn.disabled = true;
-                addToCartBtn.innerHTML = `Insufficient Points (${voucherPointsNeeded} needed)`;
-                addToCartBtn.style.backgroundColor = 'e25822'; // Indicate disabled state
+                addToCartBtn.textContent = "Insufficient Points";
+                addToCartBtn.title = `You need ${voucherPointsNeeded} points`;
             }
         }
     }

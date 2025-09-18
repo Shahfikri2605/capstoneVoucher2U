@@ -312,7 +312,7 @@ z-index: -1;
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Ensure 4 columns */
     gap: 25px;
-    padding: 0 20px 80px 20px;
+    padding: 0 20px 20px 20px;
     background-color: #f8f8f8;
 }
 .featured-offers .offer-item {
@@ -356,8 +356,9 @@ z-index: -1;
 }
 .featured-offers .offer-item .btn {
     display: inline-block;
-    background-color: #6c757d;
+    background-color: #dcac75;
     color: white;
+    font-weight: 600;
     padding: 10px 20px;
     border-radius: 5px;
     margin-bottom: 20px;

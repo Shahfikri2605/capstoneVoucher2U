@@ -1,62 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create an Account</title>
-    <link rel="stylesheet" href="../css/RegisterPage.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create an Account</title>
+  <link rel="stylesheet" href="../css/RegisterPage.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
 <div class="register-container">
-    <div class="register-box">
-        <div class="image-container">
-        </div> <!-- The image is now a CSS background -->
-        <div class="register-form">
-            <h2>Create an Account</h2>
-            <p>Set up your account</p>
-            <form action="#" id="registrationForm" enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="text" placeholder="Name" name="Username" required>
-                </div>
-                <input type="email" placeholder="Email Address" name="Email" required>
-                <div class="form-group">
-                    <input type="text" placeholder="Phone Number" name="Phone_number">
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Address" name="Address">
-                </div>
-                
-                <div class="form-group">
-                    <input type="password" placeholder="Password" name="Password" required>
-                    <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
-                </div>
-                <div class="buttons">
-                    <button type="submit">Continue</button>
-                    <button type="button" class="cancel">Cancel</button>
-                </div>
-            </form>
-            <div class="divider">
-                <span>OR</span>
-            </div>
-            <div id="g_id_onload"
-                 data-client_id="326812386407-0cm9mlg0ap6dd4i3h8u12advl52ioj06.apps.googleusercontent.com"
-                 data-callback="handleGoogleRegister"
-                 data-auto_prompt="false">
-            </div>
-            <div class="g_id_signin"
-                 data-type="standard"
-                 data-size="large"
-                 data-theme="outline"
-                 data-text="sign_in_with"
-                 data-shape="rectangular"
-                 data-logo_alignment="left">
-            </div>
-            <p class="login-link">Already have an account? <a href="LoginPage.html">Login here</a></p>
-            <div id="message"></div>
+  <div class="register-box">
+    <!-- Left Image Container -->
+    <div class="image-container"></div>
+    <!-- Register Form -->
+    <div class="register-form">
+      <h2>Create an Account</h2>
+      <p>Set up your account</p>
+      <form action="#" id="registrationForm" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Enter Name" name="Username" required>
         </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter Email Address" name="Email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone" placeholder="Enter Phone Number" name="Phone_number">
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" placeholder="Enter Address" name="Address">
+        </div>
+
+        <div class="form-group password-group">
+          <label for="password">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="password" placeholder="Password" name="Password" required>
+            <i class="fa-solid toggle-password" data-target="password"></i>
+          </div>
+        </div>
+
+        <div class="form-group password-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            <i class="fa-solid toggle-password" data-target="confirmPassword"></i>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button type="submit">Continue</button>
+          <button type="button" class="cancel" onclick="window.location.href='LoginPage.html'">Cancel</button>
+        </div>
+      </form>
+
+      <div class="divider"><span>OR</span></div>
+
+      <div id="g_id_onload"
+           data-client_id="326812386407-0cm9mlg0ap6dd4i3h8u12advl52ioj06.apps.googleusercontent.com"
+           data-callback="handleGoogleRegister"
+           data-auto_prompt="false">
+      </div>
+
+      <div class="g_id_signin"
+           data-type="standard"
+           data-size="large"
+           data-theme="outline"
+           data-text="sign_in_with"
+           data-shape="rectangular"
+           data-logo_alignment="left">
+      </div>
+
+      <p class="login-link">Already have an account? <a href="LoginPage.html">Login here</a></p>
+      <div id="message"></div>
     </div>
+  </div>
 </div>
     <script src="../js/userRegister.js"></script>
 </body>
