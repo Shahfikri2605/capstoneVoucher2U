@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - Optima Bank</title>
+    <title>Profile - Optima Bank</title>
     <link rel="stylesheet" href="../css/HomePage.css">
+    <link rel="stylesheet" href="../css/ProfilePage.css">
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/ProfilePage.css"> <!-- New CSS for Profile Page -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"  />
 </head>
 <body>
 
 <header>
     <div class="logo">
-        <img src="../assets/logo.png" alt="Voucher2U Logo">
+        <img src="../assets/logo.png" alt="Voucher2U Logo"> <!-- Placeholder for logo -->
         OptimaBank
     </div>
     <div class="burger-menu">
@@ -24,135 +24,307 @@
         <li class="dropdown">
             <a href="#">Category <i class="fas fa-caret-down"></i></a>
             <ul class="dropdown-menu">
-                <li><a href="category.html?name=travel">Travel</a></li>
-                <li><a href="category.html?name=food">Food & Dining</a></li>
-                <li><a href="category.html?name=shopping">Shopping & Retail</a></li>
+            <li><a href="category.html?name=travel">Travel</a></li>
+            <li><a href="category.html?name=food">Food & Dining</a></li>
+            <li><a href="category.html?name=shopping">Shopping & Retail</a></li>
             </ul>
         </li>
         <li><a href="#">Support</a></li>
     </ul>
-    <div class="search-bar">
-        <input type="text" placeholder="Search vouchers..." id="search-input">
-        <i class="fas fa-search"></i>
-    </div>
     <div class="header-right">
         <div class="cart">
             <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
         </div>
         <div class="user-session-info">
-              <div class="profile-dropdown-container">
+            <div class="profile-dropdown-container">
                 <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
                 <div class="dropdown-menu-profile">
-                  <a href="MyAccount.html">My Account</a>
-                  <a href="#" id="logout-link">Logout</a>
+                    <a href="ProfilePage.html">My Account</a>
+                    <a href="#" id="logout-link">Logout</a>
                 </div>
-              </div>
-            <span class="points-display" id="user-points"></span>
+            </div>
+            <span class="points-display" id="user-points">12500 Points</span>
+           
         </div>
     </div>
 </header>
 
-<main class="profile-container">
-    <div class="profile-header-card">
-        <div class="user-info-section">
-            <div class="profile-avatar">
-                <img src="../assets/profile_icon.png" alt="User Avatar">
-                <i class="fas fa-camera"></i>
-            </div>
-            <div class="user-details">
-                <h2 id="profile-name">David Smith</h2>
-                <p id="profile-email">david1998@gmail.com</p>
-            </div>
-            <div class="more-options">
-                <i class="fas fa-ellipsis-h"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="profile-content">
-        <div class="profile-card general-info">
-            <h3><i class="fas fa-info-circle"></i> General information</h3>
-            <div class="info-row">
-                <span>Phone</span>
-                <span id="phone-number">017-876 8798</span>
-            </div>
-            <div class="info-row">
-                <span>Address</span>
-                <span id="address">3675 Beach Street, Indianapolis, IN 46203</span>
-            </div>
-            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
-        </div>
-
-        <div class="profile-card loyalty-balance">
-            <h3><i class="fas fa-coins"></i> Loyalty Points Balance</h3>
-            <p>Loyalty Points Balance: <span id="loyalty-points-balance">12500</span></p>
-        </div>
-
-        <div class="profile-card payment-history">
-            <h3><i class="fas fa-history"></i> Payment History</h3>
-            <div class="payment-filters">
-                <span class="filter-btn active">All payments</span>
-                <span class="filter-btn">Succeeded</span>
-                <span class="filter-btn">Pending</span>
-                <span class="filter-btn">Failed</span>
-                <span class="filter-btn">Incomplete</span>
-                <span class="total-count">3 total</span>
-                <button class="create-btn"><i class="fas fa-plus"></i> Create</button>
-            </div>
-            <div class="payment-table-container">
-                <table class="payment-table">
-                    <thead>
-                        <tr>
-                            <th>VOUCHER</th>
-                            <th>AMOUNT</th>
-                            <th>STATUS</th>
-                            <th>TIME</th>
-                            <th>DATE</th>
-                            <th>DEVICE</th>
-                            <th>IP ADDRESS</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Payment history rows will be dynamically injected here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="profile-card loyalty-progress">
-            <h3><i class="fas fa-chart-line"></i> Loyalty Program Progress</h3>
-            <div class="progress-details">
-                <p>Your Tier Progress</p>
-                <span class="current-tier">Silver</span>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" style="width: 65%;"></div>
+<!-- Modal Overlay for Edit Form -->
+<div class="modal-overlay" id="editModalOverlay">
+    <div class="edit-form-container" id="editFormContainer">
+        <div class="edit-form-card">
+            <h3>
+                <div class="title-section">
+                    <i class="fas fa-edit"></i>
+                    Edit Profile Information
                 </div>
-                <p>You need 3500 more points to reach Gold Tier.</p>
+                <button type="button" class="modal-close" id="modalCloseBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </h3>
+            
+            <form id="editProfileForm">
+                <div class="form-sections">
+                    <!-- Personal Information Section -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-user"></i> Personal Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="editUsername">Full Name *</label>
+                                <input type="text" id="editUsername" name="Username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editEmail">Email Address *</label>
+                                <input type="email" id="editEmail" name="Email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="editPhone">Phone Number</label>
+                                <input type="text" id="editPhone" name="Phone_number" placeholder="Optional">
+                            </div>
+                            <div class="form-group">
+                                <label for="editAddress">Address</label>
+                                <input type="text" id="editAddress" name="Address" placeholder="Optional">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-shield-alt"></i> Security Settings</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password</label>
+                                <input type="password" id="currentPassword" name="current_password" placeholder="Enter current password to change">
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password</label>
+                                <input type="password" id="newPassword" name="new_password" placeholder="Leave blank to keep current">
+                                <div class="password-strength" id="passwordStrength"></div>
+                                <div class="password-requirements" id="passwordRequirements">
+                                    <ul>
+                                        <li id="lengthReq">At least 8 characters</li>
+                                        <li id="upperReq">One uppercase letter</li>
+                                        <li id="lowerReq">One lowercase letter</li>
+                                        <li id="numberReq">One number</li>
+                                        <li id="specialReq">One special character</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm new password">
+                            </div>
+                            <div class="form-group">
+                                <!-- Empty space for alignment -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="editMessage" class="message"></div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="cancelEditBtn">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button type="submit" class="btn-save">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <div class="profile-avatar">
+            DS
+        </div>
+        <div class="profile-info">
+            <h1 id="userName">null</h1>
+            <p id="userEmail">null@email.com</p>
+        </div>
+    </div>
+
+    <!-- Profile Information Grid -->
+    <div class="profile-grid">
+        <!-- General Information -->
+        <div class="profile-card">
+            <div class="card-header">
+            <h3><i class="fas fa-user"></i> General Information</h3>
+            <button class="btn-edit" id="editToggleBtn">
+                <i class="fas fa-edit">...</i>
+            </button>
             </div>
-            <div class="points-earned-history">
-                <h4>Points Earned History</h4>
-                <!-- Placeholder for chart -->
-                <img src="https://via.placeholder.com/400x150?text=Points+Earned+Chart" alt="Points Earned Chart">
+            <div class="info-row">
+                <span class="info-label">Phone</span>
+                <span class="info-value" id="userPhone">+1 (555) 123-4567</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Address</span>
+                <span class="info-value" id="userAddress">123 Main St, Anytown, USA</span>
             </div>
         </div>
 
-        <div class="profile-card activities">
-            <h3><i class="fas fa-list-alt"></i> Activities</h3>
-            <div class="activity-item">
-                <p>Redeem 30% travel voucher succeeded</p>
-                <span>08:02 PM - Feb 15, 2023</span>
-                <a href="#">Show detail</a>
+        <!-- Member Ship Status -->
+        <div class="profile-card">
+            <h3><i class="fas fa-crown"></i> Member Ship Status</h3>
+            <div class="info-row">
+                <span class="info-label">Current Tier</span>
+                <span class="info-value" id="memberTier">Gold</span>
             </div>
-            <div class="activity-item">
-                <p>A new voucher added to cart</p>
-                <span>07:02 PM - May 02, 2023</span>
-                <a href="#">Show detail</a>
+            <div class="info-row">
+                <span class="info-label">Benefits</span>
+                <span class="info-value" id="memberBenefit">Gold Rewards</span>
             </div>
-            <a href="#" class="show-more-btn">Show more</a>
+        </div>
+
+        <!-- Loyalty Points Balance -->
+        <div class="profile-card points-balance">
+            <h3><i class="fas fa-coins"></i> Loyalty Points Balance</h3>
+            <div class="points-number" id="pointsBalance">12,500</div>
+        </div>
+
+        <!-- Payment History -->
+        <div class="profile-card payment-history">
+            <h3><i class="fas fa-credit-card"></i> Transaction History</h3>
+            
+            <div class="transaction-tabs">
+                <button class="tab-button active" data-tab="all">All</button>
+                <button class="tab-button" data-tab="completed">Completed</button>
+                <button class="tab-button" data-tab="refund">Return/Refund</button>
+                <button class="tab-button" data-tab="pending">Pending</button>
+                <button class="tab-button" data-tab="failed">Failed</button>
+            </div>
+
+            <div class="tab-content active" id="all-tab">
+                <div id="transactionList">
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon completed">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Purchase</h4>
+                                <p>12:29 AM • May 15, 2023</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount completed">80p</div>
+                        <div class="transaction-status completed">Completed</div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon refund">
+                                <i class="fas fa-undo"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Refund</h4>
+                                <p>02:45 AM • Feb 16, 2023</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount refund">-80p</div>
+                        <div class="transaction-status refund">Refunded</div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon pending">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Purchase</h4>
+                                <p>10:15 AM • Jan 20, 2023</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount pending">120p</div>
+                        <div class="transaction-status pending">Pending</div>
+                    </div>
+
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <div class="transaction-icon failed">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="transaction-details">
+                                <h4>Purchase</h4>
+                                <p>08:30 PM • Jan 18, 2023</p>
+                            </div>
+                        </div>
+                        <div class="transaction-amount failed">200p</div>
+                        <div class="transaction-status failed">Failed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loyalty Program Progress -->
+        <div class="profile-card loyalty-progress">
+            <h3><i class="fas fa-trophy"></i> Loyalty Program Progress</h3>
+                <div class="progress-container">
+                    <div class="tier-progress">
+                        <h4>Your Tier Progress</h4>
+                        <div class="current-tier">
+                            <span>Current Tier:</span>
+                            <span class="tier-badge" id="currentTierBadge">null</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 65%"></div>
+                            </div>
+                            <div class="progress-percentage" id="progressPercentage">0%</div>
+                        </div>
+                        <p class="progress-text" id="progressText">You need null more points to reach Gold Tier.</p>
+                    </div>
+
+                    <div class="points-history">
+                        <h4>Points Earned History</h4>
+                        <div class="points-chart">
+                            <canvas id="pointsChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <!-- Activities -->
+        <div class="profile-card activities-card">
+            <h3><i class="fas fa-history"></i> Activities</h3>
+            <div id="activitiesList">
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="activity-text">
+                        Redeems 70% of total voucher successfully
+                    </div>
+                    <div class="activity-time">
+                        22/12/22 • Dec 22, 2022
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="activity-text">
+                        A new voucher added to cart
+                    </div>
+                    <div class="activity-time">
+                        22/12/22 • Nov 22, 2022
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</main>
+</div>
 
 <footer class="footer">
     <div class="footer-content">
@@ -198,8 +370,16 @@
 </footer>
 
 <script src="../js/userSession.js"></script>
-<script src="../js/cartDisplay.js"></script>
-<script src="../js/search.js"></script>
-<script src="../js/profile.js"></script> <!-- New script for profile page functionality -->
+<script src="../js/profilePage.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerMenu = document.querySelector('.burger-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        burgerMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    });
+</script>
 </body>
 </html>

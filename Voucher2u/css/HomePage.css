@@ -649,3 +649,7 @@ header .user-session-info .profile-icon {
     color: #007bff; /* Example color */
     transition: color 0.3s ease;
 }
+
+header .user-session-info .profile-icon:hover {
+    color: #0056b3;
+}

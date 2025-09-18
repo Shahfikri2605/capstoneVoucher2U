@@ -3,6 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const userPointsSpan = document.getElementById('user-points'); // Get the points display element
     const logoutLink = document.getElementById('logout-link'); // Get the logout link
     const profileDropdownContainer = document.querySelector('.profile-dropdown-container');
+    const profileDropdownMenu = document.querySelector('.dropdown-menu-profile'); // Get the dropdown menu
+
+    // Initially hide the dropdown menu
+    if (profileDropdownMenu) {
+        profileDropdownMenu.style.display = 'none';
+    }
 
     // Function to fetch and display user points
     async function fetchAndDisplayUserPoints() {
@@ -61,21 +67,36 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data.loggedIn) {
-                authLink.innerHTML = `<i class="fas fa-user-circle"></i> ${data.userName}`;
+                authLink.innerHTML = `<i class="fas fa-user"></i> ${data.userName}`;
                 authLink.href = "#"; // Keep it as # since dropdown handles navigation
                 if (profileDropdownContainer) {
                     profileDropdownContainer.style.display = 'inline-block'; // Show dropdown container
                 }
+                
+                // Add event listener to toggle dropdown visibility
+                authLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (profileDropdownMenu) {
+                        profileDropdownMenu.style.display = profileDropdownMenu.style.display === 'block' ? 'none' : 'block';
+                    }
+                });
+
+                // Hide dropdown if clicked outside
+                document.addEventListener('click', (e) => {
+                    if (profileDropdownContainer && !profileDropdownContainer.contains(e.target) && profileDropdownMenu) {
+                        profileDropdownMenu.style.display = 'none';
+                    }
+                });
+                
                 localStorage.setItem('userId', data.userId); // Store userId in localStorage
                 fetchAndDisplayUserPoints(); // Fetch and display points after login check
             } else {
                 authLink.innerHTML = `<i class="fas fa-user"></i> Login`;
                 authLink.href = "LoginPage.html";
                 if (profileDropdownContainer) {
-                    profileDropdownContainer.style.display = 'inline-block'; // Keep it inline-block even if not logged in
-                    const dropdownMenu = profileDropdownContainer.querySelector('.dropdown-menu-profile');
-                    if (dropdownMenu) {
-                        dropdownMenu.style.display = 'none'; // Hide dropdown menu if not logged in
+                    profileDropdownContainer.style.display = 'inline-block'; 
+                    if (profileDropdownMenu) {
+                        profileDropdownMenu.style.display = 'none'; // Hide dropdown menu if not logged in
                     }
                 }
                 localStorage.removeItem('userId'); // Remove userId if not logged in
@@ -89,9 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             authLink.href = "LoginPage.html";
             if (profileDropdownContainer) {
                 profileDropdownContainer.style.display = 'inline-block';
-                const dropdownMenu = profileDropdownContainer.querySelector('.dropdown-menu-profile');
-                if (dropdownMenu) {
-                    dropdownMenu.style.display = 'none';
+                if (profileDropdownMenu) {
+                    profileDropdownMenu.style.display = 'none';
                 }
             }
             localStorage.removeItem('userPoints'); // Clear userPoints from localStorage on login check error

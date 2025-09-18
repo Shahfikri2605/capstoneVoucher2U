@@ -82,6 +82,40 @@ header .user-session-info .profile-icon {
 }
 header .user-session-info .profile-icon:hover { color: #0056b3; }
 
+.profile-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu-profile {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    top: 100%; /* Position below the profile icon */
+    left: 0; /* Align with the left edge of the profile icon */
+}
+
+.dropdown-menu-profile a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-menu-profile a:hover {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.profile-dropdown-container:hover .dropdown-menu-profile {
+    display: block;
+}
+
 /* Footer Styles */
 .footer {
     background-color: #eb4e05;
