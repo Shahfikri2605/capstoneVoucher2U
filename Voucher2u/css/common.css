@@ -118,7 +118,7 @@ header .user-session-info .profile-icon:hover { color: #0056b3; }
 
 /* Footer Styles */
 .footer {
-    background-color: #eb4e05;
+    background-color: #ad481a;
     color: #ecf0f1;
     padding: 50px 20px 20px;
     font-size: 15px;
@@ -153,13 +153,13 @@ header .user-session-info .profile-icon:hover { color: #0056b3; }
 }
 .footer .footer-section ul li {
     margin-bottom: 10px;
-}
+}   
 .footer .footer-section a {
-    color: #bdc3c7;
+    color: #fff;
     transition: color 0.3s ease;
 }
 .footer .footer-section a:hover {
-    color: #fff;
+    color: #bdc3c7;
 }
 .footer .footer-section.contact p {
     margin-bottom: 10px;
@@ -212,7 +212,7 @@ header .user-session-info .profile-icon:hover { color: #0056b3; }
     border-top: 1px solid #3b506b;
     padding-top: 20px;
     margin-top: 20px;
-    color: #bdc3c7;
+    color: #e1e4e6;
 }
 .footer .footer-bottom p {
     margin: 5px 0;

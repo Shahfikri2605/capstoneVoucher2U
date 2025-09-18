@@ -33,8 +33,9 @@ body {
     border-radius: 20px; /* More rounded corners for a modern look */
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
     width: 100%; /* Take full width of its container */
-    max-width: 1100px; /* Max width for the box */
-    margin: 20px; /* Add some margin around the box */
+    max-width: 1100px; /* instead of 1100px */
+    transform: scale(0.9); /* scale the entire box down */
+    transform-origin: center; /* keep scaling centered */
 }
 
 /* Image container */
@@ -247,6 +248,4 @@ body {
     .login-link a {
         font-size: 13px;
     }
-
-
 }  
