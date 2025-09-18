@@ -73,20 +73,11 @@ header .logo img {
 /* Voucher Grid */
 .voucher-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    padding: 0 20px 80px 20px;
-    background-color: #f8f8f8;
-}
-
-/* Voucher Grid */
-.voucher-grid {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     max-width: 1200px; /* Centers grid and prevents stretching too wide */
     margin: 0 auto; /* Center align grid */
     gap: 25px;
-    padding: 0 20px 80px 20px;
+    padding: 10px 20px 40px 20px;
     justify-items: center; /* Center align cards in row if fewer than 4 */
     background-color: #f8f8f8;
 }
