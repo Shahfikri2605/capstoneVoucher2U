@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Voucher2U</title>
+    <link rel="stylesheet" href="../css/HomePage.css">
+    <link rel="stylesheet" href="../css/common.css">
+   
+    <link rel="stylesheet" href="../css/ProductDetails.css"> <!-- New CSS for product details-specific styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="../assets/logo.png" alt="Voucher2U Logo">
+        OptimaBank
+    </div>
+    <div class="burger-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+        <li><a href="HomePage.html">Home</a></li>
+        <li class="dropdown">
+            <a href="#">Category <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="category.html?name=travel">Travel</a></li>
+                <li><a href="category.html?name=food">Food & Drinks</a></li>
+                <li><a href="category.html?name=shopping">Shopping</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Support</a></li>
+    </ul>
+    <div class="header-right">
+        <div class="cart">
+            <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
+        </div>
+        <div class="user-session-info">
+            <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+            <span class="points-display" id="user-points">12500 Points</span>
+        </div>
+    </div>
+</header>
+
+<main class="product-details-container">
+    <div class="product-image-section">
+        <img id="product-image" src="../assets/luxury_resort.jpg" alt="Exclusive Flight Discount Voucher">
+    </div>
+    <div class="product-info-section">
+        <h1 class="product-title" id="product-title">Exclusive Flight Discount Voucher</h1>
+        <div class="product-meta">
+            <span class="product-points" id="product-points"></span>
+        </div>
+        <p class="product-description" id="product-description">
+            Experience seamless travel with our exclusive flight discount voucher, brought to you by Optima Bank.
+            Redeemable on major airlines for both domestic and international routes,
+            making your next adventure more affordable and hassle-free. Key
+            Features: - Applicable to economy and
+            business class flights worldwide. - No
+            blackout dates for maximum flexibility in
+            your travel plans. - Easily transferable to
+            family and friends, perfect for gifting. -
+            Streamlined online redemption process
+            for quick bookings.
+        </p>
+        <div class="product-actions">
+            <button class="btn redeem-now-btn">REDEEM NOW</button>
+            <button class="btn add-to-cart-btn" id="add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+        </div>
+
+        <div class="terms-conditions">
+            <h2>Terms & Conditions</h2>
+            <ul id="terms-conditions-list">
+                <li>Voucher is non-refundable and cannot be exchanged for cash.</li>
+                <li>Valid for one-time use only per account.</li>
+                <li>Booking is subject to airline availability and specific fare rules.</li>
+                <li>Any unused portion of the voucher will be forfeited upon redemption.</li>
+                <li>Valid for travel dates within the specified duration of the voucher.</li>
+                <li>Not combinable with other promotions, discounts, or loyalty programs.</li>
+                <li>Offer may be subject to change or withdrawal without prior notice.</li>
+                <li>Please refer to the full terms on the airline's website upon booking.</li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Vouchers</a></li>
+                <li><a href="#">Our story</a></li>
+            </ul>
+        </div>
+        <div class="footer-section help">
+            <h4>Help</h4>
+            <ul>
+                <li><a href="#">Redeem</a></li>
+                <li><a href="#">Issues</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h4>Contact</h4>
+            <p>Phone: (+1) 123 456 7893</p>
+            <p>Email: name@email.com</p>
+        </div>
+        <div class="footer-section promotions">
+            <h4>Receive new promotions</h4>
+            <div class="subscribe">
+                <input type="email" placeholder="Input your email">
+                <button>Subscribe</button>
+            </div>
+            <div class="social-links">
+                <a href="#"><img src="../assets/facebook_icon.png" alt="Facebook"></a>
+                <a href="#"><img src="../assets/twitter_icon.png" alt="Twitter"></a>
+                <a href="#"><img src="../assets/linkedin_icon.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../assets/youtube_icon.png" alt="YouTube"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2022 Brand, Inc. | Privacy | Terms | Sitemap</p>
+        <p>Made with V</p>
+    </div>
+</footer>
+
+<script src="../js/userSession.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const burgerMenu = document.querySelector('.burger-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        burgerMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    });
+</script>
+<script src="../js/ProductDetails.js"></script> <!-- Link to the new JavaScript file -->
+<script src="../js/cartDisplay.js"></script> <!-- New script for global cart count -->
+</body>
+</html>

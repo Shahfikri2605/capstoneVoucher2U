@@ -1,0 +1,206 @@
+/* ======================
+   Global Styles
+====================== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+header .nav-links li { margin-left: 30px; }
+header .nav-links a {
+    font-weight: 500;
+    color: #555;
+    transition: color 0.3s ease;
+}
+header .nav-links a:hover { color: #007bff; }
+
+/* Dropdown menu */
+.nav-links .dropdown { position: relative; }
+.nav-links .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    min-width: 180px;
+    z-index: 1000;
+}
+.nav-links .dropdown-menu a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    font-size: 15px;
+}
+.nav-links .dropdown-menu a:hover {
+    background: #f4f4f4;
+    color: #007bff;
+}
+.nav-links .dropdown:hover .dropdown-menu { display: block; }
+
+header .header-right {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+header .cart, header .user-session-info {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    color: #555;
+    font-weight: 500;
+}
+header .user-session-info .profile-icon {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+header .user-session-info .profile-icon:hover { color: #0056b3; }
+
+/* Footer Styles */
+.footer {
+    background-color: #eb4e05;
+    color: #ecf0f1;
+    padding: 50px 20px 20px;
+    font-size: 15px;
+}
+.footer .footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+.footer .footer-section {
+    margin-bottom: 30px;
+    width: 200px;
+}
+.footer .footer-section h4 {
+    font-size: 18px;
+    color: #fafafa;
+    margin-bottom: 20px;
+    position: relative;
+}
+.footer .footer-section h4::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: #0a0a0a;
+    margin-top: 8px;
+}
+.footer .footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+.footer .footer-section ul li {
+    margin-bottom: 10px;
+}
+.footer .footer-section a {
+    color: #bdc3c7;
+    transition: color 0.3s ease;
+}
+.footer .footer-section a:hover {
+    color: #fff;
+}
+.footer .footer-section.contact p {
+    margin-bottom: 10px;
+    color: #f0f0f0;
+}
+.footer .footer-section.promotions {
+    width: 250px;
+    text-align: center;
+}
+.footer .subscribe {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.footer .subscribe input {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    flex-grow: 1;
+}
+.footer .subscribe button {
+    background-color: #f37d2e;
+    color: rgb(0, 0, 0);
+    border: cornsilk;
+    padding: 10px 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.footer .subscribe button:hover {
+    background-color: #f1f1f1;
+}
+.footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+.footer .social-links img {
+    height: 24px;
+    width: 24px;
+    transition: transform 0.3s ease;
+}
+.footer .social-links img:hover {
+    transform: translateY(-3px);
+}
+.footer .footer-bottom {
+    text-align: center;
+    border-top: 1px solid #3b506b;
+    padding-top: 20px;
+    margin-top: 20px;
+    color: #bdc3c7;
+}
+.footer .footer-bottom p {
+    margin: 5px 0;
+}
+
+/* Responsive header/footer */
+@media (max-width: 768px) {
+    header { padding: 15px 20px; }
+    header .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        z-index: 1000;
+    }
+    header .nav-links.active { display: flex; }
+    header .nav-links a { padding: 15px 20px; text-align: center; }
+    .burger-menu { display: block; }
+    .footer .footer-content { flex-direction: column; align-items: center; }
+    .footer .footer-section { width: 90%; text-align: center; }
+}

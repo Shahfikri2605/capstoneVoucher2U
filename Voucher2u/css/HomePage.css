@@ -127,13 +127,16 @@ header .user-session-info i {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../assets/register.png'); /* Placeholder background image */
+    background-image: url('../assets/optimabank_banner.png'); /* Placeholder background image */
     background-size: cover;
     background-position: center;
     color: white; /* Ensure text is visible on background */
     padding: 100px 20px; /* Adjust padding for better visual */
     position: relative; /* Needed for overlay */
     z-index: 1;
+    width: 100%;
+    min-height: 400px; /* optional: set height if you want */
+    margin: 0;
 }
 .hero::before {
 content: '';
@@ -146,10 +149,10 @@ background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
 z-index: -1;
 }
 .hero .hero-content {
-    text-align: left;
-    margin-right: 0;
-    margin-bottom: 30px;
-    text-align: center;
+    text-align: left; /* Align text to the left */
+    margin-right: auto; /* Push content to the left */
+    margin-left: 100px; /* Add some left margin for spacing */
+    max-width: 500px; /* Limit content width if needed */
 }
 .hero h1 {
     font-size: 36px;
@@ -161,17 +164,6 @@ z-index: -1;
     color: #e0e0e0;
     margin-bottom: 30px;
 }
-.hero .btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-.hero .btn:hover {
-    background-color: #0056b3;
-}
 .hero .hero-image {
     z-index: 2;
 }
@@ -180,6 +172,58 @@ z-index: -1;
     max-width: 300px;
     height: auto;
     border-radius: 8px;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.carousel-container {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.carousel-slide img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+/* Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 50%;
+}
+
+.carousel-btn.prev {
+  left: 15px;
+}
+
+.carousel-btn.next {
+  right: 15px;
+}
+
+.carousel-btn:hover {
+  background-color: rgba(0,0,0,0.8);
 }
 
 /* Section Titles */
@@ -221,6 +265,30 @@ z-index: -1;
 .categories .category-item p {
     font-size: 15px;
     color: #777;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+  padding: 15px; /* space for background */
+}
+
+.icon-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 8px;   /* offset vertically */
+  left: 8px;  /* offset horizontally */
+  width: 60px;
+  height: 60px;
+  background: #ffe5d1; /* light orange, pick a brand color */
+  border-radius: 50%; /* makes it circular */
+  z-index: 0; /* behind the icon */
+}
+
+.icon-wrapper img {
+  position: relative;
+  z-index: 1; /* keep icon above shape */
+  height: 50px;
 }
 
 /* Featured Offers Section */

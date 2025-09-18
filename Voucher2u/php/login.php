@@ -5,6 +5,9 @@ header('Content-Type: application/json');
 
 $response = ['success' => false, 'message' => 'An unexpected error occurred.'];
 
+error_log("Login request method: " . $_SERVER['REQUEST_METHOD']);
+error_log("Login POST data: " . print_r($_POST, true));
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
