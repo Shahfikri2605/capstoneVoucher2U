@@ -1,0 +1,388 @@
+/* General body and main container styling */
+body {
+    background-color: #fff2e6; /* Light orange background */
+    font-family: Arial, sans-serif;
+}
+
+.profile-container {
+    max-width: 1200px;
+    margin: 80px auto 40px auto; /* Adjust top margin to account for fixed header */
+    padding: 20px;
+}
+
+/* Header Card with User Info */
+.profile-header-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.back-to-customer-list {
+    display: inline-flex;
+    align-items: center;
+    color: #e25822; /* Orange for links */
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.back-to-customer-list i {
+    margin-right: 8px;
+}
+
+.user-info-section {
+    display: flex;
+    align-items: center;
+    position: relative; /* For positioning more options */
+}
+
+.profile-avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+    background-color: #ffead9; /* Light orange */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-avatar .fa-camera {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(226, 88, 34, 0.8); /* Orange with transparency */
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.user-details h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #e25822; /* Orange heading */
+}
+
+.user-details p {
+    margin: 5px 0 0;
+    color: #888;
+    font-size: 14px;
+}
+
+.more-options {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    color: #e25822; /* Orange icon */
+    cursor: pointer;
+    padding: 10px; /* Make clickable area larger */
+}
+
+/* General Card Styling */
+.profile-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 30px;
+}
+
+.profile-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 25px;
+}
+
+.profile-card h3 {
+    font-size: 18px;
+    color: #e25822; /* Orange heading */
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-card h3 i {
+    margin-right: 10px;
+    color: #e25822; /* Orange icon color */
+}
+
+/* General Information Card */
+.general-info .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ffe0b3; /* Lighter orange border */
+    font-size: 15px;
+}
+
+.general-info .info-row:last-of-type {
+    border-bottom: none;
+}
+
+.general-info .info-row span:first-child {
+    color: #555;
+    font-weight: bold;
+}
+
+.general-info .info-row span:last-child {
+    color: #777;
+    text-align: right;
+}
+
+.general-info .edit-btn {
+    background-color: #fce4cc; /* Light orange background */
+    color: #e25822; /* Orange text */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-top: 20px;
+    float: right; /* Align to the right */
+    font-size: 14px;
+}
+
+.general-info .edit-btn i {
+    margin-right: 5px;
+}
+
+/* Loyalty Points Balance Card */
+.loyalty-balance p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.loyalty-balance #loyalty-points-balance {
+    font-size: 32px;
+    font-weight: bold;
+    color: #e25822; /* Orange for points */
+}
+
+/* Payment History Card */
+.payment-history {
+    grid-column: 1 / -1; /* Spans full width */
+}
+
+.payment-filters {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.payment-filters .filter-btn {
+    background-color: #ffead9; /* Light orange */
+    border-radius: 20px;
+    padding: 8px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #e25822; /* Orange text */
+    transition: background-color 0.3s ease;
+}
+
+.payment-filters .filter-btn.active {
+    background-color: #e25822; /* Orange active button */
+    color: white;
+}
+
+.payment-filters .filter-btn:hover {
+    background-color: #ffcc99; /* Lighter orange on hover */
+}
+
+.payment-filters .total-count {
+    margin-left: auto; /* Push to the right */
+    font-size: 14px;
+    color: #777;
+}
+
+.payment-filters .create-btn {
+    background-color: #e25822; /* Orange for create button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+.payment-filters .create-btn i {
+    margin-right: 5px;
+}
+
+.payment-table-container {
+    overflow-x: auto; /* Enable horizontal scrolling for tables on small screens */
+}
+
+.payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.payment-table th,
+.payment-table td {
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid #ffe0b3; /* Lighter orange border */
+}
+
+.payment-table th {
+    background-color: #ffead9; /* Light orange background */
+    font-weight: bold;
+    color: #e25822; /* Orange text */
+    text-transform: uppercase;
+}
+
+.payment-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.payment-table .status.incomplete {
+    color: #f0ad4e; /* Orange for incomplete */
+}
+
+.payment-table .status.succeeded {
+    color: #28a745; /* Green - can keep this standard */
+}
+
+/* Loyalty Program Progress Card */
+.loyalty-progress .progress-details p {
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 15px;
+}
+
+.loyalty-progress .current-tier {
+    background-color: #e25822; /* Orange tier highlight */
+    color: white; /* White text on orange */
+    border-radius: 5px;
+    padding: 3px 8px;
+    font-size: 13px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.loyalty-progress .progress-bar-container {
+    background-color: #ffead9; /* Light orange background for progress bar */
+    border-radius: 5px;
+    height: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.loyalty-progress .progress-bar {
+    background-color: #e25822; /* Orange progress bar color */
+    height: 100%;
+    border-radius: 5px;
+}
+
+.loyalty-progress .points-earned-history h4 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #e25822; /* Orange heading */
+}
+
+.loyalty-progress .points-earned-history img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Activities Card */
+.activities .activity-item {
+    border-bottom: 1px solid #ffe0b3; /* Lighter orange border */
+    padding: 15px 0;
+}
+
+.activities .activity-item:last-of-type {
+    border-bottom: none;
+}
+
+.activities .activity-item p {
+    margin: 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.activities .activity-item span {
+    font-size: 13px;
+    color: #777;
+    display: block;
+    margin-top: 5px;
+}
+
+.activities .activity-item a {
+    color: #e25822; /* Orange link */
+    text-decoration: none;
+    font-size: 13px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.activities .show-more-btn {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #e25822; /* Orange button */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .profile-container {
+        margin-top: 100px;
+        padding: 15px;
+    }
+
+    .profile-content {
+        grid-template-columns: 1fr; /* Single column layout on small screens */
+    }
+
+    .profile-header-card .user-info-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-header-card .profile-avatar {
+        margin-bottom: 15px;
+    }
+
+    .profile-filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .payment-filters .filter-btn {
+        margin-bottom: 10px;
+    }
+
+    .payment-filters .total-count {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .payment-filters .create-btn {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}

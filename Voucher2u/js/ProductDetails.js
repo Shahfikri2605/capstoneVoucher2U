@@ -5,8 +5,11 @@ document.addEventListener('DOMContentLoaded', async function() {
     const productTitle = document.getElementById('product-title');
     const productDescription = document.getElementById('product-description');
     const termsConditionsList = document.getElementById('terms-conditions-list');
-    const redeemNowBtn = document.querySelector('.redeem-now-btn');
+    const redeemNowBtn = document.getElementById('redeem-now-btn');
     const addToCartBtn = document.getElementById('add-to-cart-btn');
+    const quantityInput = document.getElementById('quantity-input');
+    const minusBtn = document.querySelector('.minus-btn');
+    const plusBtn = document.querySelector('.plus-btn');
     const userPoints = document.getElementById('user-points');
     const cartCountSpan = document.getElementById('cart-count');
 
@@ -15,12 +18,57 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     let currentProduct = null; // To store fetched product details
 
+    // Function to check user points and set button states
+    function checkPointsAndSetButtonStates() {
+        const userAvailablePoints = parseInt(localStorage.getItem('userPoints') || '0');
+        const voucherPointsNeeded = currentProduct ? currentProduct.points : 0;
+
+        if (redeemNowBtn) {
+            if (userAvailablePoints >= voucherPointsNeeded) {
+                redeemNowBtn.disabled = false;
+                redeemNowBtn.textContent = 'REDEEM NOW';
+                redeemNowBtn.style.backgroundColor = ''; // Reset to default
+            } else {
+                redeemNowBtn.disabled = true;
+                redeemNowBtn.textContent = `Insufficient Points (${voucherPointsNeeded} needed`;
+                redeemNowBtn.style.backgroundColor = 'e25822'; // Indicate disabled state
+            }
+        }
+
+        if (addToCartBtn) {
+            if (userAvailablePoints >= voucherPointsNeeded) {
+                addToCartBtn.disabled = false;
+                addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Add to Cart';
+                addToCartBtn.style.backgroundColor = ''; // Reset to default
+            } else {
+                addToCartBtn.disabled = true;
+                addToCartBtn.innerHTML = `Insufficient Points (${voucherPointsNeeded} needed)`;
+                addToCartBtn.style.backgroundColor = 'e25822'; // Indicate disabled state
+            }
+        }
+    }
+
     // Function to add product to cart (now interacts with backend)
     async function addToCart(product) {
         const userId = localStorage.getItem('userId');
         if (!userId) {
             alert('Please log in to add items to your cart.');
             window.location.href = 'LoginPage.html'; // Redirect to login page
+            return;
+        }
+
+        const quantity = parseInt(quantityInput.value); // Get selected quantity
+        if (isNaN(quantity) || quantity < 1) {
+            alert('Please enter a valid quantity.');
+            return;
+        }
+
+        // Check points again before adding to cart (client-side validation)
+        const userAvailablePoints = parseInt(localStorage.getItem('userPoints') || '0');
+        const voucherPointsNeeded = product.points * quantity; // Total points needed
+
+        if (userAvailablePoints < voucherPointsNeeded) {
+            alert('You do not have enough points to add this voucher to your cart. Total points needed: ' + voucherPointsNeeded);
             return;
         }
 
@@ -33,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 body: JSON.stringify({
                     voucher_id: product.id,
                     user_id: userId,
-                    quantity: 1 // Always add 1 from product details page
+                    quantity: quantity // Send selected quantity
                 })
             });
 
@@ -42,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (data.success) {
                 alert(data.message);
                 window.dispatchEvent(new Event('cartUpdated')); // Notify global cart count
-                window.location.href = 'ShoppingCart.html'; // Navigate to shopping cart page
+                // window.location.href = 'ShoppingCart.html'; // Removed navigation to shopping cart page
             } else {
                 alert(`Failed to add to cart: ${data.message}`);
                 console.error('Add to Cart Error:', data.message);
@@ -82,6 +130,12 @@ document.addEventListener('DOMContentLoaded', async function() {
                     });
                 }
 
+                // Initial check for points and set button states after product details are loaded
+                checkPointsAndSetButtonStates();
+
+                // Listen for custom event that signals user points might have changed (e.g., from userSession.js)
+                window.addEventListener('userPointsUpdated', checkPointsAndSetButtonStates);
+
                 // Add to Cart button functionality
                 if (addToCartBtn) {
                     addToCartBtn.addEventListener('click', () => {
@@ -89,10 +143,32 @@ document.addEventListener('DOMContentLoaded', async function() {
                     });
                 }
 
-                // Redeem Now button functionality (placeholder for now)
+                // Redeem Now button functionality - navigates to shopping cart
                 if (redeemNowBtn) {
                     redeemNowBtn.addEventListener('click', () => {
-                        alert(`Redeem functionality for ${currentProduct.title} will be implemented here.`);
+                        window.location.href = 'ShoppingCart.html';
+                    });
+                }
+
+                // Quantity selector functionality
+                if (minusBtn && plusBtn && quantityInput) {
+                    minusBtn.addEventListener('click', () => {
+                        let currentValue = parseInt(quantityInput.value);
+                        if (currentValue > 1) {
+                            quantityInput.value = currentValue - 1;
+                        }
+                    });
+
+                    plusBtn.addEventListener('click', () => {
+                        let currentValue = parseInt(quantityInput.value);
+                        quantityInput.value = currentValue + 1;
+                    });
+
+                    quantityInput.addEventListener('change', () => {
+                        let currentValue = parseInt(quantityInput.value);
+                        if (isNaN(currentValue) || currentValue < 1) {
+                            quantityInput.value = 1;
+                        }
                     });
                 }
 

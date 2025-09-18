@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Generate random points between 3000 and 5000
-        $points = rand(3000, 5000);
+        $points = rand(10000, 25000);
 
         // Insert new user into the database
         $stmt = $pdo->prepare("INSERT INTO User (Email, Username, Phone_number, Password, Profile_image, Address, Points) VALUES (?, ?, ?, ?, ?, ?, ?)");

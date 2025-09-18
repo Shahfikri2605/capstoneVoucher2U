@@ -6,6 +6,7 @@
   <title>Voucher2U - Category</title>
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/Category.css">
+  <link rel="stylesheet" href="../css/HomePage.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 <body>
@@ -31,13 +32,23 @@
       </li>
       <li><a href="#">Support</a></li>
   </ul>
+  <div class="search-bar">
+      <input type="text" placeholder="Search vouchers..." id="search-input">
+      <i class="fas fa-search"></i>
+  </div>
   <div class="header-right">
       <div class="cart">
           <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
       </div>
       <div class="user-session-info">
-          <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
-          <span class="points-display" id="user-points">12500 Points</span>
+          <div class="profile-dropdown-container">
+            <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+            <div class="dropdown-menu-profile">
+              <a href="ProfilePage.html">My Account</a>
+              <a href="#" id="logout-link">Logout</a>
+            </div>
+          </div>
+          <span class="points-display" id="user-points"></span>
       </div>
   </div>
 </header>
@@ -103,5 +114,6 @@
 <script src="../js/userSession.js"></script>
 <script src="../js/Category.js"></script> <!-- New JS for dynamic category content -->
 <script src="../js/cartDisplay.js"></script> <!-- New script for global cart count -->
+<script src="../js/search.js"></script> <!-- New script for search functionality -->
 </body>
 </html>

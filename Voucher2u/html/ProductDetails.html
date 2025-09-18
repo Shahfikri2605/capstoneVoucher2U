@@ -37,8 +37,14 @@
             <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
         </div>
         <div class="user-session-info">
-            <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
-            <span class="points-display" id="user-points">12500 Points</span>
+            <div class="profile-dropdown-container">
+              <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+              <div class="dropdown-menu-profile">
+                <a href="ProfilePage.html">My Account</a>
+                <a href="#" id="logout-link">Logout</a>
+              </div>
+            </div>
+            <span class="points-display" id="user-points"></span>
         </div>
     </div>
 </header>
@@ -65,8 +71,13 @@
             for quick bookings.
         </p>
         <div class="product-actions">
-            <button class="btn redeem-now-btn">REDEEM NOW</button>
+            <div class="quantity-selector">
+                <button class="quantity-btn minus-btn">-</button>
+                <input type="number" id="quantity-input" value="1" min="1">
+                <button class="quantity-btn plus-btn">+</button>
+            </div>
             <button class="btn add-to-cart-btn" id="add-to-cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+            <button class="btn redeem-now-btn" id="redeem-now-btn">REDEEM NOW</button>
         </div>
 
         <div class="terms-conditions">

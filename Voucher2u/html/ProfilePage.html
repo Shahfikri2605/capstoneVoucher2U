@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Optima Bank</title>
+    <link rel="stylesheet" href="../css/HomePage.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/ProfilePage.css"> <!-- New CSS for Profile Page -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="../assets/logo.png" alt="Voucher2U Logo">
+        OptimaBank
+    </div>
+    <div class="burger-menu">
+        <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links">
+        <li><a href="HomePage.html">Home</a></li>
+        <li class="dropdown">
+            <a href="#">Category <i class="fas fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href="category.html?name=travel">Travel</a></li>
+                <li><a href="category.html?name=food">Food & Dining</a></li>
+                <li><a href="category.html?name=shopping">Shopping & Retail</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Support</a></li>
+    </ul>
+    <div class="search-bar">
+        <input type="text" placeholder="Search vouchers..." id="search-input">
+        <i class="fas fa-search"></i>
+    </div>
+    <div class="header-right">
+        <div class="cart">
+            <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
+        </div>
+        <div class="user-session-info">
+              <div class="profile-dropdown-container">
+                <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+                <div class="dropdown-menu-profile">
+                  <a href="MyAccount.html">My Account</a>
+                  <a href="#" id="logout-link">Logout</a>
+                </div>
+              </div>
+            <span class="points-display" id="user-points"></span>
+        </div>
+    </div>
+</header>
+
+<main class="profile-container">
+    <div class="profile-header-card">
+        <div class="user-info-section">
+            <div class="profile-avatar">
+                <img src="../assets/profile_icon.png" alt="User Avatar">
+                <i class="fas fa-camera"></i>
+            </div>
+            <div class="user-details">
+                <h2 id="profile-name">David Smith</h2>
+                <p id="profile-email">david1998@gmail.com</p>
+            </div>
+            <div class="more-options">
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-card general-info">
+            <h3><i class="fas fa-info-circle"></i> General information</h3>
+            <div class="info-row">
+                <span>Phone</span>
+                <span id="phone-number">017-876 8798</span>
+            </div>
+            <div class="info-row">
+                <span>Address</span>
+                <span id="address">3675 Beach Street, Indianapolis, IN 46203</span>
+            </div>
+            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+        </div>
+
+        <div class="profile-card loyalty-balance">
+            <h3><i class="fas fa-coins"></i> Loyalty Points Balance</h3>
+            <p>Loyalty Points Balance: <span id="loyalty-points-balance">12500</span></p>
+        </div>
+
+        <div class="profile-card payment-history">
+            <h3><i class="fas fa-history"></i> Payment History</h3>
+            <div class="payment-filters">
+                <span class="filter-btn active">All payments</span>
+                <span class="filter-btn">Succeeded</span>
+                <span class="filter-btn">Pending</span>
+                <span class="filter-btn">Failed</span>
+                <span class="filter-btn">Incomplete</span>
+                <span class="total-count">3 total</span>
+                <button class="create-btn"><i class="fas fa-plus"></i> Create</button>
+            </div>
+            <div class="payment-table-container">
+                <table class="payment-table">
+                    <thead>
+                        <tr>
+                            <th>VOUCHER</th>
+                            <th>AMOUNT</th>
+                            <th>STATUS</th>
+                            <th>TIME</th>
+                            <th>DATE</th>
+                            <th>DEVICE</th>
+                            <th>IP ADDRESS</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Payment history rows will be dynamically injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="profile-card loyalty-progress">
+            <h3><i class="fas fa-chart-line"></i> Loyalty Program Progress</h3>
+            <div class="progress-details">
+                <p>Your Tier Progress</p>
+                <span class="current-tier">Silver</span>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" style="width: 65%;"></div>
+                </div>
+                <p>You need 3500 more points to reach Gold Tier.</p>
+            </div>
+            <div class="points-earned-history">
+                <h4>Points Earned History</h4>
+                <!-- Placeholder for chart -->
+                <img src="https://via.placeholder.com/400x150?text=Points+Earned+Chart" alt="Points Earned Chart">
+            </div>
+        </div>
+
+        <div class="profile-card activities">
+            <h3><i class="fas fa-list-alt"></i> Activities</h3>
+            <div class="activity-item">
+                <p>Redeem 30% travel voucher succeeded</p>
+                <span>08:02 PM - Feb 15, 2023</span>
+                <a href="#">Show detail</a>
+            </div>
+            <div class="activity-item">
+                <p>A new voucher added to cart</p>
+                <span>07:02 PM - May 02, 2023</span>
+                <a href="#">Show detail</a>
+            </div>
+            <a href="#" class="show-more-btn">Show more</a>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section about">
+            <h4>About</h4>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Vouchers</a></li>
+                <li><a href="#">Our story</a></li>
+            </ul>
+        </div>
+        <div class="footer-section help">
+            <h4>Help</h4>
+            <ul>
+                <li><a href="#">Redeem</a></li>
+                <li><a href="#">Issues</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h4>Contact</h4>
+            <p>Phone: (+1) 123 456 7893</p>
+            <p>Email: name@email.com</p>
+        </div>
+        <div class="footer-section promotions">
+            <h4>Receive new promotions</h4>
+            <div class="subscribe">
+                <input type="email" placeholder="Input your email">
+                <button>Subscribe</button>
+            </div>
+            <div class="social-links">
+                <a href="#"><img src="../assets/facebook_icon.png" alt="Facebook"></a>
+                <a href="#"><img src="../assets/twitter_icon.png" alt="Twitter"></a>
+                <a href="#"><img src="../assets/linkedin_icon.png" alt="LinkedIn"></a>
+                <a href="#"><img src="../assets/youtube_icon.png" alt="YouTube"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2022 Brand, Inc. | Privacy | Terms | Sitemap</p>
+        <p>Made with V</p>
+    </div>
+</footer>
+
+<script src="../js/userSession.js"></script>
+<script src="../js/cartDisplay.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/profile.js"></script> <!-- New script for profile page functionality -->
+</body>
+</html>

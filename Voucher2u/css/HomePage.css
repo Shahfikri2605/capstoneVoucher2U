@@ -27,6 +27,10 @@ header {
     border-bottom: 1px solid #eee;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     gap: 20px; /* Add gap for spacing between direct children */
+    position: fixed; /* Keep header fixed at the top */
+    width: 98%; /* Ensure it spans the full width */
+    top: 0; /* Position at the top of the viewport */
+    z-index: 1000; /* Bring header to front */
 }
 .burger-menu {
     display: none; /* Hidden by default */
@@ -84,20 +88,24 @@ header .search-bar {
     margin-right: 20px;
     flex-grow: 1; /* Allow search bar to grow */
     max-width: 250px; /* Limit search bar width */
+    display: flex; /* Make search bar a flex container */
+    align-items: center; /* Vertically align items */
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 0 10px;
 }
 header .search-bar input {
     width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
+    padding: 8px 0;
+    border: none;
     outline: none;
+    background: transparent;
+    flex-grow: 1;
 }
 header .search-bar i {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
     color: #888;
+    margin-left: 8px;
+    cursor: pointer;
 }
 header .cart,
 header .user-session-info {
@@ -115,6 +123,14 @@ header .user-session-info .profile-icon {
 }
 header .user-session-info .profile-icon:hover {
     color: #0056b3;
+}
+header .user-session-info .points-display {
+    margin-left: 10px; /* Space between profile icon and points */
+    background-color: #ffc107; /* Highlight color (e.g., yellow) */
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 20px; /* Rounded shape */
+    font-weight: bold;
 }
 header .cart i,
 header .user-session-info i {
@@ -590,4 +606,45 @@ z-index: -1;
     .footer .subscribe button {
         margin-left: 0;
     }
+}
+
+.profile-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu-profile {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    top: 100%; /* Position below the profile icon */
+    left: 0; /* Align with the left edge of the profile icon */
+}
+
+.dropdown-menu-profile a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-menu-profile a:hover {
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.profile-dropdown-container:hover .dropdown-menu-profile {
+    display: block;
+}
+
+header .user-session-info .profile-icon {
+    margin-left: 10px;
+    font-size: 20px;
+    color: #007bff; /* Example color */
+    transition: color 0.3s ease;
 }
