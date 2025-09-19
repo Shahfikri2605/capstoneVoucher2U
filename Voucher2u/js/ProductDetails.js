@@ -54,13 +54,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (!userId) {
             alert('Please log in to add items to your cart.');
             window.location.href = 'LoginPage.html'; // Redirect to login page
-            return;
+            return false; // Indicate failure
         }
 
         const quantity = parseInt(quantityInput.value); // Get selected quantity
         if (isNaN(quantity) || quantity < 1) {
             alert('Please enter a valid quantity.');
-            return;
+            return false; // Indicate failure
         }
 
         // Check points again before adding to cart (client-side validation)
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         if (userAvailablePoints < voucherPointsNeeded) {
             alert('You do not have enough points to add this voucher to your cart. Total points needed: ' + voucherPointsNeeded);
-            return;
+            return false; // Indicate failure
         }
 
         try {
@@ -90,14 +90,16 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (data.success) {
                 alert(data.message);
                 window.dispatchEvent(new Event('cartUpdated')); // Notify global cart count
-                // window.location.href = 'ShoppingCart.html'; // Removed navigation to shopping cart page
+                return true; // Indicate success
             } else {
                 alert(`Failed to add to cart: ${data.message}`);
                 console.error('Add to Cart Error:', data.message);
+                return false; // Indicate failure
             }
         } catch (error) {
             alert('An error occurred while adding to cart.');
             console.error('Network error or failed to parse JSON:', error);
+            return false; // Indicate failure
         }
     }
 
@@ -145,8 +147,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
                 // Redeem Now button functionality - navigates to shopping cart
                 if (redeemNowBtn) {
-                    redeemNowBtn.addEventListener('click', () => {
-                        window.location.href = 'ShoppingCart.html';
+                    redeemNowBtn.addEventListener('click', async () => {
+                        // First, add the product to the cart
+                        const addSuccess = await addToCart(currentProduct); // addToCart now returns a boolean for success
+                        if (addSuccess) {
+                            window.location.href = 'ShoppingCart.html';
+                        }
                     });
                 }
 
