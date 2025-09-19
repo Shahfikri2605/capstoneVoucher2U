@@ -1,4 +1,15 @@
 <?php
+
+require '../../vendor/autoload.php'; // Composer autoloader
+
+use Dotenv\Dotenv;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+// Load environment variables
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
+
 require_once '../../databaseConnection/db_config.php';
 
 header('Content-Type: application/json');
@@ -64,67 +75,46 @@ try {
     // Log the reset link for debugging
     error_log("Password reset link for " . $email . ": " . $resetLink);
 
-    // Function to check if MailHog is running
-    function isMailHogRunning() {
-        $connection = @fsockopen('localhost', 1025, $errno, $errstr, 5);
-        if ($connection) {
-            fclose($connection);
-            return true;
-        }
-        return false;
-    }
+    // PHPMailer configuration
+    $mail = new PHPMailer(true);
 
-    // Configure PHP mail settings for MailHog
-    ini_set('SMTP', 'localhost');
-    ini_set('smtp_port', '1025');
-    ini_set('sendmail_from', 'noreply@optimabank.com');
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.gmail.com';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $_ENV['GMAIL_USERNAME']; // Your Gmail address
+        $mail->Password   = $_ENV['GMAIL_APP_PASSWORD']; // Your generated App Password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Use SMTPS
+        $mail->Port       = 465; // SMTPS port for Gmail
 
-    // Email content
-    $subject = "Password Reset Request - Optima Bank";
-    $emailBody = "Hello " . htmlspecialchars($user['Username']) . ",\n\n";
-    $emailBody .= "You have requested to reset your password for your Optima Bank account.\n\n";
-    $emailBody .= "Click the following link to reset your password:\n";
-    $emailBody .= $resetLink . "\n\n";
-    $emailBody .= "This link will expire in 24 hours.\n\n";
-    $emailBody .= "If you did not request this password reset, please ignore this email.\n\n";
-    $emailBody .= "Best regards,\n";
-    $emailBody .= "Optima Bank Team";
+        // Recipients
+        $mail->setFrom('noreply@optimabank.com', 'Optima Bank');
+        $mail->addAddress($email, htmlspecialchars($user['Username']));
+        $mail->addReplyTo('support@optimabank.com', 'Support');
 
-    // Email headers
-    $headers = "From: noreply@optimabank.com\r\n";
-    $headers .= "Reply-To: support@optimabank.com\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        // Content
+        $mail->isHTML(false); // Set email format to plain text
+        $mail->Subject = "Password Reset Request - Optima Bank";
+        $mail->Body    = "Hello " . htmlspecialchars($user['Username']) . ",\n\n";
+        $mail->Body   .= "You have requested to reset your password for your Optima Bank account.\n\n";
+        $mail->Body   .= "Click the following link to reset your password:\n";
+        $mail->Body   .= $resetLink . "\n\n";
+        $mail->Body   .= "This link will expire in 24 hours.\n\n";
+        $mail->Body   .= "If you did not request this password reset, please ignore this email.\n\n";
+        $mail->Body   .= "Best regards,\n";
+        $mail->Body   .= "Optima Bank Team";
 
-    // Check if MailHog is running
-    if (isMailHogRunning()) {
-        // Send email through MailHog
-        $emailSent = @mail($email, $subject, $emailBody, $headers);
-
-        if ($emailSent) {
-            $response['success'] = true;
-            $response['message'] = 'A password reset link has been sent to your email address. Check MailHog to view the email.';
-            $response['mailhog_url'] = 'http://localhost:8025';
-            $response['using_mailhog'] = true;
-            
-            error_log("Password reset email sent successfully to MailHog for: " . $email);
-        } else {
-            // MailHog running but mail() failed
-            $response['message'] = 'Failed to send email through MailHog. Please check your configuration.';
-            error_log("MailHog running but mail() failed for: " . $email);
-        }
-    } else {
-        // MailHog not running - fallback to demo mode
-        $response['success'] = true;
-        $response['message'] = 'MailHog is not running. For demo purposes, use this reset link:';
-        $response['reset_link'] = $resetLink;
-        $response['demo_mode'] = true;
-        $response['mailhog_note'] = 'Start MailHog (./mailhog) and refresh to test email functionality.';
+        $mail->send();
         
-        error_log("MailHog not available - Reset link for demo: " . $resetLink);
+        $response['success'] = true;
+        $response['message'] = 'A password reset link has been sent to your email address via Gmail.';
+        error_log("Password reset email sent successfully via Gmail to: " . $email);
+    } catch (Exception $e) {
+        $response['message'] = "Failed to send email. Mailer Error: {$mail->ErrorInfo}";
+        error_log("PHPMailer Error: " . $mail->ErrorInfo);
     }
 
-    // Log successful password reset request
     error_log("Password reset requested for user ID: " . $user['Id'] . ", Email: " . $email);
 
 } catch (PDOException $e) {

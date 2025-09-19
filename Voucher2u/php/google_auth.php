@@ -8,6 +8,12 @@ require_once '../../databaseConnection/db_config.php';
 // composer require google/apiclient:^2.x
 require_once '../../vendor/autoload.php'; // Adjust path as necessary
 
+use Dotenv\Dotenv;
+
+// Load environment variables from .env file
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
+
 header('Content-Type: application/json');
 
 $response = ['success' => false, 'message' => 'An unexpected error occurred.'];
@@ -24,7 +30,7 @@ $id_token = $data['id_token'];
 $action = $data['action'];
 
 // Replace with your Google Client ID
-$client_id = '326812386407-0cm9mlg0ap6dd4i3h8u12advl52ioj06.apps.googleusercontent.com'; 
+$client_id = getenv('GOOGLE_CLIENT_ID'); 
 
 $client = new Google_Client(['client_id' => $client_id]);
 
