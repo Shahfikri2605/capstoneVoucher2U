@@ -23,11 +23,17 @@ class ComposerStaticInitd0f70146cdf8eac346a4db6abc400b56
         array (
             'phpseclib3\\' => 11,
         ),
+        'V' => 
+        array (
+            'Voucher2u\\' => 10,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Svg\\' => 4,
+            'Sabberworm\\CSS\\' => 15,
         ),
         'P' => 
         array (
@@ -42,6 +48,7 @@ class ComposerStaticInitd0f70146cdf8eac346a4db6abc400b56
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Masterminds\\' => 12,
         ),
         'G' => 
         array (
@@ -55,11 +62,14 @@ class ComposerStaticInitd0f70146cdf8eac346a4db6abc400b56
         ),
         'F' => 
         array (
+            'FontLib\\' => 8,
             'Firebase\\JWT\\' => 13,
         ),
         'D' => 
         array (
             'Dotenv\\' => 7,
+            'Dompdf\\' => 7,
+            'DatabaseConnection\\' => 19,
         ),
     );
 
@@ -67,6 +77,10 @@ class ComposerStaticInitd0f70146cdf8eac346a4db6abc400b56
         'phpseclib3\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
+        ),
+        'Voucher2u\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Voucher2u',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
@@ -79,6 +93,14 @@ class ComposerStaticInitd0f70146cdf8eac346a4db6abc400b56
         'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Svg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
+        ),
+        'Sabberworm\\CSS\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
         ),
         'Psr\\Log\\' => 
         array (
@@ -113,6 +135,10 @@ class ComposerStaticInitd0f70146cdf8eac346a4db6abc400b56
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -141,6 +167,10 @@ class ComposerStaticInitd0f70146cdf8eac346a4db6abc400b56
         array (
             0 => __DIR__ . '/..' . '/google/apiclient/src',
         ),
+        'FontLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
         'Firebase\\JWT\\' => 
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
@@ -149,11 +179,20 @@ class ComposerStaticInitd0f70146cdf8eac346a4db6abc400b56
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
+        'Dompdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
+        'DatabaseConnection\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/databaseConnection',
+        ),
     );
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
         'Google_AccessToken_Revoke' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
         'Google_AccessToken_Verify' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
         'Google_AuthHandler_AuthHandlerFactory' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',

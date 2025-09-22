@@ -47,6 +47,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         description = 'Save on fashion, electronics, and home goods.';
                         bannerImage = '../assets/shopping_banner.png';
                         break;
+                    case 'all':
+                        title = 'All Vouchers';
+                        description = 'Discover all available vouchers.';
+                        bannerImage = '../assets/all_vouchers_banner.png'; // You'll need to create this banner image
+                        break;
                     default:
                         title = 'Voucher Category';
                         description = 'Browse available vouchers.';

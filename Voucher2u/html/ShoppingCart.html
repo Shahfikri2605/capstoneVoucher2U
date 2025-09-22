@@ -42,6 +42,9 @@
 
 <main class="cart-container">
     <h1 class="cart-title">YOUR SHOPPING CART</h1>
+    <button class="clear-cart-btn">
+        <i class="fas fa-trash-alt"></i> Clear Cart
+    </button>
 
     <div class="cart-table-wrapper">
         <table class="cart-table">
@@ -83,7 +86,7 @@
                 <tr class="cart-item">
                     <td class="item-details">
                         <div class="item-image-wrapper">
-                            <img src="../assets/tech_digital.png" alt="Tech & Digital Services">
+                            <img src="../assets/voucher_images/electronics-voucher.jpg" alt="Tech & Digital Services">
                             <button class="remove-item"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="item-info">
@@ -122,7 +125,17 @@
             <span>Grand Total</span>
             <span id="grand-total-value">2400</span>
         </div>
-        <button class="checkout-btn">CHECKOUT</button>
+        <div class="summary-row" id="points-deduction-row">
+            <span>Points Deduction</span>
+            <span id="points-deduction-value">0</span>
+        </div>
+        <div class="summary-row grand-total">
+            <span>Final Total</span>
+            <span id="final-total-value">2400</span>
+        </div>
+        <p id="points-error-message" style="color: red; text-align: center; margin-top: 10px; display: none;">Insufficient points to proceed with checkout.</p>
+        <button class="checkout-btn">REDEEM NOW</button>
+        <!-- <button class="clear-cart-btn">CLEAR CART</button> -->
     </div>
 </main>
 
@@ -170,6 +183,19 @@
 </footer>
 
 <script src="../js/userSession.js"></script>
+
+<div id="redemption-success-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button" id="redemption-modal-close">&times;</span>
+        <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <h2>Successfully Redeemed</h2>
+        <p>Your Points Balance: <span id="new-points-balance"></span></p>
+        <button id="download-voucher-btn" class="download-button">DOWNLOAD VOUCHER <i class="fas fa-download"></i></button>
+    </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const burgerMenu = document.querySelector('.burger-menu');

@@ -20,15 +20,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $categoryId = $categoryMap[strtolower($categoryName)] ?? null;
 
-    if ($categoryId === null) {
+    $sql = "SELECT Id, Category_id, Points, Title, Image, Description, Terms_and_condition FROM Voucher";
+    $params = [];
+
+    if ($categoryName === 'all' || $categoryName === '') {
+        // Fetch all vouchers, no WHERE clause needed
+    } else if ($categoryId !== null) {
+        $sql .= " WHERE Category_id = ?";
+        $params[] = $categoryId;
+    } else {
         $response['message'] = 'Invalid category provided.';
         echo json_encode($response);
         exit;
     }
 
     try {
-        $stmt = $pdo->prepare("SELECT Id, Category_id, Points, Title, Image, Description, Terms_and_condition FROM Voucher WHERE Category_id = ?");
-        $stmt->execute([$categoryId]);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
         $vouchers = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $processedVouchers = [];
