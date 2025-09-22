@@ -62,10 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             offerItem.innerHTML = `
                 <a href="productDetails.html?id=${voucher.Id}">
                     <img src="${voucher.Image_Path}" alt="${voucher.Title}">
-                    <div class="points">${voucher.Points} Points</div>
                     <h3>${voucher.Title}</h3>
                     <p>${voucher.Description}</p>
-                    <span class="btn">View Details</span>
+                    <div class="points">${voucher.Points} Points</div>
                 </a>
             `;
             resultsContainer.appendChild(offerItem);

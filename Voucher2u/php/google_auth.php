@@ -29,7 +29,6 @@ if (empty($data) || !isset($data['id_token']) || !isset($data['action'])) {
 $id_token = $data['id_token'];
 $action = $data['action'];
 
-// Replace with your Google Client ID
 $client_id = getenv('GOOGLE_CLIENT_ID'); 
 
 $client = new Google_Client(['client_id' => $client_id]);
