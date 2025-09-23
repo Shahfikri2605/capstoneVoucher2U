@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const cartTable = document.querySelector('.cart-table tbody');
     const subtotalValue = document.getElementById('subtotal-value');
-    const grandtotalValue = document.getElementById('grand-total-value');
     const pointsDeductionValue = document.getElementById('points-deduction-value');
     const finalTotalValue = document.getElementById('final-total-value');
     const pointsErrorMessage = document.getElementById('points-error-message');
@@ -137,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         pointsDeductionValue.textContent = pointsDeduction;
         finalTotalValue.textContent = finalTotal;
-        grandtotalValue.textContent = finalTotal; // Update grand total display as well
 
         const anyCheckboxChecked = document.querySelectorAll('.item-select-checkbox:checked').length > 0;
 

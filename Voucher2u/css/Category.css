@@ -132,7 +132,7 @@ header .logo img {
     border: 2px solid rgba(241, 141, 101, 0.904);
 }
 .voucher-grid .offer-item:hover .points {
-    color: #ff6600; /* orange on hover */
+    color: #ff0040; /* orange on hover */
 }
 .voucher-grid .offer-item p {
     font-size: 14px;
@@ -157,7 +157,7 @@ header .logo img {
 
 /* Footer Styles */
 .footer {
-    background-color: #eb4e05;
+    background-color: #df0a15da;
     color: #ecf0f1;
     padding: 50px 20px 20px;
     font-size: 15px;

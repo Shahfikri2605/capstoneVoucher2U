@@ -32,7 +32,7 @@ header .nav-links a {
     color: #555;
     transition: color 0.3s ease;
 }
-header .nav-links a:hover { color: #007bff; }
+header .nav-links a:hover { color: #ff0040; }
 
 /* Dropdown menu */
 .nav-links .dropdown { position: relative; }
@@ -57,7 +57,7 @@ header .nav-links a:hover { color: #007bff; }
 }
 .nav-links .dropdown-menu a:hover {
     background: #f4f4f4;
-    color: #007bff;
+    color: #ff0040;
 }
 .nav-links .dropdown:hover .dropdown-menu { display: block; }
 
@@ -77,7 +77,7 @@ header .cart, header .user-session-info {
 header .user-session-info .profile-icon {
     margin-left: 10px;
     font-size: 20px;
-    color: #007bff;
+    color: #df0a15da;
     transition: color 0.3s ease;
 }
 header .user-session-info .profile-icon:hover { color: #0056b3; }
@@ -118,7 +118,7 @@ header .user-session-info .profile-icon:hover { color: #0056b3; }
 
 /* Footer Styles */
 .footer {
-    background-color: #ad481a;
+    background-color: #df0a15da;
     color: #ecf0f1;
     padding: 50px 20px 20px;
     font-size: 15px;

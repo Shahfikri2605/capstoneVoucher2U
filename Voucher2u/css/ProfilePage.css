@@ -72,7 +72,7 @@ header .nav-links a {
     transition: color 0.3s ease;
 }
 header .nav-links a:hover {
-    color: #007bff;
+    color: #ff2265;
 }
 header .header-right {
     display: flex;
@@ -486,7 +486,7 @@ header .user-session-info i {
 }
 
 .profile-card h3 i {
-    color: #eb4e05;
+    color: #df0a15da;
     font-size: 18px;
 }
 
@@ -525,7 +525,7 @@ header .user-session-info i {
 
 /* Points Balance Special Styling */
 .points-balance {
-    background: linear-gradient(135deg, #eb4e05, #ff6b35);
+    background: linear-gradient(135deg, #df0a15da, #e0121cda);
     color: white;
     grid-column: 1 / -1;
 }

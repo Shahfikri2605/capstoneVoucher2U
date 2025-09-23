@@ -42,7 +42,7 @@
 .product-points {
     display: inline-block;
     background-color: #fff6f2;
-    color: #e25822;
+    color: #ff0040;
     padding: 6px 10px;
     border-radius: 20px;
     font-weight: 600;
@@ -110,7 +110,7 @@
 }
 
 .redeem-now-btn {
-    background-color: #e25822; /* Orange from image */
+    background-color: #ff0040; /* Orange from image */
     color: white;
 }
 
@@ -120,7 +120,7 @@
 
 .add-to-cart-btn {
     background-color: white;
-    color: #e25822; /* Orange from image */
+    color: #ff0040; /* Orange from image */
     border: 1px solid #e25822;
 }
 

@@ -12,7 +12,7 @@
 .cart-title {
     text-align: center;
     font-size: 2.5em;
-    color: #e25822; /* Orange color from image */
+    color: #ff0040; /* Orange color from image */
     margin-bottom: 40px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -35,7 +35,7 @@
 }
 
 .clear-cart-btn:hover {
-    background-color: #c82333;
+    background-color: #ff2265;
 }
 
 .clear-cart-btn .fas {
@@ -61,7 +61,7 @@
 }
 
 .cart-table th {
-    background-color: #e25822; /* Orange header from image */
+    background-color: #ff0040; /* Orange header from image */
     color: white;
     font-weight: bold;
     text-transform: uppercase;
@@ -92,7 +92,7 @@
     position: absolute;
     top: -10px;
     right: -10px;
-    background-color: #e25822; /* Orange color */
+    background-color: #ff0040; /* Orange color */
     color: white;
     border: none;
     border-radius: 50%;
@@ -107,7 +107,7 @@
 }
 
 .remove-item:hover {
-    background-color: #c04a1f;
+    background-color: #ff0040;
 }
 
 .item-info h3 {
@@ -129,7 +129,7 @@
 }
 
 .item-points .discount {
-    color: #007bff; /* Blue for discount */
+    color: #ff0040; /* Blue for discount */
     font-size: 0.9em;
     margin-top: 5px;
 }
@@ -175,12 +175,12 @@
 
 .quantity-control .quantity-plus {
     border-left: 1px solid #ddd;
-    background-color: #ff8c00; /* Orange for plus button */
+    background-color: #ff0040; /* Orange for plus button */
     color: white;
 }
 
 .quantity-control .quantity-plus:hover {
-    background-color: #e25822;
+    background-color: #ff0040;
 }
 
 .item-total-points {
@@ -222,7 +222,7 @@
     display: block;
     width: 100%;
     padding: 15px;
-    background-color: #e25822; /* Orange checkout button */
+    background-color: #ff0040; /* Orange checkout button */
     color: white;
     border: none;
     border-radius: 5px;
@@ -234,13 +234,13 @@
 }
 
 .checkout-btn:hover {
-    background-color: #c04a1f;
+    background-color: #ff0040;
 }
 
 .item-select-checkbox {
     width: 20px;
     height: 20px;
-    accent-color: #e25822; /* Orange accent for checkbox */
+    accent-color: #ff0040; /* Orange accent for checkbox */
     cursor: pointer;
     margin-right: 10px; /* Space between checkbox and item details */
 }
@@ -392,7 +392,7 @@
 
 #new-points-balance {
     font-weight: bold;
-    color: #e25822; /* Orange color for points balance */
+    color: #ff0040; /* Orange color for points balance */
 }
 
 .download-button {
@@ -410,5 +410,5 @@
 }
 
 .download-button:hover {
-    background-color: #e25822; /* Darker orange on hover */
+    background-color: #ff0040; /* Darker orange on hover */
 }

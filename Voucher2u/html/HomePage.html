@@ -186,5 +186,27 @@
     <script src="../js/cartDisplay.js"></script> <!-- New script for global cart count -->
     <script src="../js/featuredVouchers.js"></script> <!-- New script for dynamic featured vouchers -->
     <script src="../js/search.js"></script> <!-- New script for search functionality -->
+
+    <!-- Chatbot Floating Button -->
+    <div id="chatbot-button">
+        <img src="../assets/icon_chatbot.png" alt="Optima Bot" style="width:50px; height:50px;">
+    </div>
+
+    <!-- Chatbot Window (initially hidden) -->
+    <div id="chatbot-window">
+        <div class="chatbot-header">
+            <h3>Optima Bot</h3>
+            <button id="close-chatbot">X</button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <!-- Chat messages will be inserted here -->
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input-field" placeholder="Type your message...">
+            <button id="chatbot-send-button">Send</button>
+        </div>
+    </div>
+
+    <script src="../js/chatbot.js"></script> <!-- New script for chatbot functionality -->
 </body>
 </html>

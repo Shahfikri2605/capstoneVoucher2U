@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 
                 localStorage.setItem('userId', data.userId); // Store userId in localStorage
+                localStorage.setItem('userName', data.userName); // Store userName in localStorage
                 fetchAndDisplayUserPoints(); // Fetch and display points after login check
             } else {
                 authLink.innerHTML = `<i class="fas fa-user"></i> Login`;
