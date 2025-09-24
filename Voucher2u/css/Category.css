@@ -73,7 +73,7 @@ header .logo img {
 /* Voucher Grid */
 .voucher-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     max-width: 1200px; /* Centers grid and prevents stretching too wide */
     margin: 0 auto; /* Center align grid */
     gap: 25px;

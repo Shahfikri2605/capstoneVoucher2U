@@ -1,3 +1,5 @@
+console.log('profilePage.js loaded v20250924');
+
 document.addEventListener('DOMContentLoaded', function() {
     // Load user profile data
     loadProfileData();
@@ -5,6 +7,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize event listeners
     initializeEventListeners();
 });
+
+// Simple HTML escape helper to prevent insertion of raw HTML from server data
+function escapeHtml(unsafe) {
+    if (!unsafe && unsafe !== 0) return '';
+    return String(unsafe)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
 
 function loadProfileData() {
     // Check if user is logged in first
@@ -61,10 +74,25 @@ function updateProfileDisplay(userData) {
     if (userName) userName.textContent = userData.Username || 'User Name';
     if (userEmail) userEmail.textContent = userData.Email || 'user@email.com';
     
-    // Update avatar initials
-    if (profileAvatar && userData.Username) {
-        const initials = getInitials(userData.Username);
-        profileAvatar.textContent = initials;
+    // Update avatar image or initials without overwriting innerHTML
+    const avatarImg = document.getElementById('avatarImg');
+    const avatarInitials = document.getElementById('avatarInitials');
+    // If server provided a profile image path, show it; otherwise show initials
+    if (userData.Profile_image) {
+        if (avatarImg) {
+            avatarImg.src = userData.Profile_image;
+            avatarImg.style.display = 'block';
+        }
+        if (avatarInitials) avatarInitials.style.display = 'none';
+    } else {
+        if (avatarImg) {
+            avatarImg.src = '';
+            avatarImg.style.display = 'none';
+        }
+        if (avatarInitials) {
+            avatarInitials.style.display = 'flex';
+            avatarInitials.textContent = getInitials(userData.Username || '');
+        }
     }
     
     // Update general information
@@ -232,6 +260,100 @@ function initializeEventListeners() {
     // Load transactions and activities
     loadTransactionHistory();
     loadActivities();
+
+    // Avatar upload handlers
+    const profileAvatar = document.getElementById('profileAvatar');
+    const avatarFileInput = document.getElementById('avatarFileInput');
+    const avatarImg = document.getElementById('avatarImg');
+    const avatarInitials = document.getElementById('avatarInitials');
+    const avatarEditBtn = document.getElementById('avatarEditBtn');
+
+    function openAvatarPicker() {
+        if (avatarFileInput) avatarFileInput.click();
+    }
+
+    if (profileAvatar) {
+        profileAvatar.addEventListener('click', function(e) {
+            // If user clicks the container (not the edit button), open picker
+            openAvatarPicker();
+        });
+    }
+
+    if (avatarEditBtn) {
+        avatarEditBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            openAvatarPicker();
+        });
+    }
+
+    if (avatarFileInput) {
+        avatarFileInput.addEventListener('change', function(e) {
+            const file = e.target.files && e.target.files[0];
+            if (!file) return;
+
+            // Validate file type and size (limit to 5MB)
+            if (!file.type.startsWith('image/')) {
+                alert('Please select a valid image file.');
+                return;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Image size should be 5MB or less.');
+                return;
+            }
+
+            // Preview image locally
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                if (avatarImg) {
+                    avatarImg.src = evt.target.result;
+                    avatarImg.style.display = 'block';
+                }
+                if (avatarInitials) {
+                    avatarInitials.style.display = 'none';
+                }
+            };
+            reader.readAsDataURL(file);
+
+            // Upload to server
+            const uploadData = new FormData();
+            uploadData.append('profile_image', file);
+
+            fetch('../php/upload_profile_image.php', {
+                method: 'POST',
+                body: uploadData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // If server returns the image path, update src
+                    if (data.imageUrl && avatarImg) {
+                        avatarImg.src = data.imageUrl + '?t=' + Date.now();
+                        avatarImg.style.display = 'block';
+                        if (avatarInitials) avatarInitials.style.display = 'none';
+                    }
+                    // Optionally update session/local UI
+                    console.log('Profile image updated successfully');
+                } else {
+                    alert(data.message || 'Failed to upload image');
+                    // revert preview
+                    if (avatarImg) {
+                        avatarImg.src = '';
+                        avatarImg.style.display = 'none';
+                    }
+                    if (avatarInitials) avatarInitials.style.display = 'flex';
+                }
+            })
+            .catch(err => {
+                console.error('Upload error', err);
+                alert('An error occurred while uploading the image.');
+                if (avatarImg) {
+                    avatarImg.src = '';
+                    avatarImg.style.display = 'none';
+                }
+                if (avatarInitials) avatarInitials.style.display = 'flex';
+            });
+        });
+    }
 }
 
 function showEditModal() {
@@ -672,7 +794,22 @@ function updateTransactionDisplay(transactions) {
     if (!transactionList || transactions.length === 0) return;
     
     transactionList.innerHTML = '';
-    
+
+    // Create header row that starts from the voucher title column
+    const header = document.createElement('div');
+    header.className = 'transaction-item transaction-header';
+    header.innerHTML = `
+        <div class="transaction-row">
+            <div class="transaction-start"></div>
+            <div class="transaction-type"></div>
+            <div class="transaction-title header">Voucher</div>
+            <div class="transaction-qty header">Quantity</div>
+            <div class="transaction-date header">Date</div>
+            <div class="transaction-amount header">Points</div>
+        </div>
+    `;
+    transactionList.appendChild(header);
+
     transactions.forEach(transaction => {
         const transactionItem = createTransactionElement(transaction);
         transactionList.appendChild(transactionItem);
@@ -682,24 +819,23 @@ function updateTransactionDisplay(transactions) {
 function createTransactionElement(transaction) {
     const item = document.createElement('div');
     item.className = 'transaction-item';
-    
-    const isCredit = transaction.type === 'credit' || transaction.amount > 0;
-    const iconClass = isCredit ? 'credit' : 'debit';
-    const iconSymbol = isCredit ? 'fas fa-plus' : 'fas fa-minus';
-    const amountClass = isCredit ? 'credit' : 'debit';
-    const amountPrefix = isCredit ? '+' : '-';
-    
+    // transaction expected fields from server: title, quantity, points_cost, completed_date
+    const title = transaction.title || 'Transaction';
+    const quantity = transaction.quantity || 1;
+    const pointsCost = transaction.points_cost || 0;
+    const completedDate = transaction.completed_date || transaction.date || null;
+    // Layout: [tick icon] | "Voucher Redemption" | Title | Quantity | Date | points
     item.innerHTML = `
-        <div class="transaction-info">
-            <div class="transaction-icon ${iconClass}">
-                <i class="${iconSymbol}"></i>
+        <div class="transaction-row">
+            <div class="transaction-start">
+                <div class="transaction-icon completed"><i class="fas fa-check"></i></div>
             </div>
-            <div class="transaction-details">
-                <h4>${transaction.description || 'Transaction'}</h4>
-                <p>${formatTransactionDate(transaction.date)}</p>
-            </div>
+            <div class="transaction-type">Voucher Redemption</div>
+            <div class="transaction-title">${escapeHtml(title)}</div>
+            <div class="transaction-qty">${quantity}x</div>
+            <div class="transaction-date">${formatTransactionDate(completedDate)}</div>
+            <div class="transaction-amount completed">${pointsCost}</div>
         </div>
-        <div class="transaction-amount ${amountClass}">${amountPrefix}${Math.abs(transaction.amount)}</div>
     `;
     
     return item;
@@ -708,9 +844,8 @@ function createTransactionElement(transaction) {
 function formatTransactionDate(dateString) {
     if (!dateString) return 'Unknown date';
     const date = new Date(dateString);
-    return date.toLocaleString('en-US', { 
-        hour: '2-digit', 
-        minute: '2-digit',
+    // Return date only (no time) because DB stores date without time
+    return date.toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric'

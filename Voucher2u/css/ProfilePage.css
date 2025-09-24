@@ -154,6 +154,54 @@ header .user-session-info i {
     font-weight: bold;
 }
 
+/* Avatar image overrides */
+.profile-avatar {
+    position: relative;
+    cursor: pointer;
+    /* allow the edit badge to overlap outside the avatar */
+    overflow: visible;
+}
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%; /* ensure image itself is circular */
+}
+.profile-avatar #avatarInitials {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-edit-btn {
+    position: absolute;
+    /* place it slightly outside the avatar so it looks like a separate badge */
+    right: -4px;
+    bottom: -4px;
+    background: #007bff; /* distinct colored badge */
+    border: 2px solid #fff; /* white ring to separate it from avatar */
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.12s ease;
+    z-index: 4; pointer-events: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.22);
+}
+.avatar-edit-btn i { font-size: 11px; }
+.avatar-edit-btn:hover { background: rgba(0,0,0,0.8); }
+
+.profile-avatar img { z-index: 1; }
+.profile-avatar #avatarInitials { z-index: 2; }
+
+.profile-avatar:focus { outline: 2px solid rgba(0,123,255,0.3); }
+
 .profile-info h1 {
     margin: 0 0 5px 0;
     font-size: 28px;
@@ -610,6 +658,66 @@ header .user-session-info i {
     gap: 15px;
 }
 
+/* New compact row layout for transactions: type | title | qty | date | amount */
+.transaction-row {
+    display: grid;
+    grid-template-columns: 44px 140px 1fr 70px 140px 90px;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+}
+.transaction-row .transaction-start {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.transaction-row .transaction-start .transaction-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #fff;
+    background-color: #28a745; /* green */
+}
+
+.transaction-row .transaction-type {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 600;
+    padding: 0 5px 0 5px;
+}
+.transaction-row .transaction-title {
+    font-size: 15px;
+    color: #333;
+    font-weight: 600;
+}
+.transaction-row .transaction-qty {
+    font-size: 14px;
+    color: #555;
+    text-align: left;
+}
+.transaction-row .transaction-date {
+    font-size: 14px;
+    color: #666;
+}
+.transaction-row .transaction-amount {
+    text-align: right;
+}
+
+/* Header row styling */
+.transaction-header {
+    padding: 10px 0;
+    border-bottom: 2px solid #eef2f5;
+}
+.transaction-header .header {
+    color: #6c757d;
+    font-size: 13px;
+    font-weight: 700;
+}
+
 .transaction-icon {
     width: 40px;
     height: 40px;
@@ -655,49 +763,8 @@ header .user-session-info i {
     margin-right: 20px;
 }
 
-.transaction-amount.completed {
+.transaction-amount {
     color: #28a745;
-}
-
-.transaction-amount.refund {
-    color: #ffc107;
-}
-
-.transaction-amount.pending {
-    color: #17a2b8;
-}
-
-.transaction-amount.failed {
-    color: #dc3545;
-}
-
-.transaction-status {
-    font-size: 14px;
-    font-weight: 500;
-    padding: 4px 12px;
-    border-radius: 20px;
-    min-width: 80px;
-    text-align: center;
-}
-
-.transaction-status.completed {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.transaction-status.refund {
-    background-color: #fff3cd;
-    color: #856404;
-}
-
-.transaction-status.pending {
-    background-color: #d1ecf1;
-    color: #0c5460;
-}
-
-.transaction-status.failed {
-    background-color: #f8d7da;
-    color: #721c24;
 }
 
 /* Loyalty Program Progress Layout */

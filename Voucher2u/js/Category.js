@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
 
             if (data.success) {
-                // Update category hero section (you might want to customize banners based on category)
+                // Update category hero section
                 let title = '';
                 let description = '';
                 let bannerImage = '';
@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     case 'all':
                         title = 'All Vouchers';
                         description = 'Discover all available vouchers.';
-                        bannerImage = '../assets/all_vouchers_banner.png'; // You'll need to create this banner image
+                        bannerImage = '../assets/all_vouchers.png';
                         break;
                     default:
                         title = 'Voucher Category';
                         description = 'Browse available vouchers.';
-                        bannerImage = '../assets/default_banner.png'; // Default banner
+                        bannerImage = '../assets/all_banner.png'; // Default banner
                 }
                 
                 if (categoryTitleElement) categoryTitleElement.textContent = title;

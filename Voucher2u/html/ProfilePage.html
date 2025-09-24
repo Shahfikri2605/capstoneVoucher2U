@@ -145,9 +145,14 @@
 <div class="profile-container">
     <!-- Profile Header -->
     <div class="profile-header">
-        <div class="profile-avatar">
-            DS
-        </div>
+            <div class="profile-avatar" id="profileAvatar" role="button" title="Click to change profile image">
+                <img id="avatarImg" src="" alt="Profile Image" style="display:none;" />
+                <span id="avatarInitials">DS</span>
+                <button type="button" class="avatar-edit-btn" id="avatarEditBtn" aria-label="Edit profile image">
+                    <i class="fas fa-camera"></i>
+                </button>
+                <input type="file" id="avatarFileInput" accept="image/*" style="display:none;">
+            </div>
         <div class="profile-info">
             <h1 id="userName">null</h1>
             <p id="userEmail">null@email.com</p>
@@ -174,6 +179,12 @@
             </div>
         </div>
 
+        <!-- Loyalty Points Balance -->
+        <div class="profile-card points-balance">
+            <h3><i class="fas fa-coins"></i> Loyalty Points Balance</h3>
+            <div class="points-number" id="pointsBalance">12,500</div>
+        </div>
+
         <!-- Member Ship Status -->
         <div class="profile-card">
             <h3><i class="fas fa-crown"></i> Member Ship Status</h3>
@@ -187,23 +198,9 @@
             </div>
         </div>
 
-        <!-- Loyalty Points Balance -->
-        <div class="profile-card points-balance">
-            <h3><i class="fas fa-coins"></i> Loyalty Points Balance</h3>
-            <div class="points-number" id="pointsBalance">12,500</div>
-        </div>
-
         <!-- Payment History -->
         <div class="profile-card payment-history">
             <h3><i class="fas fa-credit-card"></i> Transaction History</h3>
-            
-            <div class="transaction-tabs">
-                <button class="tab-button active" data-tab="all">All</button>
-                <button class="tab-button" data-tab="completed">Completed</button>
-                <button class="tab-button" data-tab="refund">Return/Refund</button>
-                <button class="tab-button" data-tab="pending">Pending</button>
-                <button class="tab-button" data-tab="failed">Failed</button>
-            </div>
 
             <div class="tab-content active" id="all-tab">
                 <div id="transactionList">
@@ -217,50 +214,7 @@
                                 <p>12:29 AM • May 15, 2023</p>
                             </div>
                         </div>
-                        <div class="transaction-amount completed">80p</div>
-                        <div class="transaction-status completed">Completed</div>
-                    </div>
-
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <div class="transaction-icon refund">
-                                <i class="fas fa-undo"></i>
-                            </div>
-                            <div class="transaction-details">
-                                <h4>Refund</h4>
-                                <p>02:45 AM • Feb 16, 2023</p>
-                            </div>
-                        </div>
-                        <div class="transaction-amount refund">-80p</div>
-                        <div class="transaction-status refund">Refunded</div>
-                    </div>
-
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <div class="transaction-icon pending">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="transaction-details">
-                                <h4>Purchase</h4>
-                                <p>10:15 AM • Jan 20, 2023</p>
-                            </div>
-                        </div>
-                        <div class="transaction-amount pending">120p</div>
-                        <div class="transaction-status pending">Pending</div>
-                    </div>
-
-                    <div class="transaction-item">
-                        <div class="transaction-info">
-                            <div class="transaction-icon failed">
-                                <i class="fas fa-times"></i>
-                            </div>
-                            <div class="transaction-details">
-                                <h4>Purchase</h4>
-                                <p>08:30 PM • Jan 18, 2023</p>
-                            </div>
-                        </div>
-                        <div class="transaction-amount failed">200p</div>
-                        <div class="transaction-status failed">Failed</div>
+                        <div class="transaction-amount">80 points</div>
                     </div>
                 </div>
             </div>
@@ -292,36 +246,6 @@
                         </div>
                     </div>
                 </div>
-        </div>
-
-        <!-- Activities -->
-        <div class="profile-card activities-card">
-            <h3><i class="fas fa-history"></i> Activities</h3>
-            <div id="activitiesList">
-                <div class="activity-item">
-                    <div class="activity-icon">
-                        <i class="fas fa-ticket-alt"></i>
-                    </div>
-                    <div class="activity-text">
-                        Redeems 70% of total voucher successfully
-                    </div>
-                    <div class="activity-time">
-                        22/12/22 • Dec 22, 2022
-                    </div>
-                </div>
-
-                <div class="activity-item">
-                    <div class="activity-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="activity-text">
-                        A new voucher added to cart
-                    </div>
-                    <div class="activity-time">
-                        22/12/22 • Nov 22, 2022
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -369,8 +293,9 @@
     </div>
 </footer>
 
-<script src="../js/userSession.js"></script>
-<script src="../js/profilePage.js"></script>
+<!-- Cache-bust query params to ensure updated JS is loaded when deploying changes -->
+<script src="../js/userSession.js?v=20250924"></script>
+<script src="../js/profilePage.js?v=20250924"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const burgerMenu = document.querySelector('.burger-menu');
