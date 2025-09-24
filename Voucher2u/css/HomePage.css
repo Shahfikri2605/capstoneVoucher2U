@@ -5,6 +5,9 @@ body {
     padding: 0;
     background-color: #f8f8f8;
     color: #333;
+    display: flex; /* Make body a flex container */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh; /* Ensure body takes full viewport height */
 }
 a {
     text-decoration: none;
@@ -792,4 +795,9 @@ header .user-session-info .profile-icon:hover {
     border-radius: 15px 15px 15px 0;
     padding: 10px 15px;
     max-width: 80%;
+}
+
+main {
+    flex-grow: 1; /* Allow main content to expand and push footer down */
+    margin-top: 70px; /* Add margin-top to main to account for fixed header */
 }
