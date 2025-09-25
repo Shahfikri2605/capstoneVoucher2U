@@ -1,4 +1,9 @@
 /* Global Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -14,26 +19,22 @@ a {
     color: inherit;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
 /* Header Styles */
 header {
     background-color: #fff;
-    padding: 15px 40px; /* Added horizontal padding */
+    padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #eee;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    gap: 20px; /* Add gap for spacing between direct children */
-    position: fixed; /* Keep header fixed at the top */
-    width: 98%; /* Ensure it spans the full width */
-    top: 0; /* Position at the top of the viewport */
-    z-index: 1000; /* Bring header to front */
+    gap: 12px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 .burger-menu {
     display: none; /* Hidden by default */
@@ -50,27 +51,37 @@ header {
     color: #ff2265;
 }
 
+/* Adjust spacing so main content doesn't hide behind header */
+main {
+    flex-grow: 1;
+    margin-top: 84px; /* match header height + padding */
+    padding-bottom: 30px;
+}
+
 /* Header Styles */
 header .logo {
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: #333;
-    margin-right: 30px; /* Add margin to the right of the logo */
-}
-header .logo img {
-    height: 30px;
     margin-right: 10px;
 }
+header .logo img {
+    height: 32px;
+    margin-right: 8px;
+}
+
+/* Nav & header-right: allow wrapping on narrow screens */
 header .nav-links {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
+    flex-wrap: wrap;
 }
 header .nav-links li {
-    margin-left: 30px;
+    margin-left: 18px;
 }
 header .nav-links a {
     font-weight: 500;
@@ -83,23 +94,23 @@ header .nav-links a:hover {
 header .header-right {
     display: flex;
     align-items: center;
-    flex-grow: 1; /* Allow header-right to take available space */
-    justify-content: flex-end; /* Push items to the right */
+    flex-grow: 1; /*Allow header-right to take available space  */
+    justify-content: flex-end; /*Push items to the right */
 }
 header .search-bar {
     position: relative;
-    margin-right: 20px;
-    flex-grow: 1; /* Allow search bar to grow */
-    max-width: 250px; /* Limit search bar width */
-    display: flex; /* Make search bar a flex container */
-    align-items: center; /* Vertically align items */
+    margin-right: 12px;
+    flex: 0 1 220px;
+    max-width: 260px;
+    display: flex;
+    align-items: center;
     border: 1px solid #ddd;
     border-radius: 20px;
     padding: 0 10px;
 }
 header .search-bar input {
     width: 100%;
-    padding: 8px 0;
+    padding: 8px 6px;
     border: none;
     outline: none;
     background: transparent;
@@ -170,7 +181,6 @@ z-index: -1;
 .hero .hero-content {
     text-align: left; /* Align text to the left */
     margin-right: auto; /* Push content to the left */
-    margin-left: 100px; /* Add some left margin for spacing */
     margin-top: 40px;
     max-width: 500px; /* Limit content width if needed */
 }
@@ -324,7 +334,7 @@ z-index: -1;
 /* Featured Vouchers Section */
 .featured-vouchers {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Ensure 4 columns */
+    grid-template-columns: repeat(4, 1fr);
     gap: 25px;
     padding: 10px 30px 30px 30px;
     background-color: #f8f8f8;
@@ -486,21 +496,32 @@ z-index: -1;
 }
 
 /* Responsive adjustments */
+@media (max-width: 1100px) {
+    .featured-vouchers {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 @media (max-width: 768px) {
     header {
-        padding: 15px 20px; /* Adjust header padding */
+        padding: 12px 14px;
     }
 
     header .nav-links {
-        display: none; /* Hide regular nav links */
+        display: none;
         flex-direction: column;
         position: absolute;
-        top: 70px; /* Below header */
-        left: 0;
-        width: 100%;
+        top: calc(100% + 8px);
+        left: 8px;
+        right: 8px;
         background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
         z-index: 1000;
+        border-radius: 8px;
+        overflow: hidden;
+        padding: 8px 0;
     }
 
     header .nav-links.active {
@@ -519,12 +540,8 @@ z-index: -1;
     }
 
     .burger-menu {
-        display: block; /* Show hamburger menu */
-    }
-
-    .header-right {
-        /* Ensure header-right elements are visible */
-        margin-left: auto;
+        display: block;
+        margin-left: 6px;
     }
 
     .hero {
@@ -541,9 +558,9 @@ z-index: -1;
     .hero .hero-image img {
         width: 100%;
     }
-    .categories, .featured-offers {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
-        padding: 0 15px 40px;
+    .categories, .featured-vouchers {
+        grid-template-columns: repeat(1, 1fr);
+        padding: 0 16px 30px;
     }
     .footer .footer-content {
         flex-direction: column;
