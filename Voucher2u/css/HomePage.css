@@ -506,7 +506,18 @@ z-index: -1;
 }
 @media (max-width: 768px) {
     header {
-        padding: 12px 14px;
+        padding: 15px 20px; /* Adjust header padding */
+        flex-wrap: wrap; /* Allow items to wrap */
+        justify-content: space-between; /* Space out items */
+    }
+
+    header .logo {
+        margin-right: 0; /* Remove right margin */
+    }
+
+    header .burger-menu {
+        display: block; /* Show hamburger menu */
+        order: 1; /* Place burger menu after logo */
     }
 
     header .nav-links {
@@ -517,11 +528,9 @@ z-index: -1;
         left: 8px;
         right: 8px;
         background-color: #fff;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-        z-index: 1000;
-        border-radius: 8px;
-        overflow: hidden;
-        padding: 8px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        z-index: 999; /* Adjust z-index to be below header but above other content */
+        align-items: center; /* Center nav items */
     }
 
     header .nav-links.active {
@@ -531,6 +540,7 @@ z-index: -1;
     header .nav-links li {
         margin: 0;
         border-bottom: 1px solid #eee;
+        width: 100%; /* Make list items take full width */
     }
 
     header .nav-links a {
@@ -539,36 +549,90 @@ z-index: -1;
         text-align: center;
     }
 
-    .burger-menu {
-        display: block;
-        margin-left: 6px;
+    header .search-bar {
+        order: 3; /* Place search bar below logo and burger menu */
+        width: 100%;
+        margin: 10px 0; /* Add top and bottom margin */
+        max-width: none; /* Remove max-width restriction */
+    }
+
+    .header-right {
+        order: 2; /* Place header-right after nav-links or search-bar */
+        margin-left: 0; /* Remove auto margin */
+        display: flex; /* Ensure it's a flex container */
+        justify-content: flex-end; /* Push items to the right */
+        flex-grow: 1; /* Allow it to take available space */
     }
 
     .hero {
         flex-direction: column;
         text-align: center;
+        margin-left: 0; /* Remove left margin */
+        margin-right: 0; /* Remove right margin */
+        padding: 80px 20px 40px; /* Adjust padding for smaller screens */
     }
     .hero .hero-content {
-        margin-right: 0;
-        margin-bottom: 30px;
+        margin-left: 0; /* Remove left margin */
+        margin-right: 0; /* Remove right margin */
+        margin-top: 0; /* Remove top margin */
+        max-width: 100%; /* Allow content to take full width */
+        padding: 0 10px; /* Add some horizontal padding */
     }
     .hero h1 {
-        font-size: 36px;
+        font-size: 30px; /* Adjust font size for mobile */
     }
-    .hero .hero-image img {
-        width: 100%;
+    .hero p {
+        font-size: 14px; /* Adjust font size for mobile */
     }
-    .categories, .featured-vouchers {
-        grid-template-columns: repeat(1, 1fr);
-        padding: 0 16px 30px;
+
+    .carousel {
+        margin: 20px auto; /* Adjust margin for smaller screens */
     }
+
+    .section-title {
+        font-size: 28px; /* Adjust font size for mobile */
+        margin: 40px 0 20px 0;
+    }
+
+    .categories {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid for categories */
+        padding: 0 15px 30px;
+    }
+    .categories .category-item {
+        height: 180px; /* Adjust height for smaller screens */
+    }
+    .categories .category-item h3 {
+        font-size: 18px;
+    }
+    .categories .category-item p {
+        font-size: 14px;
+    }
+
+    .featured-vouchers {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid for featured vouchers */
+        padding: 0 15px 30px;
+    }
+    .featured-vouchers .offer-item img {
+        height: 150px; /* Adjust image height for smaller screens */
+    }
+    .featured-vouchers .offer-item h3 {
+        font-size: 18px;
+    }
+    .featured-vouchers .offer-item p {
+        font-size: 14px;
+    }
+    .featured-vouchers .offer-item .btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
     .footer .footer-content {
         flex-direction: column;
         align-items: center;
     }
     .footer .footer-section {
         width: 90%;
-        max-width: 300px; /* Limit width */
+        max-width: 300px;
         text-align: center;
     }
     .footer .footer-section h4::after {
@@ -576,7 +640,15 @@ z-index: -1;
     }
     .footer .subscribe {
         width: 100%;
-        max-width: 300px; /* Limit width */
+        max-width: 300px;
+    }
+    .footer .subscribe input,
+    .footer .subscribe button {
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    .footer .subscribe button {
+        margin-left: 0;
     }
 }
 
@@ -591,11 +663,13 @@ z-index: -1;
         height: 25px;
     }
     .header-right {
-        flex-wrap: wrap; /* Allow items to wrap */
+        flex-wrap: wrap;
         justify-content: center;
+        width: 100%;
+        order: 4;
     }
     header .search-bar {
-        order: 1; /* Place search bar below */
+        order: 3;
         width: 100%;
         margin: 10px 0;
         max-width: none;
@@ -605,39 +679,22 @@ z-index: -1;
         margin: 0 10px;
     }
     .hero h1 {
-        font-size: 30px;
+        font-size: 28px;
     }
     .hero p {
-        font-size: 14px;
-    }
-    .hero .btn {
-        padding: 10px 20px;
-        font-size: 14px;
+        font-size: 13px;
     }
     .section-title {
-        font-size: 28px;
-        margin: 40px 0 20px 0;
+        font-size: 24px;
+        margin: 30px 0 15px 0;
     }
-    .categories, .featured-offers {
-        grid-template-columns: 1fr; /* Single column for small screens */
-        padding: 0 10px 30px;
+    .categories, .featured-vouchers {
+        grid-template-columns: 1fr;
+        padding: 0 10px 20px;
     }
-    .categories .category-item, .featured-offers .offer-item {
-        padding: 20px;
-    }
-    .footer .footer-section {
-        width: 100%;
-    }
-    .footer .subscribe {
-        flex-direction: column;
-    }
-    .footer .subscribe input,
-    .footer .subscribe button {
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-    .footer .subscribe button {
-        margin-left: 0;
+    .categories .category-item,
+    .featured-vouchers .offer-item {
+        padding: 15px;
     }
 }
 
@@ -817,4 +874,10 @@ header .user-session-info .profile-icon:hover {
 main {
     flex-grow: 1; /* Allow main content to expand and push footer down */
     margin-top: 70px; /* Add margin-top to main to account for fixed header */
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-top: 130px; /* Adjust margin-top for fixed header when nav is open on smaller screens */
+    }
 }

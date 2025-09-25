@@ -4,41 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Shopping Cart - Voucher2U</title>
-    <link rel="stylesheet" href="../css/HomePage.css"> <!-- Reusing HomePage CSS for header/footer -->
+    <link rel="stylesheet" href="../css/HomePage.css">
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/ShoppingCart.css"> <!-- New CSS for cart-specific styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <img src="../assets/logo.png" alt="Voucher2U Logo">
-        OptimaBank
-    </div>
-    <div class="burger-menu">
-        <i class="fas fa-bars"></i>
-    </div>
-    <ul class="nav-links">
-        <li><a href="HomePage.html">Home</a></li>
-        <li><a href="category.html">Category</a></li>
-       
-    </ul>
-    <div class="header-right">
-        <div class="cart">
-            <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
+    <header>
+        <div class="logo">
+            <img src="../assets/logo.png" alt="Voucher2U Logo"> <!-- Placeholder for logo -->
+            OptimaBank
         </div>
-        <div class="user-session-info">
-            <div class="profile-dropdown-container">
-              <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
-              <div class="dropdown-menu-profile">
-                <a href="ProfilePage.html">My Account</a>
-                <a href="#" id="logout-link">Logout</a>
-              </div>
+        <div class="burger-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a href="#">Category <i class="fas fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                <li><a href="category.html?name=travel">Travel</a></li>
+                <li><a href="category.html?name=food">Food & Dining</a></li>
+                <li><a href="category.html?name=shopping">Shopping & Retail</a></li>
+                <li><a href="category.html?name=all">All Voucher</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" placeholder="Search vouchers..." id="search-input">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="header-right">
+            <div class="cart">
+                <a href="ShoppingCart.html"><i class="fas fa-shopping-cart"></i> <span id="cart-count">Cart (0)</span></a>
             </div>
-            <span class="points-display" id="user-points"></span>
+            <div class="user-session-info">
+                  <div class="profile-dropdown-container">
+                    <a href="LoginPage.html" id="auth-link"><i class="fas fa-user"></i> Login</a>
+                    <div class="dropdown-menu-profile">
+                      <a href="ProfilePage.html">My Account</a>
+                      <a href="#" id="logout-link">Logout</a>
+                    </div>
+                  </div>
+                <span class="points-display" id="user-points"></span>
+    
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
 <main class="cart-container">
     <h1 class="cart-title">YOUR SHOPPING CART</h1>
