@@ -1,32 +1,4 @@
-/* Category Hero */
-.category-hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../assets/register.png'); /* Placeholder background image */
-    background-size: cover;
-    background-position: center;
-    color: white; /* Ensure text is visible on background */
-    padding: 200px 20px; /* Adjust padding for better visual */
-    position: relative; /* Needed for overlay */
-    z-index: 1;
-}
-.category-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
-    z-index: -1;
-}
-.category-hero .hero-content {
-    text-align: left; /* Align text to the left */
-    margin-right: auto; /* Push content to the left */
-    margin-left: 40px; /* Add some left margin for spacing */
-    max-width: 500px; /* Limit content width if needed */
-}
+
 
 /* Header */
 header {
@@ -61,6 +33,35 @@ header .logo img {
 }
 .burger-menu i:hover { color: #ff2265; }
 
+/* Category Hero */
+.category-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/register.png'); /* Placeholder background image */
+    background-size: cover;
+    background-position: center;
+    color: white; /* Ensure text is visible on background */
+    padding: 200px 20px; /* Adjust padding for better visual */
+    position: relative; /* Needed for overlay */
+    z-index: 1;
+}
+.category-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: -1;
+}
+.category-hero .hero-content {
+    text-align: left; /* Align text to the left */
+    margin-right: auto; /* Push content to the left */
+    margin-left: 40px; /* Add some left margin for spacing */
+    max-width: 500px; /* Limit content width if needed */
+}
 
 /* Section Titles */
 .section-title {
@@ -147,11 +148,38 @@ header .logo img {
         grid-template-columns: repeat(2, 1fr);
         padding: 0 15px 40px;
     }
+
+    /* reduce card max width a bit so two columns fit comfortably */
+    .voucher-grid .offer-item {
+        max-width: 100%;
+    }
+
+    /* reduce hero padding for tablets */
+    .category-hero {
+        padding: 120px 16px;
+    }
 }
 @media (max-width: 480px) {
     .voucher-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr); /* single column on small screens */
         padding: 0 10px 30px;
+    }
+
+    .voucher-grid .offer-item {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* Smaller hero section to avoid very tall header */
+    .category-hero {
+        padding: 80px 12px;
+    }
+
+    .category-hero .hero-content {
+        margin-left: 16px;
+        margin-right: 16px;
+        max-width: none;
+        text-align: center;
     }
 }
 

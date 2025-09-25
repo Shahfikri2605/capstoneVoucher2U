@@ -791,25 +791,21 @@ function loadTransactionHistory() {
 
 function updateTransactionDisplay(transactions) {
     const transactionList = document.getElementById('transactionList');
-    if (!transactionList || transactions.length === 0) return;
-    
+    if (!transactionList) return;
+
+    // Clear existing list
     transactionList.innerHTML = '';
 
-    // Create header row that starts from the voucher title column
-    const header = document.createElement('div');
-    header.className = 'transaction-item transaction-header';
-    header.innerHTML = `
-        <div class="transaction-row">
-            <div class="transaction-start"></div>
-            <div class="transaction-type"></div>
-            <div class="transaction-title header">Voucher</div>
-            <div class="transaction-qty header">Quantity</div>
-            <div class="transaction-date header">Date</div>
-            <div class="transaction-amount header">Points</div>
-        </div>
-    `;
-    transactionList.appendChild(header);
+    // If no transactions, show a friendly placeholder
+    if (!transactions || transactions.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'transaction-item';
+        empty.textContent = 'No transactions found.';
+        transactionList.appendChild(empty);
+        return;
+    }
 
+    // Append each transaction item (no column header row)
     transactions.forEach(transaction => {
         const transactionItem = createTransactionElement(transaction);
         transactionList.appendChild(transactionItem);
@@ -834,7 +830,7 @@ function createTransactionElement(transaction) {
             <div class="transaction-title">${escapeHtml(title)}</div>
             <div class="transaction-qty">${quantity}x</div>
             <div class="transaction-date">${formatTransactionDate(completedDate)}</div>
-            <div class="transaction-amount completed">${pointsCost}</div>
+            <div class="transaction-amount completed">${pointsCost} pts</div>
         </div>
     `;
     
@@ -846,83 +842,6 @@ function formatTransactionDate(dateString) {
     const date = new Date(dateString);
     // Return date only (no time) because DB stores date without time
     return date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-    });
-}
-
-function loadActivities() {
-    // Fetch activities from server
-    fetch('../php/get_activities.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success && data.activities) {
-                updateActivitiesDisplay(data.activities);
-            }
-        })
-        .catch(error => {
-            console.error('Error loading activities:', error);
-            // Keep default activities if fetch fails
-        });
-}
-
-function updateActivitiesDisplay(activities) {
-    const activitiesList = document.getElementById('activitiesList');
-    if (!activitiesList || activities.length === 0) return;
-    
-    activitiesList.innerHTML = '';
-    
-    activities.forEach(activity => {
-        const activityItem = createActivityElement(activity);
-        activitiesList.appendChild(activityItem);
-    });
-}
-
-function createActivityElement(activity) {
-    const item = document.createElement('div');
-    item.className = 'activity-item';
-    
-    const icon = getActivityIcon(activity.type);
-    
-    item.innerHTML = `
-        <div class="activity-icon">
-            <i class="${icon}"></i>
-        </div>
-        <div class="activity-text">
-            ${activity.description}
-        </div>
-        <div class="activity-time">
-            ${formatActivityDate(activity.date)}
-        </div>
-    `;
-    
-    return item;
-}
-
-function getActivityIcon(activityType) {
-    const icons = {
-        'voucher': 'fas fa-ticket-alt',
-        'purchase': 'fas fa-shopping-cart',
-        'redemption': 'fas fa-gift',
-        'login': 'fas fa-sign-in-alt',
-        'registration': 'fas fa-user-plus',
-        'profile_update': 'fas fa-user-edit',
-        'password_change': 'fas fa-key',
-        'default': 'fas fa-circle'
-    };
-    
-    return icons[activityType] || icons.default;
-}
-
-function formatActivityDate(dateString) {
-    if (!dateString) return 'Unknown date';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-        day: '2-digit',
-        month: '2-digit',
-        year: '2-digit'
-    }) + ' • ' + date.toLocaleDateString('en-US', { 
         month: 'short',
         day: 'numeric',
         year: 'numeric'

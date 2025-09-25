@@ -553,6 +553,7 @@ header .user-session-info i {
 .info-label {
     font-weight: 500;
     color: #666;
+    padding-right: 25px
 }
 
 .info-value {
@@ -596,48 +597,6 @@ header .user-session-info i {
     font-weight: bold;
     text-align: center;
     margin: 20px 0;
-}
-
-/* Payment History */
-.payment-history {
-    grid-column: 1 / -1;
-}
-
-.transaction-tabs {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 4px;
-}
-
-.tab-button {
-    flex: 1;
-    padding: 12px 15px;
-    border: none;
-    background: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    color: #666;
-    transition: all 0.3s ease;
-}
-
-.tab-button.active,
-.tab-button:hover {
-    background-color: #fff;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
 }
 
 .transaction-item {
@@ -687,7 +646,6 @@ header .user-session-info i {
     font-size: 14px;
     color: #6c757d;
     font-weight: 600;
-    padding: 0 5px 0 5px;
 }
 .transaction-row .transaction-title {
     font-size: 15px;
@@ -767,134 +725,88 @@ header .user-session-info i {
     color: #28a745;
 }
 
-/* Loyalty Program Progress Layout */
-.progress-container {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-}
-
-.tier-progress,
-.points-history {
-    flex: 1;
+/* Allow children to shrink and prevent long content from forcing width */
+.profile-card,
+.profile-info,
+.profile-container,
+.profile-grid,
+.transaction-row,
+.transaction-row > * {
     min-width: 0;
+    box-sizing: border-box;
 }
 
-.current-tier {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
+/* Make points number responsive */
+.points-number {
+    font-size: clamp(36px, 8vw, 80px);
+    line-height: 1;
+    word-break: break-word;
 }
 
-.tier-badge {
-    background-color: #007bff;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.tier-badge.bronze {
-    background-color: #cd7f32;
-}
-
-.tier-badge.silver {
-    background-color: #c0c0c0;
-}
-
-.tier-badge.gold {
-    background-color: #ffd700;
-    color: #333;
-}
-
-.tier-badge.platinum {
-    background-color: #e5e4e2;
-    color: #333;
-}
-
-.progress-bar-container {
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.progress-bar {
+/* Transaction list: allow horizontal scroll as a graceful fallback */
+#transactionList {
     width: 100%;
-    height: 12px;
-    background-color: #e0e0e0;
-    border-radius: 6px;
-    overflow: hidden;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
 }
 
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #007bff, #0056b3);
-    border-radius: 6px;
-    transition: width 0.3s ease;
-}
-
-.progress-percentage {
-    position: absolute;
-    right: 0;
-    top: -25px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #007bff;
-}
-
-.progress-text {
-    font-size: 14px;
-    color: #666;
-    margin: 0;
-}
-
-.points-chart {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 15px;
-}
-
-/* Activities Section */
-.activities-card {
-    grid-column: 1 / -1;
-}
-
-.activity-item {
-    display: flex;
+/* Default: Desktop (web view) */
+.transaction-row {
+    display: grid;
+    grid-template-columns: 44px 140px 1fr 70px 140px 90px;
+    gap: 12px;
     align-items: center;
-    gap: 15px;
-    padding: 12px 0;
-    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
 }
 
-.activity-item:last-child {
-    border-bottom: none;
-}
+/* Small screens (mobile phones) */
+@media (max-width: 850px) {
+    .transaction-row {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 10px 0;
+        width: 100%;
+    }
 
-.activity-icon {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #f8f9fa;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #eb4e05;
-    font-size: 14px;
-}
+    /* First row: icon + type */
+    .transaction-row .transaction-start {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .transaction-row .transaction-type {
+        font-size: 14px;
+        font-weight: 600;
+        color: #6c757d;
+        padding-bottom: 5px;
+    }
 
-.activity-text {
-    flex: 1;
-    font-size: 15px;
-    color: #333;
-}
+    /* Second row: title + qty */
+    .transaction-row .transaction-title, .transaction-row .transaction-qty {
+        display: inline-flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 14px;
+        font-weight: 700;
+        color: #000000;
+    }
 
-.activity-time {
-    font-size: 13px;
-    color: #666;
+    /* Third row: date + amount */
+    .transaction-row .transaction-date,
+    .transaction-row .transaction-amount {
+        display: inline-flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .transaction-row .transaction-amount {
+        font-weight: 750;
+        color: #28a745;
+        justify-content: flex-end;
+    }
 }
 
 /* Footer */
@@ -1080,18 +992,6 @@ header .user-session-info i {
 
     .form-actions {
         flex-direction: column;
-    }
-
-    .transaction-tabs {
-        flex-wrap: wrap;
-        gap: 2px;
-    }
-
-    .tab-button {
-        flex: 1;
-        min-width: 80px;
-        padding: 10px 8px;
-        font-size: 12px;
     }
 
     .transaction-item {
