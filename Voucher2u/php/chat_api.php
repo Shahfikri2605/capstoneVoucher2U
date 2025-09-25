@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session
+session_start(); // Start the session to access $_SESSION['Id']
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -19,26 +19,95 @@ $response = ['success' => false, 'message' => 'An unexpected error occurred.', '
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true);
     $userMessage = $input['message'] ?? '';
-    $userId = $input['userId'] ?? null; // Get userId from frontend
+    $userId = $_SESSION['Id'] ?? null; // Get userId from session
     $apiKey = $_ENV['GEMMA_API_KEY'] ?? null; // Assuming API key is stored in .env
 
     $augmentedPrompt = $userMessage;
     $dbResultContext = '';
 
-    // Keyword detection and database lookup
-    $userMessageLower = strtolower($userMessage);
+    $userMessageLower = strtolower(trim($userMessage));
 
+    // Check if the bot previously presented a menu
+    $menuPresented = $_SESSION['menu_active'] ?? false;
+    $processedByMenu = false;
+
+    if ($menuPresented && is_numeric($userMessageLower)) {
+        // Try to interpret user message as a menu selection
+        $selection = (int) $userMessageLower;
+        switch ($selection) {
+            case 1:
+                // Option 1: See latest vouchers
+                $availableVouchers = get_available_vouchers();
+                if (!empty($availableVouchers)) {
+                    $response['chat_response'] .= "Here are some of the latest vouchers available:<br>";
+                    foreach ($availableVouchers as $voucher) {
+                        $response['chat_response'] .= "- Title: " . $voucher['Title'] . "<br>  Description: " . $voucher['Description'] . "<br>  Points: " . $voucher['Points'] . "<br><br>";
+                    }
+                } else {
+                    $response['chat_response'] .= "No available vouchers found at the moment.\n";
+                }
+                $response['success'] = true;
+                $processedByMenu = true;
+                break;
+            case 2:
+                // Option 2: Check balance voucher points
+                if ($userId !== null) {
+                    $points = get_user_points($userId);
+                    if ($points !== null) {
+                        $response['chat_response'] .= "Your current loyalty points: " . $points . ".<br>";
+                    } else {
+                        $response['chat_response'] .= "Could not retrieve your loyalty points. Please try again later.\n";
+                    }
+                } else {
+                    $response['chat_response'] .= "Please log in to check your loyalty points.\n";
+                }
+                $response['success'] = true;
+                $processedByMenu = true;
+                break;
+            case 3:
+                // Option 3: How to redeem vouchers
+                $response['chat_response'] = "To redeem vouchers:<br>First, ensure you have sufficient loyalty points.<br>Add the desired voucher to your cart, proceed to checkout, and confirm your redemption.<br>A PDF voucher will be generated for your use.";
+                $response['success'] = true;
+                $processedByMenu = true;
+                break;
+            default:
+                $response['chat_response'] = "Sorry, that's not a valid option. Please choose a number from the menu or ask your question directly.";
+                $response['success'] = true;
+                $processedByMenu = true;
+                break;
+        }
+        $_SESSION['menu_active'] = false; // Reset menu state after selection
+        echo json_encode($response);
+        exit;
+    }
+
+    // If not processed by menu and no specific direct intent, present the menu
+    if (!$processedByMenu && (empty($userMessageLower) ||
+        (!str_contains($userMessageLower, 'available vouchers') &&
+        !str_contains($userMessageLower, 'all vouchers') &&
+        !str_contains($userMessageLower, 'my vouchers') &&
+        !str_contains($userMessageLower, 'my rewards') &&
+        !str_contains($userMessageLower, 'my points')))) {
+
+        $response['success'] = true;
+        $response['chat_response'] = "How can I help you today? Please choose from the following options:<br>1. See the latest vouchers and promotions available today.<br>2. Check on my balance voucher points.<br>3. How to redeem vouchers?";
+        $_SESSION['menu_active'] = true; // Set menu state
+        echo json_encode($response);
+        exit;
+    }
+
+    // Existing keyword detection and database lookup logic (if not handled by menu or initial menu presentation)
     if (str_contains($userMessageLower, 'available vouchers') || str_contains($userMessageLower, 'all vouchers')) {
         $availableVouchers = get_available_vouchers();
         if (!empty($availableVouchers)) {
             $dbResultContext .= "\n\nAvailable Vouchers from Database:\n";
             foreach ($availableVouchers as $voucher) {
-                $dbResultContext .= "- Title: " . $voucher['Title'] . ", Description: " . $voucher['Description'] . ", Points: " . $voucher['Points'] . "\n\n";
+                $dbResultContext .= "- Title: " . $voucher['Title'] . "\n  Description: " . $voucher['Description'] . "\n  Points: " . $voucher['Points'] . "\n\n";
             }
         } else {
             $dbResultContext .= "\n\nNo available vouchers found in the database.\n";
         }
-    } else if ((str_contains($userMessageLower, 'my vouchers') || str_contains($userMessageLower, 'my rewards')) && $userId) {
+    } else if ((str_contains($userMessageLower, 'my vouchers') || str_contains($userMessageLower, 'my rewards')) && $userId !== null) {
         $userVouchers = get_user_vouchers($userId);
         if (!empty($userVouchers)) {
             $dbResultContext .= "\n\nYour Vouchers from Database:\n";
@@ -49,8 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dbResultContext .= "\n\nYou don't have any vouchers yet.\n";
         }
     } else if (str_contains($userMessageLower, 'my points')) {
-        if (isset($_SESSION['Id'])) {
-            $userId = $_SESSION['Id'];
+        if ($userId !== null) {
             $points = get_user_points($userId);
             if ($points !== null) {
                 $dbResultContext .= "\n\nYour current loyalty points: " . $points . ".\n";

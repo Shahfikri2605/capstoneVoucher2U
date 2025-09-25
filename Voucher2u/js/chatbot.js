@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Display initial bot message if not already present
             if (chatMessages.children.length === 0) {
                 const userName = localStorage.getItem('userName');
-                const greeting = userName ? `Hi ${userName}! I\'m Optima Bot, can I help you?` : `Hi! I\'m Optima Bot, can I help you?`;
+                const greeting = userName ? `Hi ${userName}! I\'m Optima Bot, can I help you? Type 'menu'` : `Hi! I\'m Optima Bot, can I help you? Type "menu"`;
                 addMessage(greeting, 'bot');
             }
         }
