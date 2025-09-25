@@ -3,6 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+session_start(); // Start the session to access $_SESSION['Id']
+
 require_once '../../databaseConnection/db_config.php';
 
 // Option 1: Use Composer autoloader (recommended)
@@ -17,7 +19,8 @@ header('Content-Type: application/json');
 
 $response = ['success' => false, 'message' => 'An unexpected error occurred.'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+{
     $input = json_decode(file_get_contents('php://input'), true);
     $redeemedVouchers = $input['redeemedVouchers'] ?? [];
     $newPointsBalance = $input['newPointsBalance'] ?? 0;
@@ -189,75 +192,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Define mapping of title keywords to image filenames
             $titleMappings = [
-                // Fast Food / Restaurant
+                // More specific multi-word matches first
+                'general gift card voucher' => 'gift-card-voucher.jpg',
+                'gift card' => 'gift-card-voucher.jpg',
                 'fast food' => 'fast-food-voucher.jpg',
-                'restaurant' => 'fast-food-voucher.jpg',
+                'car rental' => 'car-rental-voucher.jpg',
+                'fine dining' => 'fine-dining-voucher.jpg',
+                'vacation package' => 'travel-voucher.jpg',
+                
+                // General categories / single-word matches
+                'travel' => 'travel-voucher.jpg',
+                'flight' => 'flight-discount-voucher.jpg',
+                'vacation' => 'vacation-package-voucher.jpg',
+                'trip' => 'travel-voucher.jpg',
+                
+                'food' => 'fast-food-voucher.jpg',
+                'restaurant' => 'restaurant-voucher.jpg',
                 'burger' => 'fast-food-voucher.jpg',
                 'pizza' => 'fast-food-voucher.jpg',
-                'food' => 'fast-food-voucher.jpg',
-                
-                // Hotel / Accommodation
-                'hotel' => 'hotel-voucher.jpg',
+                'dining' => 'fine-dining-voucher.jpg',
+                'gourmet' => 'fine-dining-voucher.jpg',
+                'steak' => 'fine-dining-voucher.jpg',
+
+                'hotel' => 'hotel-booking-voucher.jpg',
                 'accommodation' => 'hotel-voucher.jpg',
                 'booking' => 'hotel-voucher.jpg',
                 'stay' => 'hotel-voucher.jpg',
                 
-                // Car Rental
-                'car rental' => 'car-rental-voucher.jpg',
                 'car' => 'car-rental-voucher.jpg',
                 'rental' => 'car-rental-voucher.jpg',
                 'vehicle' => 'car-rental-voucher.jpg',
                 
-                // Coffee / Cafe
                 'coffee' => 'coffee-voucher.jpg',
-                'cafe' => 'coffee-voucher.jpg',
+                'cafe' => 'café-voucher.jpg',
                 'espresso' => 'coffee-voucher.jpg',
                 'latte' => 'coffee-voucher.jpg',
                 
-                // Shopping / Retail
                 'shopping' => 'shopping-voucher.jpg',
                 'retail' => 'shopping-voucher.jpg',
                 'store' => 'shopping-voucher.jpg',
                 'mall' => 'shopping-voucher.jpg',
+                'fashion'=>'fashion-voucher.jpg',
                 
-                // Electronics
                 'electronics' => 'electronics-voucher.jpg',
                 'gadget' => 'electronics-voucher.jpg',
                 'tech' => 'electronics-voucher.jpg',
                 
-                // Fashion / Clothing
                 'fashion' => 'fashion-voucher.jpg',
                 'clothing' => 'fashion-voucher.jpg',
                 'apparel' => 'fashion-voucher.jpg',
                 
-                // Home / Furniture
                 'home' => 'home-essentials-voucher.jpg',
                 'furniture' => 'home-essentials-voucher.jpg',
                 'essentials' => 'home-essentials-voucher.jpg',
                 'household' => 'home-essentials-voucher.jpg',
                 
-                // Dining / Fine Dining
-                'dining' => 'fine-dining-voucher.jpg',
-                'fine dining' => 'fine-dining-voucher.jpg',
-                'gourmet' => 'fine-dining-voucher.jpg',
-                'steak' => 'fine-dining-voucher.jpg',
-                
-                // Travel
-                'travel' => 'travel-voucher.jpg',
-                'flight' => 'travel-voucher.jpg',
-                'vacation' => 'travel-voucher.jpg',
-                'trip' => 'travel-voucher.jpg',
-                
-                // Entertainment
                 'entertainment' => 'entertainment-voucher.jpg',
                 'fun' => 'entertainment-voucher.jpg',
                 'amusement' => 'entertainment-voucher.jpg',
                 'cinema' => 'entertainment-voucher.jpg',
                 'movie' => 'entertainment-voucher.jpg',
                 
-                // Gift Cards
                 'gift' => 'gift-card-voucher.jpg',
-                'gift card' => 'gift-card-voucher.jpg',
                 'amazon' => 'gift-card-voucher.jpg',
                 'netflix' => 'gift-card-voucher.jpg',
                 'spotify' => 'gift-card-voucher.jpg',
@@ -498,9 +494,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 do {
                     $uniqueVoucherCode = 'VCH' . strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 8));
                     // In a real scenario, you'd check database for uniqueness
-                } while (false); // Skip database check for now
+                    // For now, we assume it's unique enough for demonstration
+                    $voucherCodeExists = false; // Placeholder for uniqueness check
+                    // In a real application, you would query the database here:
+                    // $stmt = $pdo->prepare("SELECT 1 FROM RedeemedVoucher WHERE voucher_code = ?");
+                    // $stmt->execute([$uniqueVoucherCode]);
+                    // $voucherCodeExists = $stmt->fetchColumn();
+                } while ($voucherCodeExists);
 
                 $redemptionDate = date('Y-m-d H:i:s');
+                $userId = $_SESSION['Id'] ?? null;
+
+                if ($userId === null) {
+                    error_log("User ID not found in session for PDF generation.");
+                    // Handle error, e.g., skip this voucher or throw an exception
+                    continue; 
+                }
+
+                // Insert into RedeemedVoucher table
+                $insertStmt = $pdo->prepare("INSERT INTO RedeemedVoucher (voucher_code, voucher_id, user_id, redemption_date, status) VALUES (?, ?, ?, ?, ?)");
+                $insertStmt->execute([
+                    $uniqueVoucherCode,
+                    $voucher['voucher_id'],
+                    $userId,
+                    $redemptionDate,
+                    'redeemed'
+                ]);
 
                 // Voucher title with better styling
                 $pdf->SetFont('helvetica', 'B', 16);

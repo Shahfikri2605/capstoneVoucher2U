@@ -36,4 +36,23 @@ function get_user_vouchers($userId) {
     }
 }
 
+/**
+ * Fetches the loyalty points of a specific user.
+ * @param int $userId The ID of the user.
+ * @return int|null The user's loyalty points, or null if not found.
+ */
+function get_user_points($userId) {
+    global $pdo;
+    try {
+        $stmt = $pdo->prepare("SELECT points FROM user WHERE Id = ?");
+        $stmt->execute([$userId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? (int) $result['points'] : null;
+    } catch (PDOException $e) {
+        error_log("Database error in get_user_points for user " . $userId . ": " . $e->getMessage());
+        return null;
+    }
+}
+
+
 // Add more functions here for other database interactions as needed

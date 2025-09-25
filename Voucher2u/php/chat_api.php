@@ -1,4 +1,5 @@
 <?php
+session_start(); // Start the session
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($availableVouchers)) {
             $dbResultContext .= "\n\nAvailable Vouchers from Database:\n";
             foreach ($availableVouchers as $voucher) {
-                $dbResultContext .= "- Title: " . $voucher['Title'] . ", Description: " . $voucher['Description'] . ", Points: " . $voucher['Points'] . "\n";
+                $dbResultContext .= "- Title: " . $voucher['Title'] . ", Description: " . $voucher['Description'] . ", Points: " . $voucher['Points'] . "\n\n";
             }
         } else {
             $dbResultContext .= "\n\nNo available vouchers found in the database.\n";
@@ -48,9 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dbResultContext .= "\n\nYou don't have any vouchers yet.\n";
         }
     } else if (str_contains($userMessageLower, 'my points')) {
-        // TODO: Implement get_user_points() in chatbot_functions.php and call it here.
-        // For now, we'll just add a placeholder context.
-        $dbResultContext .= "\n\n(Points information would be fetched here if implemented.)\n";
+        if (isset($_SESSION['Id'])) {
+            $userId = $_SESSION['Id'];
+            $points = get_user_points($userId);
+            if ($points !== null) {
+                $dbResultContext .= "\n\nYour current loyalty points: " . $points . ".\n";
+            } else {
+                $dbResultContext .= "\n\nCould not retrieve your loyalty points. Please try again later.\n";
+            }
+        } else {
+            $dbResultContext .= "\n\nPlease log in to check your loyalty points.\n";
+        }
     }
 
     // Augment the user message with database context
