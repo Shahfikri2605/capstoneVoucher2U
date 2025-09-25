@@ -7,13 +7,14 @@
 
 /* Body styles */
 body {
-    font-family: 'Roboto', sans-serif; /* Changed font to Roboto */
-    background: url('../assets/register.png') no-repeat center center/cover; /* Background image */
+    font-family: 'Roboto', sans-serif;
+    background: url('../assets/register.png') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Use min-height to allow content to expand */
-    padding: 20px; /* Add some padding for smaller screens */
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f4f4f4;
 }
 
 /* Register container */
@@ -21,37 +22,38 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%; /* Ensure container takes full width */
-    max-width: 5000px; /* Larger width */
+    width: 100%;
+    max-width: 1200px; /* Limit max width for larger screens */
+    margin: auto;
 }
-
 
 /* Register Box */
 .register-box {
     display: flex;
     background-color: white;
-    border-radius: 20px; /* More rounded corners for a modern look */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
-    width: 100%; /* Take full width of its container */
-    max-width: 1100px; /* instead of 1100px */
-    transform: scale(0.9); /* scale the entire box down */
-    transform-origin: center; /* keep scaling centered */
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1100px;
+    transform: scale(0.95); /* Slightly reduce box size */
+    transform-origin: center;
+    flex-wrap: wrap;
+    padding: 20px;
 }
 
 /* Image container */
 .image-container {
-    flex: 1.4; /* Allow image to take available space */
-    background: url('../assets/registerForm.png') no-repeat center center/cover; /* Background image */
-    min-height: 400px; /* Minimum height for the image container */
+    flex: 1.5;
+    background: url('../assets/registerForm.png') no-repeat center center/cover;
+    min-height: 400px;
     min-width: 320px;
     position: relative;
-    border-top-left-radius: 20px; /* Match register-box border-radius */
-    border-bottom-left-radius: 20px; /* Match register-box border-radius */
+    border-radius: 20px 0 0 20px;
 }
 
 /* Form container */
 .register-form {
-    flex: 1.2; /* Allow form to take available space */
+    flex: 1.5;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -61,30 +63,30 @@ body {
 /* Form styles */
 .register-form h2 {
     font-size: 30px;
-    margin-bottom: 10px; /* Reduced margin */
+    margin-bottom: 10px;
     color: #333;
 }
 
 .register-form p {
     font-size: 15px;
     color: #777;
-    margin-bottom: 20px; /* Reduced margin */
+    margin-bottom: 20px;
 }
 
 .register-form input[type="text"],
 .register-form input[type="email"],
 .register-form input[type="password"] {
     width: 100%;
-    padding: 12px 15px; /* Slightly smaller padding */
+    padding: 12px 15px;
     margin-bottom: 15px;
-    border: 1px solid #e0e0e0; /* Lighter border */
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     font-size: 16px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .register-form input:focus {
-    border-color: #63373a; /* Focus color similar to your theme */
+    border-color: #63373a;
     box-shadow: 0 0 0 2px rgba(85, 65, 67, 0.25);
     outline: none;
 }
@@ -93,34 +95,34 @@ body {
 .register-form .buttons {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px; /* Increased top margin for buttons */
+    margin-top: 10px;
 }
 
 .register-form button {
-    flex: 1; /* Make buttons take equal space */
-    padding: 10px; /* Larger padding */
-    background-color: #FF5F6D; /* Primary button color */
+    flex: 1;
+    padding: 12px;
+    background-color: #FF5F6D;
     color: white;
     border: none;
-    border-radius: 8px; /* More rounded corners */
-    font-size: 18px; /* Larger font for button */
+    border-radius: 8px;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .register-form button:hover {
-    background-color: #E84B5D; /* Darker shade for hover */
+    background-color: #E84B5D;
     box-shadow: 0 4px 10px rgba(255, 95, 109, 0.3);
 }
 
 .register-form .cancel {
-    background-color: #6c757d; /* Muted gray for cancel */
-    margin-left: 15px; /* Space between buttons */
+    background-color: #6c757d;
+    margin-left: 15px;
 }
 
 .register-form .cancel:hover {
-    background-color: #5a6268; /* Darker gray on hover */
+    background-color: #5a6268;
     box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
 }
 
@@ -154,98 +156,111 @@ body {
 
 /* Form labels */
 .register-form label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #333;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
 }
 
 /* Password wrapper (input + eye icon) */
 .password-wrapper {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
 
 .password-wrapper input {
-  width: 100%;
-  padding-right: 40px; /* space for eye icon */
+    width: 100%;
+    padding-right: 40px;
 }
 
 .password-wrapper .toggle-password {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #666;
-  font-size: 18px;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    font-size: 18px;
 }
 .password-wrapper .toggle-password:hover {
-  color: #000;
+    color: #000;
 }
 
 /* Add responsiveness */
-@media (max-width: 700px) {
+@media (max-width: 1024px) {
     .register-box {
-        flex-direction: column; /* Stack image and form vertically */
-        max-width: 400px; /* Limit width for single column layout */
+        flex-direction: column;
+        max-width: 800px; /* Smaller box width on tablets */
+        padding: 15px;
     }
 
     .image-container {
-        min-height: 200px; /* Adjust image height for smaller screens */
+        min-height: 300px;
         width: 100%;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: 20px;
+        border-radius: 20px 20px 0 0;
     }
 
     .register-form {
-        padding: 15px; /* Adjust padding */
         width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 700px) {
+    .register-box {
+        flex-direction: column;
+        max-width: 100%;
     }
 
-    .register-form .form-group {
-        flex-direction: column; /* Stack form groups vertically */
-        gap: 0; /* Remove gap when stacked */
+    .image-container {
+        min-height: 200px;
+        width: 100%;
+        border-radius: 20px 20px 0 0;
     }
 
-    .register-form .form-group input {
-        width: 100%; /* Full width for inputs in stacked groups */
-        margin-bottom: 15px; /* Add margin between stacked inputs */
-    }
-
-    .register-form .buttons {
-        flex-direction: column; /* Stack buttons vertically */
-        gap: 10px; /* Add gap between stacked buttons */
+    .register-form {
+        width: 100%;
+        padding: 10px;
     }
 
     .register-form button {
-        width: 100%; /* Full width for stacked buttons */
-        margin-left: 0; /* Remove margin for stacked buttons */
+        font-size: 16px;
     }
 }
 
 @media (max-width: 480px) {
-    .register-form {
-        padding: 10px; /* Further adjust padding for very small screens */
+    .register-box {
+        padding: 10px;
     }
 
     .register-form h2 {
-        font-size: 14px; /* Adjust heading size */
+        font-size: 20px;
     }
 
     .register-form p {
-        font-size: 7px; /* Adjust paragraph size */
+        font-size: 12px;
     }
 
     .register-form input[type="text"],
     .register-form input[type="email"],
     .register-form input[type="password"],
     .register-form button {
-        padding: 20px 15px;
-        font-size: 15px;
+        padding: 12px 15px;
+        font-size: 14px;
     }
 
-    .login-link a {
-        font-size: 13px;
+    .register-form .buttons {
+        flex-direction: column;
+        gap: 10px;
     }
-}  
+
+    .register-form button {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .register-form .cancel {
+        margin-left: 0;
+    }
+}
+
