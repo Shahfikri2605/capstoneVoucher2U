@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             </td>
                             <td class="item-points">
                                 <span class="points-value">${item.points}</span>
-                                <p class="discount">Discount : 20%</p>
                             </td>
                             <td class="item-quantity">
                                 <div class="quantity-control">
