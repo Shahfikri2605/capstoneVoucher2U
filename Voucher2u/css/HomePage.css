@@ -183,6 +183,7 @@ z-index: -1;
     margin-right: auto; /* Push content to the left */
     margin-top: 40px;
     max-width: 500px; /* Limit content width if needed */
+    padding-left: 50px; /* Add some left padding */
 }
 .hero h1 {
     font-size: 36px;
